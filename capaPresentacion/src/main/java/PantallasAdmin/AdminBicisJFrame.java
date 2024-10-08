@@ -15,6 +15,7 @@ public class AdminBicisJFrame extends javax.swing.JFrame {
      */
     public AdminBicisJFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
