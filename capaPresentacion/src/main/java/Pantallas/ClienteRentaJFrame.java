@@ -31,13 +31,15 @@ public class ClienteRentaJFrame extends javax.swing.JFrame {
 
         panelRound3 = new Utileria.PanelRound();
         panelRound4 = new Utileria.PanelRound();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelRound3.setBackground(new java.awt.Color(200, 200, 200));
+        panelRound3.setBackground(new java.awt.Color(255, 255, 255));
         panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRound4.setBackground(new java.awt.Color(204, 169, 221));
+        panelRound4.setBackground(new java.awt.Color(230, 230, 230));
         panelRound4.setRoundBottomLeft(50);
         panelRound4.setRoundBottomRight(50);
         panelRound4.setRoundTopLeft(50);
@@ -54,7 +56,34 @@ public class ClienteRentaJFrame extends javax.swing.JFrame {
             .addGap(0, 450, Short.MAX_VALUE)
         );
 
-        panelRound3.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 800, 450));
+        panelRound3.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 800, 450));
+
+        jPanel1.setBackground(new java.awt.Color(250, 210, 105));
+        jPanel1.setForeground(new java.awt.Color(255, 138, 0));
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Rentar Bicicleta");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addContainerGap(658, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        panelRound3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,8 +139,8 @@ public class ClienteRentaJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Utileria.PanelRound panelRound1;
-    private Utileria.PanelRound panelRound2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private Utileria.PanelRound panelRound3;
     private Utileria.PanelRound panelRound4;
     // End of variables declaration//GEN-END:variables
