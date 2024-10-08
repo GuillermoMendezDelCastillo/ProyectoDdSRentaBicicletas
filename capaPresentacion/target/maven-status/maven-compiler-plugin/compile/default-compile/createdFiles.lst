@@ -1,7 +1,13 @@
 Pantallas\ClienteRentaJFrame.class
 PantallasAdmin\AdminBicisJFrame$1.class
-PantallasAdmin\AdminBicisJFrame.class
-Utileria\PanelRound.class
+PantallasAdmin\AdminBicisJFrame$2.class
 Pantallas\PantallaPrincipal$1.class
+Utileria\ComboItems.class
+Utileria\JButtonRenderer.class
+Utileria\JButtonCell.class
+Utileria\Utilidades.class
+PantallasAdmin\AdminBicisJFrame.class
+Utileria\JButtonCellEditor.class
+Utileria\PanelRound.class
 Pantallas\ClienteRentaJFrame$1.class
 Pantallas\PantallaPrincipal.class
