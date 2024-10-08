@@ -1,6 +1,8 @@
 Pantallas\PantallaRegistro$1.class
 Pantallas\ClienteRentaJFrame.class
+Pantallas\PantallaPrincipal$2.class
 PantallasAdmin\AdminBicisJFrame$1.class
+Pantallas\PantallaPrincipal$3.class
 PantallasAdmin\AdminBicisJFrame$2.class
 Pantallas\PantallaRegistro$2.class
 Pantallas\PantallaRegistro.class
@@ -13,5 +15,6 @@ Utileria\Utilidades.class
 PantallasAdmin\AdminBicisJFrame.class
 Utileria\JButtonCellEditor.class
 Utileria\PanelRound.class
+PantallasAdmin\AdminBicisJFrame$3.class
 Pantallas\ClienteRentaJFrame$1.class
 Pantallas\PantallaPrincipal.class
