@@ -29,6 +29,7 @@ public class ClienteRentaJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         panelRound3 = new Utileria.PanelRound();
         panelRound4 = new Utileria.PanelRound();
         jPanel1 = new javax.swing.JPanel();
@@ -141,6 +142,7 @@ public class ClienteRentaJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private Utileria.PanelRound panelRound3;
     private Utileria.PanelRound panelRound4;
     // End of variables declaration//GEN-END:variables
