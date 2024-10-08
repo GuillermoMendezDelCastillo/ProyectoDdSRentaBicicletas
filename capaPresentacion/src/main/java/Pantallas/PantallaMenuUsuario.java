@@ -5,19 +5,22 @@
 package Pantallas;
 
 import java.util.Locale;
+import javax.swing.JPanel;
 
 /**
  *
  * @author PC Gamer
  */
 public class PantallaMenuUsuario extends javax.swing.JFrame {
-
+    private PanelRenta b = new PanelRenta();
+    
     /**
      * Creates new form ClienteRentaJFrame
      */
     public PantallaMenuUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
+        showPanel(b.getFondo());
     }
 
     /**
@@ -33,7 +36,9 @@ public class PantallaMenuUsuario extends javax.swing.JFrame {
         panelRound3 = new Utileria.PanelRound();
         panelRound4 = new Utileria.PanelRound();
         btnRentarBicicleta = new javax.swing.JButton();
+        btnRentarBicicleta1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        dashBoard = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,7 +52,7 @@ public class PantallaMenuUsuario extends javax.swing.JFrame {
         panelRound4.setRoundTopRight(50);
 
         btnRentarBicicleta.setBackground(new java.awt.Color(204, 153, 255));
-        btnRentarBicicleta.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btnRentarBicicleta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRentarBicicleta.setText("Rentar bicicleta");
         btnRentarBicicleta.setPreferredSize(new java.awt.Dimension(200, 50));
         btnRentarBicicleta.addActionListener(new java.awt.event.ActionListener() {
@@ -56,43 +61,68 @@ public class PantallaMenuUsuario extends javax.swing.JFrame {
             }
         });
 
+        btnRentarBicicleta1.setBackground(new java.awt.Color(204, 153, 255));
+        btnRentarBicicleta1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRentarBicicleta1.setText("Comprar bicicleta");
+        btnRentarBicicleta1.setPreferredSize(new java.awt.Dimension(200, 50));
+        btnRentarBicicleta1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRentarBicicleta1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
         panelRound4.setLayout(panelRound4Layout);
         panelRound4Layout.setHorizontalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound4Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(btnRentarBicicleta, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnRentarBicicleta1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(btnRentarBicicleta, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(651, Short.MAX_VALUE))
         );
         panelRound4Layout.setVerticalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound4Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(btnRentarBicicleta, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(358, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRentarBicicleta1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(btnRentarBicicleta, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(7, 7, 7))
         );
 
-        panelRound3.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 800, 450));
+        panelRound3.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1000, 50));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 153, 0));
         jLabel2.setText("Bienvenido");
         panelRound3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
 
+        dashBoard.setBackground(new java.awt.Color(230, 230, 230));
+
+        javax.swing.GroupLayout dashBoardLayout = new javax.swing.GroupLayout(dashBoard);
+        dashBoard.setLayout(dashBoardLayout);
+        dashBoardLayout.setHorizontalGroup(
+            dashBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 980, Short.MAX_VALUE)
+        );
+        dashBoardLayout.setVerticalGroup(
+            dashBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 470, Short.MAX_VALUE)
+        );
+
+        panelRound3.add(dashBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 980, 470));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
         );
 
         pack();
@@ -102,8 +132,24 @@ public class PantallaMenuUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRentarBicicletaActionPerformed
 
+    private void btnRentarBicicleta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarBicicleta1ActionPerformed
+        // TODO add your handling code here:
+        showPanel(b);
+    }//GEN-LAST:event_btnRentarBicicleta1ActionPerformed
+
+    private void showPanel(JPanel p){
+        p.setSize(620, 530);
+        p.setLocation(0, 0);
+        dashBoard.removeAll();
+        dashBoard.add(p, new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,-1,-1));
+        dashBoard.revalidate();
+        dashBoard.repaint();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRentarBicicleta;
+    private javax.swing.JButton btnRentarBicicleta1;
+    private javax.swing.JPanel dashBoard;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;
     private Utileria.PanelRound panelRound3;
