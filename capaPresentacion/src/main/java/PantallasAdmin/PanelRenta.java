@@ -90,7 +90,6 @@ public class PanelRenta extends javax.swing.JPanel {
         botonRentar.setBackground(new java.awt.Color(210, 210, 210));
         botonRentar.setForeground(new java.awt.Color(0, 0, 0));
         botonRentar.setText("Rentar");
-        botonRentar.setEnabled(false);
         botonRentar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonRentarActionPerformed(evt);

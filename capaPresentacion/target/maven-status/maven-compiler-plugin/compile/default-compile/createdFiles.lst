@@ -8,6 +8,7 @@ Utileria\Utilidades.class
 Utileria\JButtonCellEditor.class
 PantallasAdmin\InfoBici.class
 PantallasAdmin\SeleccionarBicicleta.class
+PantallasAdmin\ServiciosBici$2$1.class
 PantallasAdmin\ServiciosBici.class
 PantallasAdmin\EditarBici.class
 PantallasAdmin\PagarRenta$2.class
@@ -32,6 +33,7 @@ PantallasAdmin\PanelRenta$4.class
 PantallasAdmin\AdminBicis.class
 PantallasAdmin\PantallaMenu$2.class
 Pantallas\PantallaPrincipal.class
+PantallasAdmin\ServiciosBici$2.class
 Utileria\RoundButton.class
 PantallasAdmin\PagarRenta$3.class
 Pantallas\PantallaPrincipal$3.class
@@ -39,7 +41,6 @@ PantallasAdmin\PantallaMenu$5.class
 PantallasAdmin\AgregarBici.class
 PantallasAdmin\PanelRenta$1.class
 PantallasAdmin\RentaConfirmadaJFrame.class
-PantallasAdmin\ServiciosBici$1$1.class
 PantallasAdmin\PagarRenta.class
 Utileria\JButtonCell.class
 PantallasAdmin\PantallaMenu$1.class
