@@ -171,6 +171,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
     private void btnRegistrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrateActionPerformed
         // TODO add your handling code here:
+        PantallaRegistro p=new PantallaRegistro();
+        p.show();
+        this.dispose();
     }//GEN-LAST:event_btnRegistrateActionPerformed
 
     private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
