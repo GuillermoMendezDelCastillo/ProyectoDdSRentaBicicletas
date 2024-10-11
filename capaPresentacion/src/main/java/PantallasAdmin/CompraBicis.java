@@ -39,15 +39,14 @@ public class CompraBicis extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         panelRound1 = new Utileria.PanelRound();
-        panelRound2 = new Utileria.PanelRound();
-        panelRound3 = new Utileria.PanelRound();
-        jButton4 = new javax.swing.JButton();
         panelRound4 = new Utileria.PanelRound();
         panelRound5 = new Utileria.PanelRound();
         panelRound6 = new Utileria.PanelRound();
         panelRound7 = new Utileria.PanelRound();
         panelRound8 = new Utileria.PanelRound();
         scrollbar1 = new java.awt.Scrollbar();
+        panelRound3 = new Utileria.PanelRound();
+        jButton4 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,66 +100,6 @@ public class CompraBicis extends javax.swing.JPanel {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 60));
-
-        panelRound2.setRoundBottomLeft(50);
-        panelRound2.setRoundBottomRight(50);
-        panelRound2.setRoundTopLeft(50);
-        panelRound2.setRoundTopRight(50);
-
-        panelRound3.setBackground(new java.awt.Color(160, 160, 160));
-        panelRound3.setRoundBottomLeft(50);
-        panelRound3.setRoundBottomRight(50);
-        panelRound3.setRoundTopLeft(50);
-        panelRound3.setRoundTopRight(50);
-
-        jButton4.setBackground(new java.awt.Color(255, 174, 105));
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("Añadir");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
-        panelRound3.setLayout(panelRound3Layout);
-        panelRound3Layout.setHorizontalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
-                .addContainerGap(159, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(14, 14, 14))
-        );
-        panelRound3Layout.setVerticalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
-                .addContainerGap(160, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
-        panelRound2.setLayout(panelRound2Layout);
-        panelRound2Layout.setHorizontalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-            .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelRound2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        panelRound2Layout.setVerticalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-            .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelRound2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 230, 190));
 
         panelRound4.setBackground(new java.awt.Color(160, 160, 160));
         panelRound4.setRoundBottomLeft(50);
@@ -258,6 +197,40 @@ public class CompraBicis extends javax.swing.JPanel {
         jPanel1.add(panelRound8, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, -1, -1));
         jPanel1.add(scrollbar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 58, 30, 490));
 
+        panelRound3.setBackground(new java.awt.Color(160, 160, 160));
+        panelRound3.setRoundBottomLeft(50);
+        panelRound3.setRoundBottomRight(50);
+        panelRound3.setRoundTopLeft(50);
+        panelRound3.setRoundTopRight(50);
+
+        jButton4.setBackground(new java.awt.Color(255, 174, 105));
+        jButton4.setForeground(new java.awt.Color(0, 0, 0));
+        jButton4.setText("Añadir");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
+        panelRound3.setLayout(panelRound3Layout);
+        panelRound3Layout.setHorizontalGroup(
+            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
+                .addContainerGap(159, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(14, 14, 14))
+        );
+        panelRound3Layout.setVerticalGroup(
+            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
+                .addContainerGap(160, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addContainerGap())
+        );
+
+        jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -287,7 +260,6 @@ public class CompraBicis extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private Utileria.PanelRound panelRound1;
-    private Utileria.PanelRound panelRound2;
     private Utileria.PanelRound panelRound3;
     private Utileria.PanelRound panelRound4;
     private Utileria.PanelRound panelRound5;
