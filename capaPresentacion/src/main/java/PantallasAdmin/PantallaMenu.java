@@ -11,12 +11,13 @@ import javax.swing.JPanel;
  * @author PC Gamer
  */
 public class PantallaMenu extends javax.swing.JFrame {
-    private PanelRenta b=new PanelRenta();
+    private PanelRenta b=new PanelRenta(this);
     /**
      * Creates new form PantallaMenu
      */
     public PantallaMenu() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -51,7 +52,7 @@ public class PantallaMenu extends javax.swing.JFrame {
         btnRentarBicicleta.setBackground(new java.awt.Color(204, 153, 255));
         btnRentarBicicleta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRentarBicicleta.setForeground(new java.awt.Color(0, 0, 0));
-        btnRentarBicicleta.setText("Rentar bicicleta");
+        btnRentarBicicleta.setText("Comprar bicicleta");
         btnRentarBicicleta.setPreferredSize(new java.awt.Dimension(200, 50));
         btnRentarBicicleta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,9 +61,9 @@ public class PantallaMenu extends javax.swing.JFrame {
         });
 
         btnRentarBicicleta1.setBackground(new java.awt.Color(204, 153, 255));
-        btnRentarBicicleta1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRentarBicicleta1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRentarBicicleta1.setForeground(new java.awt.Color(0, 0, 0));
-        btnRentarBicicleta1.setText("Comprar bicicleta");
+        btnRentarBicicleta1.setText("Renta Bicicleta");
         btnRentarBicicleta1.setPreferredSize(new java.awt.Dimension(200, 50));
         btnRentarBicicleta1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

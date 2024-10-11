@@ -1,3 +1,4 @@
+Utileria\RoundButton.class
 Pantallas\PantallaPrincipal$3.class
 PantallasAdmin\PantallaMenu$5.class
 Pantallas\PantallaRegistro$2.class
@@ -10,14 +11,21 @@ Utileria\Utilidades.class
 PantallasAdmin\PantallaMenu$1.class
 Utileria\JButtonCellEditor.class
 Utileria\PanelRound.class
+PantallasAdmin\SeleccionarBicicleta.class
 PantallasAdmin\RentaConfirmadaJFrame$1.class
 PantallasAdmin\AdminClientes.class
 PantallasAdmin\AdminBicis$2.class
+PantallasAdmin\SeleccionarBicicleta$2.class
 PantallasAdmin\PanelRenta$3.class
 Pantallas\PantallaRegistro$1.class
 Pantallas\PantallaPrincipal$2.class
 PantallasAdmin\PantallaMenu.class
+PantallasAdmin\SeleccionarBicicleta$1.class
 Pantallas\PantallaRegistro.class
+PantallasAdmin\SeleccionarBicicleta$3$1.class
+PantallasAdmin\SeleccionarBicicleta$3.class
+Pantallas\PantallaPrincipal$4.class
+PantallasAdmin\RentaConfirmadaJFrame$2.class
 Utileria\ComboItems.class
 Pantallas\PantallaRegistro$3.class
 PantallasAdmin\PanelRenta$5.class

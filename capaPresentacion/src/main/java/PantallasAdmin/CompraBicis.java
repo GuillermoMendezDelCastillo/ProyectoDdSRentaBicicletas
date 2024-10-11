@@ -44,9 +44,7 @@ public class CompraBicis extends javax.swing.JPanel {
         panelRound6 = new Utileria.PanelRound();
         panelRound7 = new Utileria.PanelRound();
         panelRound8 = new Utileria.PanelRound();
-        jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        scrollbar1 = new java.awt.Scrollbar();
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -250,22 +248,7 @@ public class CompraBicis extends javax.swing.JPanel {
         );
 
         jPanel1.add(panelRound8, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, -1, -1));
-
-        jButton2.setBackground(new java.awt.Color(255, 174, 105));
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText(">");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 80, -1, -1));
-
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Pagina 1");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(709, 90, 50, -1));
-
-        jButton3.setBackground(new java.awt.Color(255, 174, 105));
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("<");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, -1, -1));
+        jPanel1.add(scrollbar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 58, 30, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -285,11 +268,8 @@ public class CompraBicis extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private Utileria.PanelRound panelRound1;
@@ -300,5 +280,6 @@ public class CompraBicis extends javax.swing.JPanel {
     private Utileria.PanelRound panelRound6;
     private Utileria.PanelRound panelRound7;
     private Utileria.PanelRound panelRound8;
+    private java.awt.Scrollbar scrollbar1;
     // End of variables declaration//GEN-END:variables
 }

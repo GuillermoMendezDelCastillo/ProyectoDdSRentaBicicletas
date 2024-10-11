@@ -5,6 +5,7 @@
 package PantallasAdmin;
 
 import java.awt.Color;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -12,12 +13,13 @@ import javax.swing.JPanel;
  * @author PC Gamer
  */
 public class PanelRenta extends javax.swing.JPanel {
-
+    JFrame main;
     /**
      * Creates new form PanelRenta
      */
-    public PanelRenta() {
+    public PanelRenta(JFrame main) {
         initComponents();
+        this.main=main;
     }
 
     /**
@@ -33,12 +35,8 @@ public class PanelRenta extends javax.swing.JPanel {
         panelRound5 = new Utileria.PanelRound();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
         jComboBox6 = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         botonRentar = new javax.swing.JToggleButton();
         jButton2 = new javax.swing.JButton();
@@ -56,44 +54,27 @@ public class PanelRenta extends javax.swing.JPanel {
         panelRound5.setRoundBottomRight(50);
         panelRound5.setRoundTopLeft(50);
         panelRound5.setRoundTopRight(50);
+        panelRound5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Tiempo:");
+        panelRound5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 219, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Bicicleta:");
-
-        jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("Cantidad:");
+        panelRound5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("Cobro:");
-
-        jLabel11.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("Metodo de pago:");
-
-        jComboBox5.setBackground(new java.awt.Color(250, 250, 250));
-        jComboBox5.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel10.setText("Total:");
+        panelRound5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, -1, -1));
 
         jComboBox6.setBackground(new java.awt.Color(250, 250, 250));
         jComboBox6.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton3.setBackground(new java.awt.Color(255, 174, 105));
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Seleccionar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
+        panelRound5.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 249, 254, -1));
 
         jTextField2.setEditable(false);
         jTextField2.setBackground(new java.awt.Color(250, 250, 250));
@@ -104,6 +85,7 @@ public class PanelRenta extends javax.swing.JPanel {
                 jTextField2ActionPerformed(evt);
             }
         });
+        panelRound5.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, 244, -1));
 
         botonRentar.setBackground(new java.awt.Color(210, 210, 210));
         botonRentar.setForeground(new java.awt.Color(0, 0, 0));
@@ -114,69 +96,18 @@ public class PanelRenta extends javax.swing.JPanel {
                 botonRentarActionPerformed(evt);
             }
         });
+        panelRound5.add(botonRentar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, 138, -1));
 
+        jButton2.setBackground(new java.awt.Color(255, 174, 105));
+        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Seleccionar");
-
-        javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
-        panelRound5.setLayout(panelRound5Layout);
-        panelRound5Layout.setHorizontalGroup(
-            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound5Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jComboBox6, 0, 254, Short.MAX_VALUE)
-                        .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel9)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel11))
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
-                .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonRentar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
-            .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelRound5Layout.createSequentialGroup()
-                    .addGap(55, 55, 55)
-                    .addComponent(jLabel8)
-                    .addContainerGap(673, Short.MAX_VALUE)))
-        );
-        panelRound5Layout.setVerticalGroup(
-            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound5Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel10)
-                .addGap(9, 9, 9)
-                .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(29, 29, 29)
-                .addComponent(jLabel9)
-                .addGap(11, 11, 11)
-                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addGap(50, 50, 50)
-                .addComponent(botonRentar)
-                .addGap(22, 22, 22))
-            .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelRound5Layout.createSequentialGroup()
-                    .addGap(48, 48, 48)
-                    .addComponent(jLabel8)
-                    .addContainerGap(378, Short.MAX_VALUE)))
-        );
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        panelRound5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 130, 161, -1));
 
         panelRound3.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 800, 450));
 
@@ -258,12 +189,6 @@ public class PanelRenta extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        botonRentar.setEnabled(true);
-        botonRentar.setBackground(new Color(255,174,105));
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
@@ -280,6 +205,12 @@ public class PanelRenta extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        SeleccionarBicicleta sb= new SeleccionarBicicleta(main,true);
+        sb.show();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     
     public JPanel getFondo() {
             return this;
@@ -289,16 +220,12 @@ public class PanelRenta extends javax.swing.JPanel {
     private javax.swing.JToggleButton botonRentar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField2;
     private Utileria.PanelRound panelRound2;
