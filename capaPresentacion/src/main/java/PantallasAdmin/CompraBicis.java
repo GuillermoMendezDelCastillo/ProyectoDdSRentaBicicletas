@@ -4,6 +4,7 @@
  */
 package PantallasAdmin;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -12,11 +13,13 @@ import javax.swing.JPanel;
  */
 public class CompraBicis extends javax.swing.JPanel {
 
+    JFrame main;
     /**
      * Creates new form CompraBicis
      */
-    public CompraBicis() {
+    public CompraBicis(JFrame main) {
         initComponents();
+        this.main=main;
     }
 
     public JPanel getFondo() {
@@ -113,6 +116,11 @@ public class CompraBicis extends javax.swing.JPanel {
         jButton4.setBackground(new java.awt.Color(255, 174, 105));
         jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("Añadir");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
@@ -265,6 +273,12 @@ public class CompraBicis extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        InfoBici inf=new InfoBici(main,true);
+        inf.show();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

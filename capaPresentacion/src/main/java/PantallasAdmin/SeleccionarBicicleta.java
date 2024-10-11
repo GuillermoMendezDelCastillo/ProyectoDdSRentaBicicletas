@@ -16,6 +16,7 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
     public SeleccionarBicicleta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
