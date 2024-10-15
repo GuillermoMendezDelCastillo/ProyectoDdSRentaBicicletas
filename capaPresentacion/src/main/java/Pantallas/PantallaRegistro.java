@@ -32,7 +32,7 @@ public class PantallaRegistro extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         panelRound3 = new Utileria.PanelRound();
         panelRound4 = new Utileria.PanelRound();
-        txtusuario = new javax.swing.JTextField();
+        txtEmpleado = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         txtContrasena = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
@@ -53,7 +53,7 @@ public class PantallaRegistro extends javax.swing.JFrame {
         panelRound4.setRoundTopLeft(50);
         panelRound4.setRoundTopRight(50);
 
-        txtusuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         txtCorreo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -65,7 +65,7 @@ public class PantallaRegistro extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Usuario");
+        jLabel1.setText("Empleado");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Contraseña");
@@ -111,12 +111,11 @@ public class PantallaRegistro extends javax.swing.JFrame {
                         .addGroup(panelRound4Layout.createSequentialGroup()
                             .addGap(41, 41, 41)
                             .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addGroup(panelRound4Layout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addComponent(jLabel3)))
+                                .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addGroup(panelRound4Layout.createSequentialGroup()
+                                    .addGap(2, 2, 2)
+                                    .addComponent(jLabel3))
                                 .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel4)))))
                 .addContainerGap(175, Short.MAX_VALUE))
@@ -127,7 +126,7 @@ public class PantallaRegistro extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
@@ -147,7 +146,7 @@ public class PantallaRegistro extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 153, 0));
-        jLabel2.setText("Ingresa tus datos");
+        jLabel2.setText("Ingrese los datos del empleado");
         panelRound3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,6 +191,6 @@ public class PantallaRegistro extends javax.swing.JFrame {
     private Utileria.PanelRound panelRound4;
     private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextField txtusuario;
+    private javax.swing.JTextField txtEmpleado;
     // End of variables declaration//GEN-END:variables
 }
