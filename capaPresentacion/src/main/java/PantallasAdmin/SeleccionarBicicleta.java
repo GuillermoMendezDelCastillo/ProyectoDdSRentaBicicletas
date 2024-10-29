@@ -29,39 +29,14 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel12 = new javax.swing.JPanel();
-        roundButton1 = new Utileria.RoundButton();
-        roundButton17 = new Utileria.RoundButton();
-        roundButton18 = new Utileria.RoundButton();
-        roundButton19 = new Utileria.RoundButton();
-        roundButton20 = new Utileria.RoundButton();
-        roundButton21 = new Utileria.RoundButton();
-        scrollbar2 = new java.awt.Scrollbar();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        Dashboard = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel12.setBackground(new java.awt.Color(250, 250, 250));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        roundButton1.setText("roundButton1");
-        jPanel12.add(roundButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 160, 130));
-
-        roundButton17.setText("roundButton1");
-        jPanel12.add(roundButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 160, 130));
-
-        roundButton18.setText("roundButton1");
-        jPanel12.add(roundButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 160, 130));
-
-        roundButton19.setText("roundButton1");
-        jPanel12.add(roundButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 160, 130));
-
-        roundButton20.setText("roundButton1");
-        jPanel12.add(roundButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 160, 130));
-
-        roundButton21.setText("roundButton1");
-        jPanel12.add(roundButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 160, 130));
-        jPanel12.add(scrollbar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 30, 350));
 
         jButton1.setBackground(new java.awt.Color(255, 174, 105));
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -71,7 +46,7 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel12.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 100, 20));
+        jPanel12.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 590, 110, 30));
 
         jButton2.setBackground(new java.awt.Color(255, 174, 105));
         jButton2.setText("Aceptar");
@@ -80,17 +55,32 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel12.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 100, 20));
+        jPanel12.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 590, 120, 30));
+
+        Dashboard.setPreferredSize(new java.awt.Dimension(850, 550));
+
+        javax.swing.GroupLayout DashboardLayout = new javax.swing.GroupLayout(Dashboard);
+        Dashboard.setLayout(DashboardLayout);
+        DashboardLayout.setHorizontalGroup(
+            DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 850, Short.MAX_VALUE)
+        );
+        DashboardLayout.setVerticalGroup(
+            DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 550, Short.MAX_VALUE)
+        );
+
+        jPanel12.add(Dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 850, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
         );
 
         pack();
@@ -149,45 +139,9 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Dashboard;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollBar jScrollBar5;
-    private Utileria.PanelRound panelRound1;
-    private Utileria.PanelRound panelRound2;
-    private Utileria.PanelRound panelRound3;
-    private Utileria.PanelRound panelRound4;
-    private Utileria.PanelRound panelRound5;
-    private Utileria.RoundButton roundButton1;
-    private Utileria.RoundButton roundButton14;
-    private Utileria.RoundButton roundButton15;
-    private Utileria.RoundButton roundButton16;
-    private Utileria.RoundButton roundButton17;
-    private Utileria.RoundButton roundButton18;
-    private Utileria.RoundButton roundButton19;
-    private Utileria.RoundButton roundButton2;
-    private Utileria.RoundButton roundButton20;
-    private Utileria.RoundButton roundButton21;
-    private Utileria.RoundButton roundButton3;
-    private Utileria.RoundButton roundButton4;
-    private Utileria.RoundButton roundButton5;
-    private Utileria.RoundButton roundButton6;
-    private java.awt.Scrollbar scrollbar1;
-    private java.awt.Scrollbar scrollbar2;
     // End of variables declaration//GEN-END:variables
 }
