@@ -79,7 +79,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Container class="javax.swing.JPanel" name="Dashboard">
+        <Container class="javax.swing.JPanel" name="dashBoard">
           <Properties>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[850, 550]"/>

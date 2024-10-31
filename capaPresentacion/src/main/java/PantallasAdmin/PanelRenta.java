@@ -219,7 +219,7 @@ public class PanelRenta extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        SeleccionarBicicleta sb= new SeleccionarBicicleta(main,true);
+        SeleccionarBicicleta sb= new SeleccionarBicicleta(main,true, main);
         sb.show();
     }//GEN-LAST:event_jButton2ActionPerformed
 

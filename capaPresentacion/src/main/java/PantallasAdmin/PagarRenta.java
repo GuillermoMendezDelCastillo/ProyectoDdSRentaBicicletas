@@ -33,12 +33,13 @@ public class PagarRenta extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         botonRentar = new javax.swing.JToggleButton();
-        roundButton1 = new Utileria.RoundButton();
-        roundButton2 = new Utileria.RoundButton();
-        roundButton3 = new Utileria.RoundButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
@@ -87,15 +88,6 @@ public class PagarRenta extends javax.swing.JDialog {
         });
         panelRound5.add(botonRentar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 138, -1));
 
-        roundButton1.setText("roundButton1");
-        panelRound5.add(roundButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 370, 50));
-
-        roundButton2.setText("roundButton1");
-        panelRound5.add(roundButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 370, 50));
-
-        roundButton3.setText("roundButton1");
-        panelRound5.add(roundButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 370, 50));
-
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("En efectivo");
@@ -110,6 +102,18 @@ public class PagarRenta extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Paypal");
         panelRound5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+
+        jButton2.setText("jButton2");
+        panelRound5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 360, 50));
+
+        jButton3.setText("jButton2");
+        panelRound5.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 360, 50));
+
+        jButton5.setText("jButton2");
+        panelRound5.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 360, 50));
+
+        jButton6.setText("jButton2");
+        panelRound5.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 360, 50));
 
         panelRound3.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 800, 450));
 
@@ -234,7 +238,11 @@ public class PagarRenta extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton botonRentar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -245,8 +253,5 @@ public class PagarRenta extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField2;
     private Utileria.PanelRound panelRound3;
     private Utileria.PanelRound panelRound5;
-    private Utileria.RoundButton roundButton1;
-    private Utileria.RoundButton roundButton2;
-    private Utileria.RoundButton roundButton3;
     // End of variables declaration//GEN-END:variables
 }

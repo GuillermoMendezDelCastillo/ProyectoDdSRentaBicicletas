@@ -4,6 +4,9 @@
  */
 package PantallasAdmin;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
  *
  * @author PC Gamer
@@ -13,10 +16,12 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
     /**
      * Creates new form SeleccionarBicicleta
      */
-    public SeleccionarBicicleta(java.awt.Frame parent, boolean modal) {
+    public SeleccionarBicicleta(java.awt.Frame parent, boolean modal,JFrame p) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        CompraBicis c=new CompraBicis(p);
+        showPanel(c);
     }
 
     /**
@@ -31,7 +36,7 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
         jPanel12 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        Dashboard = new javax.swing.JPanel();
+        dashBoard = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -57,20 +62,20 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
         });
         jPanel12.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 590, 120, 30));
 
-        Dashboard.setPreferredSize(new java.awt.Dimension(850, 550));
+        dashBoard.setPreferredSize(new java.awt.Dimension(850, 550));
 
-        javax.swing.GroupLayout DashboardLayout = new javax.swing.GroupLayout(Dashboard);
-        Dashboard.setLayout(DashboardLayout);
-        DashboardLayout.setHorizontalGroup(
-            DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout dashBoardLayout = new javax.swing.GroupLayout(dashBoard);
+        dashBoard.setLayout(dashBoardLayout);
+        dashBoardLayout.setHorizontalGroup(
+            dashBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 850, Short.MAX_VALUE)
         );
-        DashboardLayout.setVerticalGroup(
-            DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        dashBoardLayout.setVerticalGroup(
+            dashBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 550, Short.MAX_VALUE)
         );
 
-        jPanel12.add(Dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 850, 550));
+        jPanel12.add(dashBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 850, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,50 +101,19 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
         return ;
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarBicicleta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarBicicleta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarBicicleta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarBicicleta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                SeleccionarBicicleta dialog = new SeleccionarBicicleta(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+    private void showPanel(JPanel p){
+        p.setSize(850, 550);
+        p.setLocation(0, 0);
+        dashBoard.removeAll();
+        dashBoard.add(p, new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,-1,-1));
+        dashBoard.revalidate();
+        dashBoard.repaint();
     }
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Dashboard;
+    private javax.swing.JPanel dashBoard;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel12;

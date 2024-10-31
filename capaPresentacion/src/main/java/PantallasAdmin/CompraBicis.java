@@ -4,8 +4,16 @@
  */
 package PantallasAdmin;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -14,12 +22,49 @@ import javax.swing.JPanel;
 public class CompraBicis extends javax.swing.JPanel {
 
     JFrame main;
+    ArrayList<JButton> botones;
+    ArrayList<JButton> seleccionados;
+    
     /**
      * Creates new form CompraBicis
      */
     public CompraBicis(JFrame main) {
         initComponents();
         this.main=main;
+        botones = new ArrayList<>();
+        seleccionados = new ArrayList<>();
+        crearBotones();
+    }
+    
+    private void crearBotones() {
+        int numeroOpciones = 50; 
+
+        panelBotones.setLayout(new GridLayout(0, 3, 10, 10)); 
+
+        for (int i = 0; i < numeroOpciones; i++) {
+            JButton boton = new JButton("Opción " + (i + 1));
+            boton.setPreferredSize(new Dimension(200, 300)); 
+            boton.setBackground(Color.LIGHT_GRAY); 
+
+            boton.addActionListener(e -> {
+                if (seleccionados.contains(boton)) {
+                    boton.setBackground(Color.LIGHT_GRAY); 
+                    seleccionados.remove(boton);
+                } else {
+                    boton.setBackground(Color.GREEN);
+                    seleccionados.add(boton); 
+                }
+            });
+
+            panelBotones.add(boton); 
+        }
+
+
+        JScrollPane scrollPane = new JScrollPane(panelBotones);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jPanel1.add(scrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 810, 460));
     }
 
     public JPanel getFondo() {
@@ -39,14 +84,7 @@ public class CompraBicis extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         panelRound1 = new Utileria.PanelRound();
-        panelRound4 = new Utileria.PanelRound();
-        panelRound5 = new Utileria.PanelRound();
-        panelRound6 = new Utileria.PanelRound();
-        panelRound7 = new Utileria.PanelRound();
-        panelRound8 = new Utileria.PanelRound();
-        scrollbar1 = new java.awt.Scrollbar();
-        panelRound3 = new Utileria.PanelRound();
-        jButton4 = new javax.swing.JButton();
+        panelBotones = new Utileria.PanelRound();
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,135 +139,12 @@ public class CompraBicis extends javax.swing.JPanel {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 60));
 
-        panelRound4.setBackground(new java.awt.Color(160, 160, 160));
-        panelRound4.setRoundBottomLeft(50);
-        panelRound4.setRoundBottomRight(50);
-        panelRound4.setRoundTopLeft(50);
-        panelRound4.setRoundTopRight(50);
-
-        javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
-        panelRound4.setLayout(panelRound4Layout);
-        panelRound4Layout.setHorizontalGroup(
-            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-        panelRound4Layout.setVerticalGroup(
-            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
-
-        panelRound5.setBackground(new java.awt.Color(160, 160, 160));
-        panelRound5.setRoundBottomLeft(50);
-        panelRound5.setRoundBottomRight(50);
-        panelRound5.setRoundTopLeft(50);
-        panelRound5.setRoundTopRight(50);
-
-        javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
-        panelRound5.setLayout(panelRound5Layout);
-        panelRound5Layout.setHorizontalGroup(
-            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-        panelRound5Layout.setVerticalGroup(
-            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
-
-        panelRound6.setBackground(new java.awt.Color(160, 160, 160));
-        panelRound6.setRoundBottomLeft(50);
-        panelRound6.setRoundBottomRight(50);
-        panelRound6.setRoundTopLeft(50);
-        panelRound6.setRoundTopRight(50);
-
-        javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);
-        panelRound6.setLayout(panelRound6Layout);
-        panelRound6Layout.setHorizontalGroup(
-            panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-        panelRound6Layout.setVerticalGroup(
-            panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(panelRound6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
-
-        panelRound7.setBackground(new java.awt.Color(160, 160, 160));
-        panelRound7.setRoundBottomLeft(50);
-        panelRound7.setRoundBottomRight(50);
-        panelRound7.setRoundTopLeft(50);
-        panelRound7.setRoundTopRight(50);
-
-        javax.swing.GroupLayout panelRound7Layout = new javax.swing.GroupLayout(panelRound7);
-        panelRound7.setLayout(panelRound7Layout);
-        panelRound7Layout.setHorizontalGroup(
-            panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-        panelRound7Layout.setVerticalGroup(
-            panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(panelRound7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, -1, -1));
-
-        panelRound8.setBackground(new java.awt.Color(160, 160, 160));
-        panelRound8.setRoundBottomLeft(50);
-        panelRound8.setRoundBottomRight(50);
-        panelRound8.setRoundTopLeft(50);
-        panelRound8.setRoundTopRight(50);
-
-        javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
-        panelRound8.setLayout(panelRound8Layout);
-        panelRound8Layout.setHorizontalGroup(
-            panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-        panelRound8Layout.setVerticalGroup(
-            panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(panelRound8, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, -1, -1));
-        jPanel1.add(scrollbar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 58, 30, 490));
-
-        panelRound3.setBackground(new java.awt.Color(160, 160, 160));
-        panelRound3.setRoundBottomLeft(50);
-        panelRound3.setRoundBottomRight(50);
-        panelRound3.setRoundTopLeft(50);
-        panelRound3.setRoundTopRight(50);
-
-        jButton4.setBackground(new java.awt.Color(255, 174, 105));
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("Añadir");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
-        panelRound3.setLayout(panelRound3Layout);
-        panelRound3Layout.setHorizontalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
-                .addContainerGap(159, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(14, 14, 14))
-        );
-        panelRound3Layout.setVerticalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
-                .addContainerGap(160, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addContainerGap())
-        );
-
-        jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        panelBotones.setRoundBottomLeft(50);
+        panelBotones.setRoundBottomRight(50);
+        panelBotones.setRoundTopLeft(50);
+        panelBotones.setRoundTopRight(50);
+        panelBotones.setLayout(new java.awt.GridLayout());
+        jPanel1.add(panelBotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 810, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -247,25 +162,12 @@ public class CompraBicis extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        InfoBici inf=new InfoBici(main,true);
-        inf.show();
-    }//GEN-LAST:event_jButton4ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private Utileria.PanelRound panelBotones;
     private Utileria.PanelRound panelRound1;
-    private Utileria.PanelRound panelRound3;
-    private Utileria.PanelRound panelRound4;
-    private Utileria.PanelRound panelRound5;
-    private Utileria.PanelRound panelRound6;
-    private Utileria.PanelRound panelRound7;
-    private Utileria.PanelRound panelRound8;
-    private java.awt.Scrollbar scrollbar1;
     // End of variables declaration//GEN-END:variables
 }
