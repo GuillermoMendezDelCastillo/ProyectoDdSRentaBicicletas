@@ -4,6 +4,7 @@
  */
 package dao;
 
+import entidades.Usuario;
 import javax.persistence.EntityManager;
 
 /**
@@ -17,7 +18,14 @@ public class pruebaConexion {
      */
     public static void main(String[] args) {
         IConexion conexion = new Conexion();
-        EntityManager entityManager = conexion.crearConexion();
+        //conexion.crearConexion();
+        
+        Usuario test = new Usuario("Jesus", "jesus@gmail.com", "12345");
+        
+        IUsuarioDAO prueba = new UsuarioDAO();
+        
+        prueba.agregar(test);
+        
     }
     
 }

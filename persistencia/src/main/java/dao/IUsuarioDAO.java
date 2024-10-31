@@ -4,18 +4,12 @@
  */
 package dao;
 
-import javax.persistence.EntityManager;
+import entidades.Usuario;
 
 /**
  *
  * @author Gui26
  */
-public interface IConexion {
-    
-    //EntityManager conexion;
-    
-    //public EntityManager crearConexion();
-    
-    public EntityManager getConexion();
-    
+public interface IUsuarioDAO {
+    public Usuario agregar(Usuario usuario);
 }

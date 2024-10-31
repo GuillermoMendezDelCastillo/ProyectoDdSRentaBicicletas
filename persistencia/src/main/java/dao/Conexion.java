@@ -11,13 +11,28 @@ import javax.persistence.Persistence;
  * @author Gui26
  */
 public class Conexion implements IConexion{
+
+    private EntityManager conexion;
     
+    public Conexion() {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("renta_bicicletas");
+        this.conexion = emFactory.createEntityManager();
+    }
+    
+    
+    
+    /*
     @Override
     public EntityManager crearConexion(){
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("renta_bicicletas");
         EntityManager entityManager = emFactory.createEntityManager();
         
         return entityManager;
+    }
+    */
+
+    public EntityManager getConexion() {
+        return conexion;
     }
     
 }
