@@ -4,17 +4,17 @@
  */
 package dao;
 
-import entidades.Usuario;
+import entidades.Empleado;
 import java.util.List;
 
 /**
  *
  * @author Gui26
  */
-public interface IUsuarioDAO {
-    public Usuario agregar(Usuario usuario);
-    public Usuario buscar(Long id);
-    public Usuario actualizar(Usuario usuario);
-    public Usuario eliminar(Long id);
-    public List<Usuario> lista();
+public interface IEmpleadoDAO {
+    public Empleado agregar(Empleado empleado);
+    public Empleado buscar(Long id);
+    public Empleado actualizar(Empleado empleado);
+    public Empleado eliminar(Long id);
+    public List<Empleado> lista();
 }

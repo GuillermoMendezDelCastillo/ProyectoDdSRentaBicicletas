@@ -5,7 +5,10 @@
 package dao;
 
 import entidades.Usuario;
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -17,15 +20,38 @@ public class pruebaConexion {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        IConexion conexion = new Conexion();
-        //conexion.crearConexion();
+        EntityManager em = Persistence.createEntityManagerFactory("renta_bicicletas").createEntityManager();
+
+        Usuario test = new Usuario((long) 1, "Ricardo", "ricardo@gmail.com", "12345");
+
+        Usuario test2 = new Usuario("Alberto", "alberto@gmail.com", "12345");
         
-        Usuario test = new Usuario("Jesus", "jesus@gmail.com", "12345");
+        IUsuarioDAO prueba = new UsuarioDAO(em);
+        Usuario u = null;
+//        u = prueba.agregar(test2);
+//        
+//        List<Usuario> lista = prueba.lista();
+//        System.out.println("4 "+lista);
+//        
+//        u = prueba.actualizar(test);
+//        System.out.println("1 "+u);
+//        
+//        lista = prueba.lista();
+//        System.out.println("4 "+lista);
+//        
+//        u = prueba.buscar((long)1);
+//        System.out.println("2 "+u);
+//        
+//        lista = prueba.lista();
+//        System.out.println("4 "+lista);
+//        
+//        u = prueba.eliminar((long)1);
+//        System.out.println("3 "+u);
+//
+//        lista = prueba.lista();
+//        System.out.println("4 "+lista);
         
-        IUsuarioDAO prueba = new UsuarioDAO();
-        
-        prueba.agregar(test);
-        
+        em.close();
     }
-    
+
 }

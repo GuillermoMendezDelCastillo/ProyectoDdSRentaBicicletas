@@ -3,6 +3,9 @@
   <persistence-unit name="renta_bicicletas" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entidades.Usuario</class>
+    <class>entidades.Bicicleta</class>
+    <class>entidades.Renta</class>
+    <class>entidades.Cliente</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/renta_bicicletas?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

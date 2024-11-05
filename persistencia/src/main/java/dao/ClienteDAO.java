@@ -4,7 +4,7 @@
  */
 package dao;
 
-import entidades.Usuario;
+import entidades.Cliente;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -18,15 +18,15 @@ import javax.persistence.criteria.Root;
  *
  * @author Gui26
  */
-public class UsuarioDAO implements IUsuarioDAO{
+public class ClienteDAO implements IClienteDAO{
    // private IConexion conexion;
     EntityManager em;
-    public UsuarioDAO(EntityManager em) {
+    public ClienteDAO(EntityManager em) {
         this.em = em;
     }
     
     @Override
-    public Usuario agregar(Usuario usuario){
+    public Cliente agregar(Cliente cliente){
        // EntityManager entityManager = conexion.getConexion();
         EntityTransaction transaction = null;
 
@@ -34,7 +34,7 @@ public class UsuarioDAO implements IUsuarioDAO{
              
             em.getTransaction().begin();
 
-            em.persist(usuario);
+            em.persist(cliente);
             em.getTransaction()
                     .commit();
         } catch (Exception e) {
@@ -46,17 +46,17 @@ public class UsuarioDAO implements IUsuarioDAO{
             //em.close();
         }
 
-        return usuario;
+        return cliente;
     }
     
     @Override
-    public Usuario buscar(Long id){
+    public Cliente buscar(Long id){
         try {
-            Usuario u = em.find(Usuario.class, id);
+            Cliente u = em.find(Cliente.class, id);
             return u;
-//            Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.id = :id", Usuario.class);
+//            Query query = em.createQuery("SELECT u FROM Cliente u WHERE u.id = :id", Cliente.class);
 //            query.setParameter("id", id);
-//            return (Usuario) query.getSingleResult();
+//            return (Cliente) query.getSingleResult();
         } catch (NoResultException e) {
             return null;
         } finally {
@@ -67,11 +67,11 @@ public class UsuarioDAO implements IUsuarioDAO{
     }
     
     @Override
-    public Usuario actualizar(Usuario usuario){
+    public Cliente actualizar(Cliente cliente){
         EntityTransaction transaction = null;
         try {
             em.getTransaction().begin();
-            em.merge(usuario);
+            em.merge(cliente);
             em.getTransaction()
                     .commit();
         } catch (Exception e) {
@@ -82,11 +82,11 @@ public class UsuarioDAO implements IUsuarioDAO{
         } finally {
             //em.close();
         }
-        return usuario;
+        return cliente;
     }
     
-    public Usuario eliminar(Long id){
-        Usuario u = em.find(Usuario.class, id);
+    public Cliente eliminar(Long id){
+        Cliente u = em.find(Cliente.class, id);
         EntityTransaction transaction = null;
         try {
             em.getTransaction().begin();
@@ -105,13 +105,13 @@ public class UsuarioDAO implements IUsuarioDAO{
     }
     
     @Override
-    public List<Usuario> lista(){
+    public List<Cliente> lista(){
         try {
             
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-            CriteriaQuery<Usuario> criteriaQuery = criteriaBuilder.createQuery(Usuario.class);
-            Root<Usuario> usuarioRoot = criteriaQuery.from(Usuario.class);
-            criteriaQuery.select(usuarioRoot);
+            CriteriaQuery<Cliente> criteriaQuery = criteriaBuilder.createQuery(Cliente.class);
+            Root<Cliente> clienteRoot = criteriaQuery.from(Cliente.class);
+            criteriaQuery.select(clienteRoot);
             Query query = em.createQuery(criteriaQuery);
             return query.getResultList();
             

@@ -54,6 +54,13 @@ public class Usuario implements Serializable {
         this.nacimiento = nacimiento;
     }
 
+    public Usuario(Long id, String nombre, String correo, String contrasena) {
+        this.id = id;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.contrasena = contrasena;
+    }
+    
     public Usuario(Long id, String nombre, String correo, String contrasena, Date nacimiento) {
         this.id = id;
         this.nombre = nombre;
