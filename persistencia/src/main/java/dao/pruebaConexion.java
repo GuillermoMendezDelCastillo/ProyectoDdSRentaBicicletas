@@ -27,8 +27,8 @@ public class pruebaConexion {
         Usuario test2 = new Usuario("Alberto", "alberto@gmail.com", "12345");
         
         IUsuarioDAO prueba = new UsuarioDAO(em);
-        Usuario u = null;
-//        u = prueba.agregar(test2);
+        Usuario u = prueba.agregar(test2);
+        
 //        
 //        List<Usuario> lista = prueba.lista();
 //        System.out.println("4 "+lista);
