@@ -5,7 +5,9 @@
 package Pantallas;
 
 import PantallasAdmin.PantallaMenu;
+import dto.EmpleadoDTO;
 import java.util.Locale;
+import subsistemaIniciarSesion.IniciarSesion;
 
 /**
  *
@@ -158,9 +160,19 @@ public class PantallaInicio extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        PantallaMenu p=new PantallaMenu();
-        p.show();
-        this.dispose();
+        
+        EmpleadoDTO empleado = new EmpleadoDTO(txtEmpleado.getText(), new String(txtContrasena.getPassword()));
+        
+        IniciarSesion inicio = new IniciarSesion();
+        
+        if (inicio.iniciar(empleado)){
+            PantallaMenu p=new PantallaMenu();
+            p.show();
+            this.dispose();
+        } else{
+            System.out.println("Mensaje: Contraseña o usuario incorrecto");
+        }
+        
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed

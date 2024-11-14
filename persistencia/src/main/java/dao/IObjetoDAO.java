@@ -12,13 +12,14 @@ import java.util.List;
  */
 public interface IObjetoDAO<T> {
 
-    public T agregar(T cliente);
+    public T agregar(T tipo);
 
     public T buscar(Long id);
 
-    public T actualizar(T cliente);
+    public T actualizar(T tipo);
 
     public T eliminar(Long id);
 
     public List<T> lista();
+    
 }

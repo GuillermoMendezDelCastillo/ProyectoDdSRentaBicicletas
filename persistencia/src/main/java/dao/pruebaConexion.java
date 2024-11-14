@@ -4,10 +4,9 @@
  */
 package dao;
 
-import entidades.Usuario;
+import entidades.Empleado;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
@@ -21,15 +20,26 @@ public class pruebaConexion {
      */
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("renta_bicicletas").createEntityManager();
-
-        Usuario test = new Usuario((long) 1, "Ricardo", "ricardo@gmail.com", "12345");
-
-        Usuario test2 = new Usuario("Alberto", "alberto@gmail.com", "12345");
         
-        IObjetoDAO<Usuario> prueba = new UsuarioDAO(em);
-        Usuario u = prueba.agregar(test2);
+//        System.out.println(em.contains(new Empleado("ricardo@gmail.com", "12345")));
         
+        Empleado test = new Empleado((long) 1, "Ricardo", "ricardo@gmail.com", "12345");
+        
+        EmpleadoDAO prueba = new EmpleadoDAO();
+        System.out.println(prueba.iniciar("ricardo@gmail.com", "12345"));
+        prueba.agregar(test);
+        System.out.println(prueba.iniciar("ricardo@gmail.com", "12345"));
+        
+//        System.out.println(em.contains(new Empleado("ricardo@gmail.com", "12345")));
+
+//        Usuario test = new Usuario((long) 1, "Ricardo", "ricardo@gmail.com", "12345");
+//
+//        Usuario test2 = new Usuario("Alberto", "alberto@gmail.com", "12345");
 //        
+//        IObjetoDAO<Usuario> prueba = new UsuarioDAO(em);
+//        Usuario u = prueba.agregar(test2);
+//        
+////        
 //        List<Usuario> lista = prueba.lista();
 //        System.out.println("4 "+lista);
 //        

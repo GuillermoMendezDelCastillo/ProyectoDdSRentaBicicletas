@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -21,8 +22,12 @@ import javax.persistence.criteria.Root;
 public class EmpleadoDAO implements IObjetoDAO<Empleado>{
    // private IConexion conexion;
     EntityManager em;
-    public EmpleadoDAO(EntityManager em) {
-        this.em = em;
+//    public EmpleadoDAO(EntityManager em) {
+//        this.em = em;
+//    }
+
+    public EmpleadoDAO() {
+        this.em = Persistence.createEntityManagerFactory("renta_bicicletas").createEntityManager();
     }
     
     @Override
@@ -43,7 +48,7 @@ public class EmpleadoDAO implements IObjetoDAO<Empleado>{
             }
             e.printStackTrace();
         } finally {
-            //em.close();
+            em.close();
         }
 
         return empleado;
@@ -61,7 +66,7 @@ public class EmpleadoDAO implements IObjetoDAO<Empleado>{
             return null;
         } finally {
             if (em != null) {
-                //em.close();
+                em.close();
             }
         }
     }
@@ -80,7 +85,7 @@ public class EmpleadoDAO implements IObjetoDAO<Empleado>{
             }
             e.printStackTrace();
         } finally {
-            //em.close();
+            em.close();
         }
         return empleado;
     }
@@ -99,7 +104,7 @@ public class EmpleadoDAO implements IObjetoDAO<Empleado>{
             }
             e.printStackTrace();
         } finally {
-            //em.close();
+            em.close();
         }
         return u;
     }
@@ -119,7 +124,26 @@ public class EmpleadoDAO implements IObjetoDAO<Empleado>{
             return null;
         } finally {
             if (em != null) {
-                //em.close();
+                em.close();
+            }
+        }
+    }
+    
+    public Empleado iniciar(String correo, String contrasena){
+        try {
+//            Empleado u = em.contains(new Empleado(correo, contrasena));
+//            Empleado u = em.find(Empleado.class, correo);
+            Query query = em.createQuery("SELECT e FROM Usuario e WHERE "
+                    + "e.correo = :correo AND "
+                    + "e.contrasena = :contrasena", Empleado.class);
+            query.setParameter("correo", correo);
+            query.setParameter("contrasena", contrasena);
+            return (Empleado) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null; // No se encontró ningún cliente con el apodo y contraseña dada
+        } finally {
+            if (em != null) {
+                em.close();
             }
         }
     }
