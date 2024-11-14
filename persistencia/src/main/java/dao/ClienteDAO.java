@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
  *
  * @author Gui26
  */
-public class ClienteDAO implements ICRUD<Cliente>{
+public class ClienteDAO implements IObjetoDAO<Cliente>{
    // private IConexion conexion;
     EntityManager em;
     public ClienteDAO(EntityManager em) {

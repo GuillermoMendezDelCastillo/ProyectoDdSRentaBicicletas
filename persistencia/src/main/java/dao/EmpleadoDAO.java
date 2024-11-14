@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
  *
  * @author Gui26
  */
-public class EmpleadoDAO implements IEmpleadoDAO{
+public class EmpleadoDAO implements IObjetoDAO<Empleado>{
    // private IConexion conexion;
     EntityManager em;
     public EmpleadoDAO(EntityManager em) {

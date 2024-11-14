@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
  *
  * @author Gui26
  */
-public class BicicletaDAO implements IBicicletaDAO{
+public class BicicletaDAO implements IObjetoDAO<Bicicleta>{
    // private IConexion conexion;
     EntityManager em;
     public BicicletaDAO(EntityManager em) {

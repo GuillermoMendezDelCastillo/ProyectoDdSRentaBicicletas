@@ -4,13 +4,21 @@
  */
 package dao;
 
-import entidades.Usuario;
 import java.util.List;
 
 /**
  *
  * @author Gui26
  */
-public interface IUsuarioDAO extends ICRUD<Usuario>{
-    void filtro();
+public interface IObjetoDAO<T> {
+
+    public T agregar(T cliente);
+
+    public T buscar(Long id);
+
+    public T actualizar(T cliente);
+
+    public T eliminar(Long id);
+
+    public List<T> lista();
 }

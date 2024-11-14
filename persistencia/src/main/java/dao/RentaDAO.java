@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
  *
  * @author Gui26
  */
-public class RentaDAO implements IRentaDAO{
+public class RentaDAO implements IObjetoDAO<Renta>{
    // private IConexion conexion;
     EntityManager em;
     public RentaDAO(EntityManager em) {

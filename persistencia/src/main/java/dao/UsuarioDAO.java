@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
  *
  * @author Gui26
  */
-public class UsuarioDAO implements IUsuarioDAO {
+public class UsuarioDAO implements IObjetoDAO<Usuario> {
    // private IConexion conexion;
     EntityManager em;
     public UsuarioDAO(EntityManager em) {
@@ -122,11 +122,6 @@ public class UsuarioDAO implements IUsuarioDAO {
                 //em.close();
             }
         }
-    }
-
-    @Override
-    public void filtro() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

@@ -26,7 +26,7 @@ public class pruebaConexion {
 
         Usuario test2 = new Usuario("Alberto", "alberto@gmail.com", "12345");
         
-        IUsuarioDAO prueba = new UsuarioDAO(em);
+        IObjetoDAO<Usuario> prueba = new UsuarioDAO(em);
         Usuario u = prueba.agregar(test2);
         
 //        
