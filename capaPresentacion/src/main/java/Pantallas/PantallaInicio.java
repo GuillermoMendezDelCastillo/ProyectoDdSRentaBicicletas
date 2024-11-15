@@ -5,22 +5,25 @@
 package Pantallas;
 
 import PantallasAdmin.PantallaMenu;
+import control.ControlEmpleado;
 import dto.EmpleadoDTO;
 import java.util.Locale;
-import subsistemaIniciarSesion.IniciarSesion;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 
 /**
  *
  * @author PC Gamer
  */
 public class PantallaInicio extends javax.swing.JFrame {
-
+    ControlEmpleado empleadoBO;
     /**
      * Creates new form ClienteRentaJFrame
      */
-    public PantallaInicio() {
+    public PantallaInicio(ControlEmpleado empleadoBO) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.empleadoBO=empleadoBO;
     }
 
     /**
@@ -160,12 +163,11 @@ public class PantallaInicio extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        
-        EmpleadoDTO empleado = new EmpleadoDTO(txtEmpleado.getText(), new String(txtContrasena.getPassword()));
-        
-        IniciarSesion inicio = new IniciarSesion();
-        
-        if (inicio.iniciar(empleado)){
+        char[] passwordCharArray = txtContrasena.getPassword();
+        String password = new String(passwordCharArray);
+ 
+        if (empleadoBO.iniciarSesion(txtEmpleado.getText(), password)!=null)
+        {
             PantallaMenu p=new PantallaMenu();
             p.show();
             this.dispose();
@@ -216,7 +218,9 @@ public class PantallaInicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PantallaInicio().setVisible(true);
+                EntityManager em = Persistence.createEntityManagerFactory("renta_bicicletas").createEntityManager();
+                ControlEmpleado empleadoBO=new ControlEmpleado(em);
+                new PantallaInicio(empleadoBO).setVisible(true);
             }
         });
     }

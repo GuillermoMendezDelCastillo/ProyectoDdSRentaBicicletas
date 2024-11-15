@@ -11,13 +11,11 @@ import control.ControlBicicleta;
  * @author PC Gamer
  */
 public class AgregarBici extends javax.swing.JPanel {
-private ControlBicicleta bicicletas;
     /**
      * Creates new form AgregarBici
      */
     public AgregarBici() {
         initComponents();
-        bicicletas = new ControlBicicleta();
     }
 
     /**

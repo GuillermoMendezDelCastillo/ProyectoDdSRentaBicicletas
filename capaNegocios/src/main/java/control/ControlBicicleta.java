@@ -4,59 +4,69 @@
  */
 package control;
 
+import dao.BicicletaDAO;
 import dto.BicicletaDTO;
 import entidades.Bicicleta;
+import java.util.List;
 
 /**
  *
  * @author Gui26
  */
 public class ControlBicicleta {
-    
-    private Long id;
-    private String rodado;
-    private String estado;
+   private BicicletaDAO bicicletaDAO;
 
-    public ControlBicicleta() {
+    public ControlBicicleta(BicicletaDAO bicicletaDAO) {
+        this.bicicletaDAO = bicicletaDAO;
     }
 
-    public ControlBicicleta(Long id, String rodado, String estado) {
-        this.id = id;
-        this.rodado = rodado;
-        this.estado = estado;
-    }
-    
-    private Bicicleta fromDTO(BicicletaDTO b) {
-        return new Bicicleta();
+    public BicicletaDTO agregarBicicleta(BicicletaDTO bicicletaDTO) {
+        Bicicleta bicicleta = convertirDTOAEntidad(bicicletaDTO);
+        Bicicleta bicicletaAgregada = bicicletaDAO.agregar(bicicleta);
+        return convertirEntidadADTO(bicicletaAgregada);
     }
 
-    public ControlBicicleta(String rodado, String estado) {
-        this.rodado = rodado;
-        this.estado = estado;
+    public BicicletaDTO eliminarBicicleta(Long id) {
+        Bicicleta bicicletaEliminada = bicicletaDAO.eliminar(id);
+        return (bicicletaEliminada != null) ? convertirEntidadADTO(bicicletaEliminada) : null;
     }
 
-    public Long getId() {
-        return id;
+    public BicicletaDTO actualizarBicicleta(BicicletaDTO bicicletaDTO) {
+        Bicicleta bicicleta = convertirDTOAEntidad(bicicletaDTO);
+        Bicicleta bicicletaActualizada = bicicletaDAO.actualizar(bicicleta);
+        return convertirEntidadADTO(bicicletaActualizada);
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public List<BicicletaDTO> obtenerTodasLasBicicletas() {
+        List<Bicicleta> bicicletas = bicicletaDAO.lista();
+        return bicicletas.stream().map(this::convertirEntidadADTO).toList();
     }
 
-    public String getRodado() {
-        return rodado;
+    public List<BicicletaDTO> obtenerBicicletasDisponibles() {
+        List<Bicicleta> bicicletas = bicicletaDAO.lista().stream()
+                .filter(b -> b.getEstado().equalsIgnoreCase("disponible"))
+                .toList();
+        return bicicletas.stream().map(this::convertirEntidadADTO).toList();
     }
 
-    public void setRodado(String rodado) {
-        this.rodado = rodado;
+    public BicicletaDTO buscarBicicleta(Long id) {
+        Bicicleta bicicleta = bicicletaDAO.buscar(id);
+        return (bicicleta != null) ? convertirEntidadADTO(bicicleta) : null;
     }
 
-    public String getEstado() {
-        return estado;
+    public BicicletaDTO convertirEntidadADTO(Bicicleta bicicleta) {
+        return new BicicletaDTO(
+                bicicleta.getId(),
+                bicicleta.getRodado(),
+                bicicleta.getEstado()
+        );
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public Bicicleta convertirDTOAEntidad(BicicletaDTO bicicletaDTO) {
+        Bicicleta bicicleta = new Bicicleta();
+        bicicleta.setId(bicicletaDTO.getId());
+        bicicleta.setRodado(bicicletaDTO.getRodado());
+        bicicleta.setEstado(bicicletaDTO.getEstado());
+        return bicicleta;
     }
-    
 }

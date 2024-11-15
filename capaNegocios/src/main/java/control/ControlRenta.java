@@ -6,98 +6,91 @@ package control;
 
 import control.ControlBicicleta;
 import control.ControlCliente;
+import dao.RentaDAO;
+import dto.BicicletaDTO;
+import dto.ClienteDTO;
+import dto.RentaDTO;
+import entidades.Bicicleta;
+import entidades.Cliente;
+import entidades.Renta;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author Gui26
  */
 public class ControlRenta {
+    private RentaDAO rentaDAO;
+    private ControlBicicleta bicicletaBO;
+    private ControlCliente clienteBO;
     
-    private Long id;
-    private ControlBicicleta bicicleta;
-    private ControlCliente cliente;
-    private Date fecha;
-    private int tiempo;
-    private float costo;
-    private String metodoPago;
-
-    public ControlRenta() {
+    public ControlRenta(EntityManager em) {
+        rentaDAO = new RentaDAO(em);
     }
 
-    public ControlRenta(ControlBicicleta bicicleta, ControlCliente cliente, Date fecha, int tiempo, float costo, String metodoPago) {
-        this.bicicleta = bicicleta;
-        this.cliente = cliente;
-        this.fecha = fecha;
-        this.tiempo = tiempo;
-        this.costo = costo;
-        this.metodoPago = metodoPago;
+    public RentaDTO agregarRenta(RentaDTO rentaDTO) {
+        Bicicleta bicicleta = bicicletaBO.convertirDTOAEntidad(rentaDTO.getBicicleta());
+        Cliente cliente = clienteBO.convertirDTOAEntidad(rentaDTO.getCliente()) ;
+        
+        Renta renta = new Renta(bicicleta, cliente, rentaDTO.getFecha(), rentaDTO.getTiempo(), rentaDTO.getCosto(), rentaDTO.getMetodoPago());
+        renta = rentaDAO.agregar(renta);
+        return convertirARentaDTO(renta);
     }
 
-    public ControlRenta(Long id, ControlBicicleta bicicleta, ControlCliente cliente, Date fecha, int tiempo, float costo, String metodoPago) {
-        this.id = id;
-        this.bicicleta = bicicleta;
-        this.cliente = cliente;
-        this.fecha = fecha;
-        this.tiempo = tiempo;
-        this.costo = costo;
-        this.metodoPago = metodoPago;
+    public RentaDTO buscarRenta(Long id) {
+        Renta renta = rentaDAO.buscar(id);
+        if (renta != null) {
+            return convertirARentaDTO(renta);
+        }
+        return null;
     }
 
-    public Long getId() {
-        return id;
+    public List<RentaDTO> obtenerTodasLasRentas() {
+        List<Renta> rentas = rentaDAO.lista();
+        List<RentaDTO> rentaDTOs = new ArrayList<>();
+        for (Renta renta : rentas) {
+            rentaDTOs.add(convertirARentaDTO(renta));
+        }
+        return rentaDTOs;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public RentaDTO actualizarRenta(Long id, RentaDTO rentaDTO) {
+        Renta rentaExistente = rentaDAO.buscar(id);
+        if (rentaExistente != null) {
+            rentaExistente.setBicicleta(bicicletaBO.convertirDTOAEntidad(rentaDTO.getBicicleta()));
+            rentaExistente.setCliente(clienteBO.convertirDTOAEntidad(rentaDTO.getCliente()));
+            rentaExistente.setFecha(rentaDTO.getFecha());
+            rentaExistente.setTiempo(rentaDTO.getTiempo());
+            rentaExistente.setCosto(rentaDTO.getCosto());
+            rentaExistente.setMetodoPago(rentaDTO.getMetodoPago());
+            rentaDAO.actualizar(rentaExistente);
+            return convertirARentaDTO(rentaExistente);
+        }
+        return null;
     }
 
-    public ControlBicicleta getBicicleta() {
-        return bicicleta;
+    public boolean eliminarRenta(Long id) {
+        Renta renta = rentaDAO.buscar(id);
+        if (renta != null) {
+            rentaDAO.eliminar(id);
+            return true;
+        }
+        return false;
     }
 
-    public void setBicicleta(ControlBicicleta bicicleta) {
-        this.bicicleta = bicicleta;
-    }
-
-    public ControlCliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(ControlCliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public int getTiempo() {
-        return tiempo;
-    }
-
-    public void setTiempo(int tiempo) {
-        this.tiempo = tiempo;
-    }
-
-    public float getCosto() {
-        return costo;
-    }
-
-    public void setCosto(float costo) {
-        this.costo = costo;
-    }
-
-    public String getMetodoPago() {
-        return metodoPago;
-    }
-
-    public void setMetodoPago(String metodoPago) {
-        this.metodoPago = metodoPago;
+    private RentaDTO convertirARentaDTO(Renta renta) {
+        return new RentaDTO(
+            renta.getId(),
+            bicicletaBO.convertirEntidadADTO(renta.getBicicleta()),
+            clienteBO.convertirEntidadADTO(renta.getCliente()),
+            renta.getFecha(),
+            renta.getTiempo(),
+            renta.getCosto(),
+            renta.getMetodoPago()
+        );
     }
     
 }

@@ -5,45 +5,73 @@
 package control;
 
 import dao.EmpleadoDAO;
-import dao.IObjetoDAO;
 import dto.EmpleadoDTO;
+import entidades.Empleado;
+import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author Gui26
  */
 public class ControlEmpleado {
+    private EmpleadoDAO empleadoDAO = new EmpleadoDAO();
     
-    private String correo;
-    private String contrasena;
-
-    public ControlEmpleado() {
+    public ControlEmpleado(EntityManager em){
+        empleadoDAO=new EmpleadoDAO(em);
     }
     
-    public ControlEmpleado(EmpleadoDTO empleadoDto) {
-        this.correo = empleadoDto.getCorreo();
-        this.contrasena = empleadoDto.getContrasena();
+    public Empleado iniciarSesion(String correo, String contrasena) {
+        Empleado empleado = empleadoDAO.iniciar(correo, contrasena);
+        if (empleado != null) {
+            System.out.println("Inicio de sesión exitoso para: " + empleado.getNombre());
+            return empleado;
+        } else {
+            System.out.println("Credenciales incorrectas.");
+            return null;
+        }
     }
 
-    public String getCorreo() {
-        return correo;
+    public void agregarEmpleado(EmpleadoDTO empleadoDTO) {
+        Empleado empleado = convertirDTOaEmpleado(empleadoDTO);
+        empleadoDAO.agregar(empleado);
+        System.out.println("Empleado agregado: " + empleado.getNombre());
+    }
+    
+    public Empleado obtenerEmpleadoPorId(Long id) {
+        Empleado empleado = empleadoDAO.buscar(id);
+        if (empleado != null) {
+            return empleado;
+        } else {
+            System.out.println("Empleado con ID " + id + " no encontrado.");
+            return null;
+        }
+    }
+    
+    public void actualizarEmpleado(Long id, EmpleadoDTO empleadoDTO) {
+        Empleado empleadoExistente = obtenerEmpleadoPorId(id);
+        if (empleadoExistente != null) {
+            empleadoExistente.setCorreo(empleadoDTO.getCorreo());
+            empleadoExistente.setContrasena(empleadoDTO.getContrasena());
+            empleadoDAO.actualizar(empleadoExistente);
+            System.out.println("Empleado actualizado: " + empleadoExistente.getNombre());
+        }
+    }
+    
+    public List<Empleado> obtenerTodosEmpleados() {
+        return empleadoDAO.lista();
+    }
+    
+    public void eliminarEmpleado(Long id) {
+        Empleado empleado = obtenerEmpleadoPorId(id);
+        if (empleado != null) {
+            empleadoDAO.eliminar(id);
+            System.out.println("Empleado eliminado: " + empleado.getNombre());
+        }
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public boolean inicia(){
-        EmpleadoDAO empleado = new EmpleadoDAO();
-        return empleado.iniciar(correo, contrasena) != null;
+    public Empleado convertirDTOaEmpleado(EmpleadoDTO empleadoDTO) {
+        return new Empleado(empleadoDTO.getCorreo(), empleadoDTO.getContrasena());
     }
     
 }

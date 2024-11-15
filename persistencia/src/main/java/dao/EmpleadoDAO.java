@@ -20,11 +20,11 @@ import javax.persistence.criteria.Root;
  * @author Gui26
  */
 public class EmpleadoDAO implements IObjetoDAO<Empleado>{
-   // private IConexion conexion;
+//    private IConexion conexion;
     EntityManager em;
-//    public EmpleadoDAO(EntityManager em) {
-//        this.em = em;
-//    }
+    public EmpleadoDAO(EntityManager em) {
+        this.em = em;
+    }
 
     public EmpleadoDAO() {
         this.em = Persistence.createEntityManagerFactory("renta_bicicletas").createEntityManager();
