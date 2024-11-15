@@ -2,30 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package bo;
+package control;
 
-import bo.BicicletaBO;
-import bo.ClienteBO;
+import control.ControlBicicleta;
+import control.ControlCliente;
 import java.sql.Date;
 
 /**
  *
  * @author Gui26
  */
-public class RentaBO {
+public class ControlRenta {
     
     private Long id;
-    private BicicletaBO bicicleta;
-    private ClienteBO cliente;
+    private ControlBicicleta bicicleta;
+    private ControlCliente cliente;
     private Date fecha;
     private int tiempo;
     private float costo;
     private String metodoPago;
 
-    public RentaBO() {
+    public ControlRenta() {
     }
 
-    public RentaBO(BicicletaBO bicicleta, ClienteBO cliente, Date fecha, int tiempo, float costo, String metodoPago) {
+    public ControlRenta(ControlBicicleta bicicleta, ControlCliente cliente, Date fecha, int tiempo, float costo, String metodoPago) {
         this.bicicleta = bicicleta;
         this.cliente = cliente;
         this.fecha = fecha;
@@ -34,7 +34,7 @@ public class RentaBO {
         this.metodoPago = metodoPago;
     }
 
-    public RentaBO(Long id, BicicletaBO bicicleta, ClienteBO cliente, Date fecha, int tiempo, float costo, String metodoPago) {
+    public ControlRenta(Long id, ControlBicicleta bicicleta, ControlCliente cliente, Date fecha, int tiempo, float costo, String metodoPago) {
         this.id = id;
         this.bicicleta = bicicleta;
         this.cliente = cliente;
@@ -52,19 +52,19 @@ public class RentaBO {
         this.id = id;
     }
 
-    public BicicletaBO getBicicleta() {
+    public ControlBicicleta getBicicleta() {
         return bicicleta;
     }
 
-    public void setBicicleta(BicicletaBO bicicleta) {
+    public void setBicicleta(ControlBicicleta bicicleta) {
         this.bicicleta = bicicleta;
     }
 
-    public ClienteBO getCliente() {
+    public ControlCliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(ClienteBO cliente) {
+    public void setCliente(ControlCliente cliente) {
         this.cliente = cliente;
     }
 

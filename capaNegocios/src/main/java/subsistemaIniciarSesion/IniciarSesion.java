@@ -4,7 +4,7 @@
  */
 package subsistemaIniciarSesion;
 
-import bo.EmpleadoBO;
+import control.ControlEmpleado;
 import dto.EmpleadoDTO;
 
 /**
@@ -14,7 +14,7 @@ import dto.EmpleadoDTO;
 public class IniciarSesion {
     
     public boolean iniciar(EmpleadoDTO empleadoDto) {
-        EmpleadoBO empleado = new EmpleadoBO(empleadoDto);
+        ControlEmpleado empleado = new ControlEmpleado(empleadoDto);
         return empleado.inicia();
     }
     

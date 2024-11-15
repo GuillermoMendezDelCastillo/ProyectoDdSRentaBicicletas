@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package bo;
+package control;
 
 import dao.EmpleadoDAO;
 import dao.IObjetoDAO;
@@ -12,15 +12,15 @@ import dto.EmpleadoDTO;
  *
  * @author Gui26
  */
-public class EmpleadoBO {
+public class ControlEmpleado {
     
     private String correo;
     private String contrasena;
 
-    public EmpleadoBO() {
+    public ControlEmpleado() {
     }
     
-    public EmpleadoBO(EmpleadoDTO empleadoDto) {
+    public ControlEmpleado(EmpleadoDTO empleadoDto) {
         this.correo = empleadoDto.getCorreo();
         this.contrasena = empleadoDto.getContrasena();
     }

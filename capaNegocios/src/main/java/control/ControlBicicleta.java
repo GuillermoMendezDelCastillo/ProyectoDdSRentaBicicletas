@@ -2,28 +2,35 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package bo;
+package control;
+
+import dto.BicicletaDTO;
+import entidades.Bicicleta;
 
 /**
  *
  * @author Gui26
  */
-public class BicicletaBO {
+public class ControlBicicleta {
     
     private Long id;
     private String rodado;
     private String estado;
 
-    public BicicletaBO() {
+    public ControlBicicleta() {
     }
 
-    public BicicletaBO(Long id, String rodado, String estado) {
+    public ControlBicicleta(Long id, String rodado, String estado) {
         this.id = id;
         this.rodado = rodado;
         this.estado = estado;
     }
+    
+    private Bicicleta fromDTO(BicicletaDTO b) {
+        return new Bicicleta();
+    }
 
-    public BicicletaBO(String rodado, String estado) {
+    public ControlBicicleta(String rodado, String estado) {
         this.rodado = rodado;
         this.estado = estado;
     }
