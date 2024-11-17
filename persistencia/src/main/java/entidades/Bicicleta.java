@@ -34,31 +34,38 @@ public class Bicicleta implements Serializable {
     @Column(name = "estado", nullable = false, length = 50)
     private String estado;
 
+    @Column(name = "precio", nullable = false, length = 50)
+    private Float precio;
+    
     public Bicicleta() {
     }
 
-    public Bicicleta(Long id, String rodado, String estado) {
+    public Bicicleta(Long id, String rodado, String estado, Float precio) {
         this.id = id;
         this.rodado = rodado;
         this.estado = estado;
+        this.precio = precio;
     }
 
-    public Bicicleta(String rodado, String estado) {
+    public Bicicleta(String rodado, String estado, Float precio) {
         this.rodado = rodado;
         this.estado = estado;
+        this.precio = precio;
     }
 
-    public Bicicleta(Long id, String rodado, String tipo, String estado) {
+    public Bicicleta(Long id, String rodado, String tipo, String estado, Float precio) {
         this.id = id;
         this.rodado = rodado;
         this.tipo = tipo;
         this.estado = estado;
+        this.precio = precio;
     }
 
-    public Bicicleta(String rodado, String tipo, String estado) {
+    public Bicicleta(String rodado, String tipo, String estado, Float precio) {
         this.rodado = rodado;
         this.tipo = tipo;
         this.estado = estado;
+        this.precio = precio;
     }
     
     public Long getId() {
@@ -93,6 +100,14 @@ public class Bicicleta implements Serializable {
         this.estado = estado;
     }
 
+    public Float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Float precio) {
+        this.precio = precio;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -115,7 +130,7 @@ public class Bicicleta implements Serializable {
 
     @Override
     public String toString() {
-        return "Bicicleta{" + "id=" + id + ", rodado=" + rodado + ", tipo=" + tipo + ", estado=" + estado + '}';
+        return "Bicicleta{" + "id=" + id + ", rodado=" + rodado + ", tipo=" + tipo + ", estado=" + estado + ", precio=" + precio + '}';
     }
     
 }

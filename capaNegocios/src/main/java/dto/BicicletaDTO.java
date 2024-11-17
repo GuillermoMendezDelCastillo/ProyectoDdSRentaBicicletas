@@ -14,29 +14,34 @@ public class BicicletaDTO {
     private String rodado;
     private String tipo;
     private String estado;
+    private Float precio;
 
-    public BicicletaDTO(Long id, String rodado, String estado) {
+    public BicicletaDTO(Long id, String rodado, String estado, Float precio) {
         this.id = id;
         this.rodado = rodado;
         this.estado = estado;
+        this.precio = precio;
     }
 
-    public BicicletaDTO(String rodado, String estado) {
+    public BicicletaDTO(String rodado, String estado, Float precio) {
         this.rodado = rodado;
         this.estado = estado;
+        this.precio = precio;
     }
 
-    public BicicletaDTO(Long id, String rodado, String tipo, String estado) {
+    public BicicletaDTO(Long id, String rodado, String tipo, String estado, Float precio) {
         this.id = id;
         this.rodado = rodado;
         this.tipo = tipo;
         this.estado = estado;
+        this.precio = precio;
     }
 
-    public BicicletaDTO(String rodado, String tipo, String estado) {
+    public BicicletaDTO(String rodado, String tipo, String estado, Float precio) {
         this.rodado = rodado;
         this.tipo = tipo;
         this.estado = estado;
+        this.precio = precio;
     }
 
     public Long getId() {
@@ -53,6 +58,10 @@ public class BicicletaDTO {
 
     public String getEstado() {
         return estado;
+    }
+
+    public Float getPrecio() {
+        return precio;
     }
     
 }

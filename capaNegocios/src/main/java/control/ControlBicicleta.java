@@ -58,7 +58,8 @@ public class ControlBicicleta {
         return new BicicletaDTO(
                 bicicleta.getId(),
                 bicicleta.getRodado(),
-                bicicleta.getEstado()
+                bicicleta.getEstado(),
+                bicicleta.getPrecio()
         );
     }
 
