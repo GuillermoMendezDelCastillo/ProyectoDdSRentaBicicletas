@@ -140,7 +140,7 @@ public class EmpleadoDAO implements IObjetoDAO<Empleado>{
             query.setParameter("contrasena", contrasena);
             return (Empleado) query.getSingleResult();
         } catch (NoResultException e) {
-            return null; // No se encontró ningún cliente con el apodo y contraseña dada
+            return null; // No se encontró ningún cliente con el correo y contraseña dados
         } finally {
             if (em != null) {
                 em.close();

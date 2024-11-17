@@ -8,9 +8,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  *
@@ -18,25 +15,6 @@ import javax.persistence.Id;
  */
 @Entity
 public class Cliente extends Usuario implements Serializable {
-
-    //private static final long serialVersionUID = 1L;
-    
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "idUsuario")
-//    private Long id;
-//    
-//    @Column(name = "nombre", nullable = false, length = 200)
-//    private String nombre;
-//    
-//    @Column(name = "correo", nullable = false, length = 200)
-//    private String correo;
-//    
-//    @Column(name = "contrasena", nullable = false, length = 200)
-//    private String contrasena;
-//    
-//    @Column(name = "nacimiento", nullable = true)//cambiar a false despues
-//    private Date nacimiento;
 
     @Column(name = "telefono", nullable = true, length = 20)
     private String telefono;
@@ -86,25 +64,12 @@ public class Cliente extends Usuario implements Serializable {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
-//    @Override
-//    public int hashCode() {
-//        int hash = 0;
-//        hash += (id != null ? id.hashCode() : 0);
-//        return hash;
-//    }
-//
-//    @Override
-//    public boolean equals(Object object) {
-//        // TODO: Warning - this method won't work in the case the id fields are not set
-//        if (!(object instanceof Cliente)) {
-//            return false;
-//        }
-//        Cliente other = (Cliente) object;
-//        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-//            return false;
-//        }
-//        return true;
-//    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "id=" + this.getId() + ", nombre=" + this.getNombre()
+                + ", correo=" + this.getCorreo() + ", contrasena=" + this.getContrasena()
+                + ", nacimiento=" + this.getNacimiento() + ", telefono=" + telefono + ", direccion=" + direccion + '}';
+    }
     
 }

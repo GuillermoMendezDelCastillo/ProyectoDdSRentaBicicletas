@@ -4,18 +4,40 @@
  */
 package dto;
 
+import java.sql.Date;
+
 /**
  *
  * @author Gui26
  */
 public class EmpleadoDTO {
-    
+    private Long id;
+    private String nombre;
     private String correo;
     private String contrasena;
+    private Date nacimiento;
 
-    public EmpleadoDTO(String correo, String contrasena) {
+    public EmpleadoDTO(Long id, String nombre, String correo, String contrasena, Date nacimiento) {
+        this.id = id;
+        this.nombre = nombre;
         this.correo = correo;
         this.contrasena = contrasena;
+        this.nacimiento = nacimiento;
+    }
+
+    public EmpleadoDTO(String nombre, String correo, String contrasena, Date nacimiento) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.contrasena = contrasena;
+        this.nacimiento = nacimiento;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public String getCorreo() {
@@ -24,6 +46,10 @@ public class EmpleadoDTO {
 
     public String getContrasena() {
         return contrasena;
+    }
+
+    public Date getNacimiento() {
+        return nacimiento;
     }
     
 }

@@ -12,6 +12,7 @@ public class BicicletaDTO {
     
     private Long id;
     private String rodado;
+    private String tipo;
     private String estado;
 
     public BicicletaDTO(Long id, String rodado, String estado) {
@@ -25,12 +26,29 @@ public class BicicletaDTO {
         this.estado = estado;
     }
 
+    public BicicletaDTO(Long id, String rodado, String tipo, String estado) {
+        this.id = id;
+        this.rodado = rodado;
+        this.tipo = tipo;
+        this.estado = estado;
+    }
+
+    public BicicletaDTO(String rodado, String tipo, String estado) {
+        this.rodado = rodado;
+        this.tipo = tipo;
+        this.estado = estado;
+    }
+
     public Long getId() {
         return id;
     }
 
     public String getRodado() {
         return rodado;
+    }
+
+    public String getTipo() {
+        return tipo;
     }
 
     public String getEstado() {

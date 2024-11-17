@@ -134,8 +134,6 @@ public class Renta implements Serializable {
         this.metodoPago = metodoPago;
     }
     
-    
-    
     public Long getId() {
         return id;
     }
@@ -162,6 +160,13 @@ public class Renta implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Renta{" + "id=" + id + ", bicicleta=" + bicicleta + ", cliente="
+                + cliente + ", fecha=" + fecha + ", tiempo=" + tiempo + ", costo="
+                + costo + ", metodoPago=" + metodoPago + '}';
     }
     
 }

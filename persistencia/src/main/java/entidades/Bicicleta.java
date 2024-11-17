@@ -28,6 +28,9 @@ public class Bicicleta implements Serializable {
     @Column(name = "rodado", nullable = false, length = 50)
     private String rodado;
     
+    @Column(name = "tipo", nullable = true, length = 50)
+    private String tipo;
+    
     @Column(name = "estado", nullable = false, length = 50)
     private String estado;
 
@@ -42,6 +45,19 @@ public class Bicicleta implements Serializable {
 
     public Bicicleta(String rodado, String estado) {
         this.rodado = rodado;
+        this.estado = estado;
+    }
+
+    public Bicicleta(Long id, String rodado, String tipo, String estado) {
+        this.id = id;
+        this.rodado = rodado;
+        this.tipo = tipo;
+        this.estado = estado;
+    }
+
+    public Bicicleta(String rodado, String tipo, String estado) {
+        this.rodado = rodado;
+        this.tipo = tipo;
         this.estado = estado;
     }
     
@@ -59,6 +75,14 @@ public class Bicicleta implements Serializable {
 
     public void setRodado(String rodado) {
         this.rodado = rodado;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getEstado() {
@@ -88,10 +112,10 @@ public class Bicicleta implements Serializable {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
-        return "Bicicleta{" + "id=" + id + ", rodado=" + rodado + ", estado=" + estado + '}';
+        return "Bicicleta{" + "id=" + id + ", rodado=" + rodado + ", tipo=" + tipo + ", estado=" + estado + '}';
     }
     
 }
