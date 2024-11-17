@@ -26,9 +26,9 @@ public class pruebaConexion {
         Empleado test = new Empleado((long) 1, "Ricardo", "ricardo@gmail.com", "12345");
         
         EmpleadoDAO prueba = new EmpleadoDAO();
-        System.out.println(prueba.iniciar("ricardo@gmail.com", "12345"));
+        //System.out.println(prueba.iniciar("ricardo@gmail.com", "12345"));
         prueba.agregar(test);
-        System.out.println(prueba.iniciar("ricardo@gmail.com", "12345"));
+        //System.out.println(prueba.iniciar("ricardo@gmail.com", "12345"));
         
 //        System.out.println(em.contains(new Empleado("ricardo@gmail.com", "12345")));
 
