@@ -16,26 +16,27 @@ import entidades.Renta;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 /**
  *
  * @author Gui26
  */
 public class ControlRenta {
+    
     private RentaDAO rentaDAO;
     private ControlBicicleta bicicletaBO;
     private ControlCliente clienteBO;
     
-    public ControlRenta(EntityManager em) {
-        rentaDAO = new RentaDAO(em);
+    public ControlRenta() {
+        rentaDAO = new RentaDAO();
     }
 
     public RentaDTO agregarRenta(RentaDTO rentaDTO) {
         Bicicleta bicicleta = bicicletaBO.convertirDTOAEntidad(rentaDTO.getBicicleta());
         Cliente cliente = clienteBO.convertirDTOAEntidad(rentaDTO.getCliente()) ;
         
-        Renta renta = new Renta(bicicleta, cliente, rentaDTO.getFecha(), rentaDTO.getTiempo(), rentaDTO.getCosto(), rentaDTO.getMetodoPago());
+        Renta renta = new Renta(bicicleta, cliente, rentaDTO.getFecha(),
+                rentaDTO.getTiempo(), rentaDTO.getCosto(), rentaDTO.getMetodoPago());
         renta = rentaDAO.agregar(renta);
         return convertirARentaDTO(renta);
     }

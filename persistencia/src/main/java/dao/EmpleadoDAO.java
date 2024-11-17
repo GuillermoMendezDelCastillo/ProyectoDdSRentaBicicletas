@@ -22,9 +22,6 @@ import javax.persistence.criteria.Root;
 public class EmpleadoDAO implements IObjetoDAO<Empleado>{
 //    private IConexion conexion;
     EntityManager em;
-    public EmpleadoDAO(EntityManager em) {
-        this.em = em;
-    }
 
     public EmpleadoDAO() {
         this.em = Persistence.createEntityManagerFactory("renta_bicicletas").createEntityManager();
@@ -131,8 +128,6 @@ public class EmpleadoDAO implements IObjetoDAO<Empleado>{
     
     public Empleado iniciar(String correo, String contrasena){
         try {
-//            Empleado u = em.contains(new Empleado(correo, contrasena));
-//            Empleado u = em.find(Empleado.class, correo);
             Query query = em.createQuery("SELECT e FROM Usuario e WHERE "
                     + "e.correo = :correo AND "
                     + "e.contrasena = :contrasena", Empleado.class);

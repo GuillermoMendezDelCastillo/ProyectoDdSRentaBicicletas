@@ -32,6 +32,12 @@ public class EmpleadoDTO {
         this.nacimiento = nacimiento;
     }
 
+    public EmpleadoDTO(Long id, String nombre, String correo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.correo = correo;
+    }
+    
     public Long getId() {
         return id;
     }

@@ -7,23 +7,20 @@ package Pantallas;
 import PantallasAdmin.PantallaMenu;
 import control.ControlEmpleado;
 import dto.EmpleadoDTO;
-import java.util.Locale;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 
 /**
  *
  * @author PC Gamer
  */
 public class PantallaInicio extends javax.swing.JFrame {
-    ControlEmpleado empleadoBO;
+    private ControlEmpleado controlEmpleado;
     /**
      * Creates new form ClienteRentaJFrame
      */
-    public PantallaInicio(ControlEmpleado empleadoBO) {
+    public PantallaInicio() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.empleadoBO=empleadoBO;
+        this.controlEmpleado = new ControlEmpleado();
     }
 
     /**
@@ -39,7 +36,7 @@ public class PantallaInicio extends javax.swing.JFrame {
         panelRound3 = new Utileria.PanelRound();
         panelRound4 = new Utileria.PanelRound();
         txtEmpleado = new javax.swing.JTextField();
-        txtContrasena = new javax.swing.JPasswordField();
+        pswContrasena = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnIngresar = new javax.swing.JButton();
@@ -59,10 +56,10 @@ public class PantallaInicio extends javax.swing.JFrame {
 
         txtEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtContrasena.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtContrasena.addActionListener(new java.awt.event.ActionListener() {
+        pswContrasena.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pswContrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContrasenaActionPerformed(evt);
+                pswContrasenaActionPerformed(evt);
             }
         });
 
@@ -105,7 +102,7 @@ public class PantallaInicio extends javax.swing.JFrame {
                     .addGroup(panelRound4Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtContrasena, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pswContrasena, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))))
                 .addContainerGap(142, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
@@ -128,7 +125,7 @@ public class PantallaInicio extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pswContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
@@ -163,12 +160,12 @@ public class PantallaInicio extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        char[] passwordCharArray = txtContrasena.getPassword();
+        char[] passwordCharArray = pswContrasena.getPassword();
         String password = new String(passwordCharArray);
- 
-        if (empleadoBO.iniciarSesion(txtEmpleado.getText(), password)!=null)
+        EmpleadoDTO empleadoDto = controlEmpleado.iniciarSesion(txtEmpleado.getText(), password);
+        if (empleadoDto!=null)
         {
-            PantallaMenu p=new PantallaMenu();
+            PantallaMenu p = new PantallaMenu(empleadoDto);
             p.show();
             this.dispose();
         } else{
@@ -184,9 +181,9 @@ public class PantallaInicio extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
+    private void pswContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswContrasenaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtContrasenaActionPerformed
+    }//GEN-LAST:event_pswContrasenaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,9 +215,7 @@ public class PantallaInicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                EntityManager em = Persistence.createEntityManagerFactory("renta_bicicletas").createEntityManager();
-                ControlEmpleado empleadoBO=new ControlEmpleado(em);
-                new PantallaInicio(empleadoBO).setVisible(true);
+                new PantallaInicio().setVisible(true);
             }
         });
     }
@@ -234,7 +229,7 @@ public class PantallaInicio extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private Utileria.PanelRound panelRound3;
     private Utileria.PanelRound panelRound4;
-    private javax.swing.JPasswordField txtContrasena;
+    private javax.swing.JPasswordField pswContrasena;
     private javax.swing.JTextField txtEmpleado;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -19,10 +20,11 @@ import javax.persistence.criteria.Root;
  * @author Gui26
  */
 public class RentaDAO implements IObjetoDAO<Renta>{
-   // private IConexion conexion;
+
     EntityManager em;
-    public RentaDAO(EntityManager em) {
-        this.em = em;
+    
+    public RentaDAO() {
+        this.em = Persistence.createEntityManagerFactory("renta_bicicletas").createEntityManager();
     }
     
     @Override
@@ -43,7 +45,7 @@ public class RentaDAO implements IObjetoDAO<Renta>{
             }
             e.printStackTrace();
         } finally {
-            //em.close();
+            em.close();
         }
 
         return renta;
@@ -61,7 +63,7 @@ public class RentaDAO implements IObjetoDAO<Renta>{
             return null;
         } finally {
             if (em != null) {
-                //em.close();
+                em.close();
             }
         }
     }
@@ -80,7 +82,7 @@ public class RentaDAO implements IObjetoDAO<Renta>{
             }
             e.printStackTrace();
         } finally {
-            //em.close();
+            em.close();
         }
         return renta;
     }
@@ -99,7 +101,7 @@ public class RentaDAO implements IObjetoDAO<Renta>{
             }
             e.printStackTrace();
         } finally {
-            //em.close();
+            em.close();
         }
         return u;
     }
@@ -119,7 +121,7 @@ public class RentaDAO implements IObjetoDAO<Renta>{
             return null;
         } finally {
             if (em != null) {
-                //em.close();
+                em.close();
             }
         }
     }

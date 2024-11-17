@@ -4,12 +4,16 @@
  */
 package PantallasAdmin;
 
+import dto.EmpleadoDTO;
+
 /**
  *
  * @author PC Gamer
  */
 public class RentaConfirmadaJFrame extends javax.swing.JFrame {
 
+    private EmpleadoDTO empleadoDto;
+    
     /**
      * Creates new form RentaConfirmadaJFrame
      */
@@ -88,7 +92,7 @@ public class RentaConfirmadaJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        PantallaMenu p=new PantallaMenu();
+        PantallaMenu p=new PantallaMenu(empleadoDto);
         p.show();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

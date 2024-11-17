@@ -16,8 +16,8 @@ import java.util.List;
 public class ControlBicicleta {
    private BicicletaDAO bicicletaDAO;
 
-    public ControlBicicleta(BicicletaDAO bicicletaDAO) {
-        this.bicicletaDAO = bicicletaDAO;
+    public ControlBicicleta() {
+        this.bicicletaDAO = new BicicletaDAO();
     }
 
     public BicicletaDTO agregarBicicleta(BicicletaDTO bicicletaDTO) {

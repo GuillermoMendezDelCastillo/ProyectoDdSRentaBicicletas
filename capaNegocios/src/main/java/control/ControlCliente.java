@@ -8,17 +8,17 @@ import dao.ClienteDAO;
 import dto.ClienteDTO;
 import entidades.Cliente;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 /**
  *
  * @author Gui26
  */
 public class ControlCliente {
+    
     private ClienteDAO clienteDAO;
 
-    public ControlCliente(EntityManager em) {
-        this.clienteDAO = new ClienteDAO(em);
+    public ControlCliente() {
+        this.clienteDAO = new ClienteDAO();
     }
 
     public ClienteDTO agregarCliente(ClienteDTO clienteDTO) {

@@ -8,24 +8,25 @@ import dao.EmpleadoDAO;
 import dto.EmpleadoDTO;
 import entidades.Empleado;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 /**
  *
  * @author Gui26
  */
 public class ControlEmpleado {
-    private EmpleadoDAO empleadoDAO = new EmpleadoDAO();
     
-    public ControlEmpleado(EntityManager em){
-        empleadoDAO=new EmpleadoDAO(em);
+    private EmpleadoDAO empleadoDAO;
+    
+    public ControlEmpleado(){
+        this.empleadoDAO = new EmpleadoDAO();
     }
     
-    public Empleado iniciarSesion(String correo, String contrasena) {
+    public EmpleadoDTO iniciarSesion(String correo, String contrasena) {
         Empleado empleado = empleadoDAO.iniciar(correo, contrasena);
+        
         if (empleado != null) {
             System.out.println("Inicio de sesión exitoso para: " + empleado.getNombre());
-            return empleado;
+            return convertirEmpleadoAdto(empleado);
         } else {
             System.out.println("Credenciales incorrectas.");
             return null;
@@ -72,6 +73,12 @@ public class ControlEmpleado {
 
     public Empleado convertirDTOaEmpleado(EmpleadoDTO empleadoDTO) {
         return new Empleado(empleadoDTO.getCorreo(), empleadoDTO.getContrasena());
+    }
+    
+    public EmpleadoDTO convertirEmpleadoAdto(Empleado empleado){
+        EmpleadoDTO empleadoDto = new EmpleadoDTO(empleado.getId(),
+                empleado.getNombre(),empleado.getCorreo());
+        return empleadoDto;
     }
     
 }

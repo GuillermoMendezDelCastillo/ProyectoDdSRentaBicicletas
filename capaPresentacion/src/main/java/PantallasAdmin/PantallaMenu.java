@@ -4,6 +4,7 @@
  */
 package PantallasAdmin;
 
+import dto.EmpleadoDTO;
 import javax.swing.JPanel;
 
 /**
@@ -11,13 +12,16 @@ import javax.swing.JPanel;
  * @author PC Gamer
  */
 public class PantallaMenu extends javax.swing.JFrame {
-    private PanelRenta b=new PanelRenta(this);
+    private EmpleadoDTO empleadoDto;
+    private PanelRenta b;
+    
     /**
      * Creates new form PantallaMenu
      */
-    public PantallaMenu() {
+    public PantallaMenu(EmpleadoDTO empleadoDto) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.empleadoDto = empleadoDto;
     }
 
     /**
@@ -166,6 +170,7 @@ public class PantallaMenu extends javax.swing.JFrame {
 
     private void btnRentarBicicleta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarBicicleta1ActionPerformed
         // TODO add your handling code here:
+        b = new PanelRenta(this, empleadoDto);
         showPanel(b);
     }//GEN-LAST:event_btnRentarBicicleta1ActionPerformed
 

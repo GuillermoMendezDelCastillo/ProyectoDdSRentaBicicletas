@@ -4,6 +4,8 @@
  */
 package PantallasAdmin;
 
+import control.ControlBicicleta;
+import dto.EmpleadoDTO;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,13 +15,16 @@ import javax.swing.JPanel;
  * @author PC Gamer
  */
 public class PanelRenta extends javax.swing.JPanel {
-    JFrame main;
+    private JFrame main;
+    private EmpleadoDTO empleadoDto;
+    
     /**
      * Creates new form PanelRenta
      */
-    public PanelRenta(JFrame main) {
+    public PanelRenta(JFrame main, EmpleadoDTO empleadoDto) {
         initComponents();
         this.main=main;
+        this.empleadoDto = empleadoDto;
     }
 
     /**
@@ -36,13 +41,15 @@ public class PanelRenta extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jTextField2 = new javax.swing.JTextField();
+        cbTiempo = new javax.swing.JComboBox<>();
+        txtTotal = new javax.swing.JTextField();
         botonRentar = new javax.swing.JToggleButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        btnSeleccionar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        pswContrasena = new javax.swing.JPasswordField();
+        txtCorreo = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         panelRound2 = new Utileria.PanelRound();
@@ -65,25 +72,25 @@ public class PanelRenta extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel8.setText("Bicicleta:");
-        panelRound5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+        panelRound5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel10.setText("Total:");
-        panelRound5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
+        panelRound5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, -1, -1));
 
-        jComboBox6.setBackground(new java.awt.Color(250, 250, 250));
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelRound5.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 254, -1));
+        cbTiempo.setBackground(new java.awt.Color(250, 250, 250));
+        cbTiempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelRound5.add(cbTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 254, -1));
 
-        jTextField2.setEditable(false);
-        jTextField2.setBackground(new java.awt.Color(250, 250, 250));
-        jTextField2.setEnabled(false);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtTotal.setEditable(false);
+        txtTotal.setBackground(new java.awt.Color(250, 250, 250));
+        txtTotal.setEnabled(false);
+        txtTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtTotalActionPerformed(evt);
             }
         });
-        panelRound5.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 244, -1));
+        panelRound5.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 244, -1));
 
         botonRentar.setBackground(new java.awt.Color(210, 210, 210));
         botonRentar.setText("Rentar");
@@ -92,35 +99,31 @@ public class PanelRenta extends javax.swing.JPanel {
                 botonRentarActionPerformed(evt);
             }
         });
-        panelRound5.add(botonRentar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, 138, -1));
+        panelRound5.add(botonRentar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, 138, -1));
 
-        jButton2.setBackground(new java.awt.Color(255, 174, 105));
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton2.setText("Seleccionar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSeleccionar.setBackground(new java.awt.Color(255, 174, 105));
+        btnSeleccionar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSeleccionarActionPerformed(evt);
             }
         });
-        panelRound5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 161, -1));
-
-        jTextField3.setEditable(false);
-        jTextField3.setBackground(new java.awt.Color(250, 250, 250));
-        jTextField3.setEnabled(false);
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-        panelRound5.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 244, -1));
+        panelRound5.add(btnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 161, -1));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setText("Correo");
-        panelRound5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
+        panelRound5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel13.setText("Cliente:");
-        panelRound5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
+        panelRound5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel14.setText("Contraseña");
+        panelRound5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
+        panelRound5.add(pswContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 210, -1));
+        panelRound5.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 240, -1));
 
         panelRound3.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 800, 450));
 
@@ -201,9 +204,9 @@ public class PanelRenta extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtTotalActionPerformed
 
     private void botonRentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRentarActionPerformed
         // TODO add your handling code here:
@@ -217,15 +220,16 @@ public class PanelRenta extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         // TODO add your handling code here:
+        
+        ControlBicicleta c = new ControlBicicleta();// prueba
+        System.out.println(c.obtenerBicicletasDisponibles());// prueba
+        
         SeleccionarBicicleta sb= new SeleccionarBicicleta(main,true, main);
         sb.show();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+        
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     
     public JPanel getFondo() {
@@ -234,21 +238,23 @@ public class PanelRenta extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton botonRentar;
+    private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JComboBox<String> cbTiempo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private Utileria.PanelRound panelRound2;
     private Utileria.PanelRound panelRound3;
     private Utileria.PanelRound panelRound5;
+    private javax.swing.JPasswordField pswContrasena;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }
