@@ -23,6 +23,13 @@ public class PantallaMenu extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.empleadoDto = empleadoDto;
     }
+    
+    public PantallaMenu(EmpleadoDTO empleadoDto,JPanel panel) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        showPanel(panel);
+        this.empleadoDto = empleadoDto;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -167,13 +174,13 @@ public class PantallaMenu extends javax.swing.JFrame {
 
     private void btnRentarBicicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarBicicletaActionPerformed
         // TODO add your handling code here:
-        b = new PanelRenta(this, empleadoDto);
+        b = new PanelRenta(this,empleadoDto);
         showPanel(b);
     }//GEN-LAST:event_btnRentarBicicletaActionPerformed
 
     private void btnAdminBicicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminBicicletaActionPerformed
         // TODO add your handling code here:
-        AdminBicis c=new AdminBicis();
+        AdminBicis c=new AdminBicis(this,empleadoDto);
         showPanel(c);
     }//GEN-LAST:event_btnAdminBicicletaActionPerformed
 
@@ -192,6 +199,8 @@ public class PantallaMenu extends javax.swing.JFrame {
         dashBoard.repaint();
     }
 
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminBicicleta;
     private javax.swing.JButton btnAdminClientes;

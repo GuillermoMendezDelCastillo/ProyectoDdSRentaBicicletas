@@ -16,6 +16,9 @@ public class BicicletaDTO {
     private String estado;
     private Float precio;
 
+    public BicicletaDTO() {
+    }
+    
     public BicicletaDTO(Long id) {
         this.id = id;
     }

@@ -4,6 +4,9 @@
  */
 package PantallasAdmin;
 
+import dto.BicicletaDTO;
+import dto.EmpleadoDTO;
+
 /**
  *
  * @author PC Gamer
@@ -13,7 +16,7 @@ public class EditarBici extends javax.swing.JPanel {
     /**
      * Creates new form EditarBici
      */
-    public EditarBici() {
+    public EditarBici(EmpleadoDTO empleado, BicicletaDTO biciS) {
         initComponents();
     }
 

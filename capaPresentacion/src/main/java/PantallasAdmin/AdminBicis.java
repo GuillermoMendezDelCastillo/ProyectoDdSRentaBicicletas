@@ -4,25 +4,129 @@
  */
 package PantallasAdmin;
 
+import control.ControlBicicleta;
+import dto.BicicletaDTO;
+import dto.EmpleadoDTO;
+import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 /**
  *
  * @author PC Gamer
  */
 public class AdminBicis extends javax.swing.JPanel {
-
+    //Pantallas
+    ControlBicicleta biciBO;
+    JFrame main;
+    //DTOS
+    EmpleadoDTO empleado;
+    BicicletaDTO bici;
+    List<BicicletaDTO> bicis;
+    //Tabla
+    DefaultTableModel tableModel;
+    
     /**
      * Creates new form AdminBicis
      */
-    public AdminBicis() {
+    public AdminBicis(JFrame main,EmpleadoDTO empleado) {
         initComponents();
+        biciBO=new ControlBicicleta();
+        this.main=main;
+        this.empleado=empleado;
+        configurarTabla();
+        cargarDatos();
     }
 
+    
+    
      public JPanel getFondo() {
             return this;
     }
+     
+     private void cargarDatos() {
+    bicis = biciBO.obtenerTodasLasBicicletas(); 
+    for (BicicletaDTO bici : bicis) {
+        agregarFila(bici.getEstado(), "" + bici.getPrecio(), bici.getRodado());
+    }
+     }
     
+      private void configurarTabla() {
+        tableModel = new DefaultTableModel(
+            new Object[]{"Estado", "Precio", "Servicio", "Editar", "Eliminar"},
+            0 
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 3; 
+            }
+        };
+            jTable1.getColumn("Acciones").setCellRenderer((table, value, isSelected, hasFocus, row, column) -> {
+            JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
+            JButton btnEditar = new JButton("Editar");
+            JButton btnEliminar = new JButton("Eliminar");
+
+            btnEditar.addActionListener(e -> editarFila(row));
+            btnEliminar.addActionListener(e -> eliminarFila(row));
+
+            panel.add(btnEditar);
+            panel.add(btnEliminar);
+
+            return panel;
+        });
+
+        jTable1.getColumn("Acciones").setCellEditor(new DefaultCellEditor(new JCheckBox()) {
+            private final JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
+            private final JButton btnEditar = new JButton("Editar");
+            private final JButton btnEliminar = new JButton("Eliminar");
+
+            {
+                btnEditar.addActionListener(e -> {
+                    int row = jTable1.getSelectedRow();
+                    editarFila(row);
+                    fireEditingStopped();
+                });
+
+                btnEliminar.addActionListener(e -> {
+                    int row = jTable1.getSelectedRow();
+                    eliminarFila(row);
+                    fireEditingStopped();
+                });
+
+                panel.add(btnEditar);
+                panel.add(btnEliminar);
+            }
+
+            @Override
+            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+                return panel;
+            }
+        });
+    }
+      
+      private void editarFila(int row) {
+        BicicletaDTO biciSeleccionada = bicis.get(row);
+        EditarBici editarBici = new EditarBici(empleado, biciSeleccionada);
+        editarBici.show();
+        main.disable();
+    }
+
+    private void eliminarFila(int row) {
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Eliminar esta bicicleta?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            biciBO.eliminarBicicleta(bicis.get(row).getId());
+            bicis.remove(row); 
+            tableModel.removeRow(row); 
+        }
+    }
+      
+    private void agregarFila(String estado, String precio, String servicio) {
+        tableModel.addRow(new Object[]{estado, precio, servicio, "Acciones"}); 
+    }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,9 +271,14 @@ public class AdminBicis extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        AgregarBici aB=new AgregarBici(main,empleado);
+        aB.show();
+        this.disable();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
