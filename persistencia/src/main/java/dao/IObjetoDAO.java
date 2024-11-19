@@ -14,7 +14,7 @@ public interface IObjetoDAO<T> {
 
     public T agregar(T tipo);
 
-    public T buscar(Long id);
+    public T buscarPorId(Long id);
 
     public T actualizar(T tipo);
 

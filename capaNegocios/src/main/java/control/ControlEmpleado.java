@@ -40,7 +40,7 @@ public class ControlEmpleado {
     }
     
     public Empleado obtenerEmpleadoPorId(Long id) {
-        Empleado empleado = empleadoDAO.buscar(id);
+        Empleado empleado = empleadoDAO.buscarPorId(id);
         if (empleado != null) {
             return empleado;
         } else {
@@ -72,7 +72,7 @@ public class ControlEmpleado {
     }
 
     public Empleado convertirDTOaEmpleado(EmpleadoDTO empleadoDTO) {
-        return new Empleado(empleadoDTO.getCorreo(), empleadoDTO.getContrasena());
+        return new Empleado(empleadoDTO.getId(),empleadoDTO.getCorreo(), empleadoDTO.getContrasena());
     }
     
     public EmpleadoDTO convertirEmpleadoAdto(Empleado empleado){

@@ -68,11 +68,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                      <Component id="btnRentarBicicleta1" min="-2" pref="153" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnRentarBicicleta" min="-2" pref="153" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnComprarBicicleta" min="-2" pref="153" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnRentarBicicleta2" min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="btnAdminBicicleta" min="-2" pref="184" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnAdminClientes" min="-2" pref="184" max="-2" attributes="0"/>
                       <EmptySpace pref="168" max="32767" attributes="0"/>
@@ -84,9 +84,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnComprarBicicleta" alignment="3" pref="37" max="32767" attributes="0"/>
                           <Component id="btnRentarBicicleta" alignment="3" pref="37" max="32767" attributes="0"/>
-                          <Component id="btnRentarBicicleta1" alignment="3" pref="37" max="32767" attributes="0"/>
-                          <Component id="btnRentarBicicleta2" alignment="3" pref="0" max="32767" attributes="0"/>
+                          <Component id="btnAdminBicicleta" alignment="3" pref="0" max="32767" attributes="0"/>
                           <Component id="btnAdminClientes" alignment="3" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
@@ -95,7 +95,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnRentarBicicleta">
+            <Component class="javax.swing.JButton" name="btnComprarBicicleta">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="cc" type="rgb"/>
@@ -109,10 +109,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRentarBicicletaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnComprarBicicletaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnRentarBicicleta1">
+            <Component class="javax.swing.JButton" name="btnRentarBicicleta">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="cc" type="rgb"/>
@@ -126,10 +126,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRentarBicicleta1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRentarBicicletaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnRentarBicicleta2">
+            <Component class="javax.swing.JButton" name="btnAdminBicicleta">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="cc" type="rgb"/>
@@ -143,7 +143,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRentarBicicleta2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdminBicicletaActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnAdminClientes">

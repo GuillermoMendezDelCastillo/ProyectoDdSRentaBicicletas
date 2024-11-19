@@ -44,7 +44,7 @@ public class ControlCliente {
     }
 
     public ClienteDTO buscarCliente(Long id) {
-        Cliente cliente = clienteDAO.buscar(id);
+        Cliente cliente = clienteDAO.buscarPorId(id);
         return (cliente != null) ? convertirEntidadADTO(cliente) : null;
     }
 

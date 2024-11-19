@@ -35,9 +35,9 @@ public class PantallaMenu extends javax.swing.JFrame {
 
         panelRound3 = new Utileria.PanelRound();
         panelRound4 = new Utileria.PanelRound();
+        btnComprarBicicleta = new javax.swing.JButton();
         btnRentarBicicleta = new javax.swing.JButton();
-        btnRentarBicicleta1 = new javax.swing.JButton();
-        btnRentarBicicleta2 = new javax.swing.JButton();
+        btnAdminBicicleta = new javax.swing.JButton();
         btnAdminClientes = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         dashBoard = new javax.swing.JPanel();
@@ -53,10 +53,19 @@ public class PantallaMenu extends javax.swing.JFrame {
         panelRound4.setRoundTopLeft(50);
         panelRound4.setRoundTopRight(50);
 
+        btnComprarBicicleta.setBackground(new java.awt.Color(204, 153, 255));
+        btnComprarBicicleta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnComprarBicicleta.setText("Comprar bicicleta");
+        btnComprarBicicleta.setPreferredSize(new java.awt.Dimension(200, 50));
+        btnComprarBicicleta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarBicicletaActionPerformed(evt);
+            }
+        });
+
         btnRentarBicicleta.setBackground(new java.awt.Color(204, 153, 255));
         btnRentarBicicleta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnRentarBicicleta.setForeground(new java.awt.Color(0, 0, 0));
-        btnRentarBicicleta.setText("Comprar bicicleta");
+        btnRentarBicicleta.setText("Renta Bicicleta");
         btnRentarBicicleta.setPreferredSize(new java.awt.Dimension(200, 50));
         btnRentarBicicleta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,31 +73,18 @@ public class PantallaMenu extends javax.swing.JFrame {
             }
         });
 
-        btnRentarBicicleta1.setBackground(new java.awt.Color(204, 153, 255));
-        btnRentarBicicleta1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnRentarBicicleta1.setForeground(new java.awt.Color(0, 0, 0));
-        btnRentarBicicleta1.setText("Renta Bicicleta");
-        btnRentarBicicleta1.setPreferredSize(new java.awt.Dimension(200, 50));
-        btnRentarBicicleta1.addActionListener(new java.awt.event.ActionListener() {
+        btnAdminBicicleta.setBackground(new java.awt.Color(204, 153, 255));
+        btnAdminBicicleta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdminBicicleta.setText("Administrar bicicletas");
+        btnAdminBicicleta.setPreferredSize(new java.awt.Dimension(200, 50));
+        btnAdminBicicleta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRentarBicicleta1ActionPerformed(evt);
-            }
-        });
-
-        btnRentarBicicleta2.setBackground(new java.awt.Color(204, 153, 255));
-        btnRentarBicicleta2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnRentarBicicleta2.setForeground(new java.awt.Color(0, 0, 0));
-        btnRentarBicicleta2.setText("Administrar bicicletas");
-        btnRentarBicicleta2.setPreferredSize(new java.awt.Dimension(200, 50));
-        btnRentarBicicleta2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRentarBicicleta2ActionPerformed(evt);
+                btnAdminBicicletaActionPerformed(evt);
             }
         });
 
         btnAdminClientes.setBackground(new java.awt.Color(204, 153, 255));
         btnAdminClientes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdminClientes.setForeground(new java.awt.Color(0, 0, 0));
         btnAdminClientes.setText("Administrar clientes");
         btnAdminClientes.setPreferredSize(new java.awt.Dimension(200, 50));
         btnAdminClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -103,11 +99,11 @@ public class PantallaMenu extends javax.swing.JFrame {
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(btnRentarBicicleta1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(btnRentarBicicleta, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnComprarBicicleta, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRentarBicicleta2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAdminBicicleta, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdminClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(168, Short.MAX_VALUE))
@@ -117,9 +113,9 @@ public class PantallaMenu extends javax.swing.JFrame {
             .addGroup(panelRound4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnComprarBicicleta, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                     .addComponent(btnRentarBicicleta, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(btnRentarBicicleta1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(btnRentarBicicleta2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnAdminBicicleta, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btnAdminClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(6, 6, 6))
         );
@@ -162,23 +158,24 @@ public class PantallaMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRentarBicicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarBicicletaActionPerformed
+    private void btnComprarBicicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarBicicletaActionPerformed
         // TODO add your handling code here:
-        CompraBicis c=new CompraBicis(this);
+        
+        CompraRentaBicis c = new CompraRentaBicis(this,1);
         showPanel(c);
-    }//GEN-LAST:event_btnRentarBicicletaActionPerformed
+    }//GEN-LAST:event_btnComprarBicicletaActionPerformed
 
-    private void btnRentarBicicleta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarBicicleta1ActionPerformed
+    private void btnRentarBicicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarBicicletaActionPerformed
         // TODO add your handling code here:
         b = new PanelRenta(this, empleadoDto);
         showPanel(b);
-    }//GEN-LAST:event_btnRentarBicicleta1ActionPerformed
+    }//GEN-LAST:event_btnRentarBicicletaActionPerformed
 
-    private void btnRentarBicicleta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarBicicleta2ActionPerformed
+    private void btnAdminBicicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminBicicletaActionPerformed
         // TODO add your handling code here:
         AdminBicis c=new AdminBicis();
         showPanel(c);
-    }//GEN-LAST:event_btnRentarBicicleta2ActionPerformed
+    }//GEN-LAST:event_btnAdminBicicletaActionPerformed
 
     private void btnAdminClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminClientesActionPerformed
         // TODO add your handling code here:
@@ -196,10 +193,10 @@ public class PantallaMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdminBicicleta;
     private javax.swing.JButton btnAdminClientes;
+    private javax.swing.JButton btnComprarBicicleta;
     private javax.swing.JButton btnRentarBicicleta;
-    private javax.swing.JButton btnRentarBicicleta1;
-    private javax.swing.JButton btnRentarBicicleta2;
     private javax.swing.JPanel dashBoard;
     private javax.swing.JLabel jLabel2;
     private Utileria.PanelRound panelRound3;

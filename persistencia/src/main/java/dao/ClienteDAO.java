@@ -52,7 +52,7 @@ public class ClienteDAO implements IObjetoDAO<Cliente>{
     }
     
     @Override
-    public Cliente buscar(Long id){
+    public Cliente buscarPorId(Long id){
         try {
             Cliente u = em.find(Cliente.class, id);
             return u;
@@ -119,6 +119,23 @@ public class ClienteDAO implements IObjetoDAO<Cliente>{
             
         } catch (NoResultException e) {
             return null;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+    
+    public Cliente buscar(String correo, String contrasena){
+        try {
+            Query query = em.createQuery("SELECT u FROM Usuario u WHERE "
+                    + "u.correo = :correo AND "
+                    + "u.contrasena = :contrasena", Cliente.class);
+            query.setParameter("correo", correo);
+            query.setParameter("contrasena", contrasena);
+            return (Cliente) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null; // No se encontró ningún empleado con el correo y contraseña dados
         } finally {
             if (em != null) {
                 em.close();

@@ -22,6 +22,10 @@ public class Empleado extends Usuario implements Serializable {
     public Empleado() {
     }
 
+    public Empleado(Long id, String nombre, String correo) {
+        super(id, nombre, correo);
+    }
+
     public Empleado(String correo, String contrasena) {
         super(correo, contrasena);
     }

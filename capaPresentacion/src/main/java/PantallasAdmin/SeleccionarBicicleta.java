@@ -12,7 +12,10 @@ import javax.swing.JPanel;
  * @author PC Gamer
  */
 public class SeleccionarBicicleta extends javax.swing.JDialog {
-
+    
+    private CompraRentaBicis c;
+    private Integer idBicicleta;
+    
     /**
      * Creates new form SeleccionarBicicleta
      */
@@ -20,7 +23,7 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        CompraBicis c=new CompraBicis(p);
+        c = new CompraRentaBicis(p,2);
         showPanel(c);
     }
 
@@ -34,8 +37,8 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel12 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
         dashBoard = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -43,24 +46,23 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
         jPanel12.setBackground(new java.awt.Color(250, 250, 250));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 174, 105));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(255, 174, 105));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
-        jPanel12.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 590, 110, 30));
+        jPanel12.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 590, 110, 30));
 
-        jButton2.setBackground(new java.awt.Color(255, 174, 105));
-        jButton2.setText("Aceptar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAceptar.setBackground(new java.awt.Color(255, 174, 105));
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAceptarActionPerformed(evt);
             }
         });
-        jPanel12.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 590, 120, 30));
+        jPanel12.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 590, 120, 30));
 
         dashBoard.setPreferredSize(new java.awt.Dimension(850, 550));
 
@@ -91,15 +93,21 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        return ;
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if(idBicicleta!=null){
+            System.out.println("Error: no se ha difinido la bicicleta");
+        } else{
+            idBicicleta=c.getIdBicicleta();
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void showPanel(JPanel p){
         p.setSize(850, 550);
@@ -109,13 +117,15 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
         dashBoard.revalidate();
         dashBoard.repaint();
     }
-    
 
+    public Integer getIdBicicleta() {
+        return idBicicleta;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JPanel dashBoard;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel12;
     // End of variables declaration//GEN-END:variables
 }

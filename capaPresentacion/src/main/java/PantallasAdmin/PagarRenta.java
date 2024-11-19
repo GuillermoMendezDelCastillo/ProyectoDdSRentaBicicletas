@@ -4,18 +4,25 @@
  */
 package PantallasAdmin;
 
+import control.ControlRenta;
+import dto.RentaDTO;
+
 /**
  *
  * @author PC Gamer
  */
 public class PagarRenta extends javax.swing.JDialog {
 
+    private RentaDTO rentaDto;
+    private ControlRenta controlRenta;
     /**
      * Creates new form PagarRenta
      */
-    public PagarRenta(java.awt.Frame parent, boolean modal) {
+    public PagarRenta(java.awt.Frame parent, boolean modal, RentaDTO rentaDto) {
         super(parent, modal);
         initComponents();
+        this.rentaDto = rentaDto;
+        this.controlRenta = new ControlRenta();
     }
 
     /**
@@ -31,15 +38,15 @@ public class PagarRenta extends javax.swing.JDialog {
         panelRound5 = new Utileria.PanelRound();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        botonRentar = new javax.swing.JToggleButton();
+        txtTotal = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnPagar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
@@ -58,62 +65,54 @@ public class PagarRenta extends javax.swing.JDialog {
         panelRound5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Metodos:");
-        panelRound5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+        panelRound5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Total:");
         panelRound5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, -1, -1));
 
-        jTextField2.setEditable(false);
-        jTextField2.setBackground(new java.awt.Color(250, 250, 250));
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField2.setEnabled(false);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtTotal.setEditable(false);
+        txtTotal.setBackground(new java.awt.Color(250, 250, 250));
+        txtTotal.setEnabled(false);
+        txtTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtTotalActionPerformed(evt);
             }
         });
-        panelRound5.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 244, -1));
-
-        botonRentar.setBackground(new java.awt.Color(210, 210, 210));
-        botonRentar.setForeground(new java.awt.Color(0, 0, 0));
-        botonRentar.setText("Pagar");
-        botonRentar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRentarActionPerformed(evt);
-            }
-        });
-        panelRound5.add(botonRentar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 138, -1));
+        panelRound5.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 244, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("En efectivo");
-        panelRound5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+        panelRound5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Tarjeta");
-        panelRound5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        panelRound5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Paypal");
-        panelRound5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+        panelRound5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         jButton2.setText("jButton2");
-        panelRound5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 360, 50));
+        panelRound5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 360, 50));
 
         jButton3.setText("jButton2");
-        panelRound5.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 360, 50));
+        panelRound5.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 360, 50));
 
         jButton5.setText("jButton2");
-        panelRound5.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 360, 50));
+        panelRound5.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 360, 50));
 
-        jButton6.setText("jButton2");
-        panelRound5.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 360, 50));
+        btnPagar.setText("Pagar");
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
+        panelRound5.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, -1, -1));
+
+        btnCancelar.setText("Cancelar");
+        panelRound5.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
 
         panelRound3.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 800, 450));
 
@@ -122,7 +121,6 @@ public class PagarRenta extends javax.swing.JDialog {
 
         jLabel12.setBackground(new java.awt.Color(0, 0, 0));
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Metodo de pago");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -174,13 +172,6 @@ public class PagarRenta extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonRentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRentarActionPerformed
-        // TODO add your handling code here:
-        RentaConfirmadaJFrame r=new RentaConfirmadaJFrame();
-        r.show();
-        this.dispose();
-    }//GEN-LAST:event_botonRentarActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -189,18 +180,24 @@ public class PagarRenta extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtTotalActionPerformed
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+        // TODO add your handling code here:
+        controlRenta.agregarRenta(rentaDto);
+        this.dispose();
+    }//GEN-LAST:event_btnPagarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton botonRentar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnPagar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -208,8 +205,8 @@ public class PagarRenta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField2;
     private Utileria.PanelRound panelRound3;
     private Utileria.PanelRound panelRound5;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

@@ -52,7 +52,7 @@ public class RentaDAO implements IObjetoDAO<Renta>{
     }
     
     @Override
-    public Renta buscar(Long id){
+    public Renta buscarPorId(Long id){
         try {
             Renta u = em.find(Renta.class, id);
             return u;

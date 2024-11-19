@@ -35,6 +35,10 @@ public class Renta implements Serializable {
     @JoinColumn(name = "idCliente", nullable = false)
     private Cliente cliente;
     
+    @ManyToOne()
+    @JoinColumn(name = "idEmpleado", nullable = false)
+    private Empleado empleado;
+    
     @Column(name = "fecha", nullable = false)
     private Date fecha;
     
@@ -50,7 +54,8 @@ public class Renta implements Serializable {
     public Renta() {
     }
 
-    public Renta(Long id, Bicicleta bicicleta, Cliente cliente, Date fecha, int tiempo, float costo, String metodoPago) {
+    public Renta(Long id, Bicicleta bicicleta, Cliente cliente, Date fecha,
+            int tiempo, float costo, String metodoPago, Empleado empleado) {
         this.id = id;
         this.bicicleta = bicicleta;
         this.cliente = cliente;
@@ -58,32 +63,39 @@ public class Renta implements Serializable {
         this.tiempo = tiempo;
         this.costo = costo;
         this.metodoPago = metodoPago;
+        this.empleado = empleado;
     }
 
-    public Renta(Bicicleta bicicleta, Cliente cliente, Date fecha, int tiempo, float costo, String metodoPago) {
+    public Renta(Bicicleta bicicleta, Cliente cliente, Date fecha, int tiempo,
+            float costo, String metodoPago, Empleado empleado) {
         this.bicicleta = bicicleta;
         this.cliente = cliente;
         this.fecha = fecha;
         this.tiempo = tiempo;
         this.costo = costo;
         this.metodoPago = metodoPago;
+        this.empleado = empleado;
     }
 
-    public Renta(Bicicleta bicicleta, Cliente cliente, int tiempo, float costo, String metodoPago) {
+    public Renta(Bicicleta bicicleta, Cliente cliente, int tiempo, float costo,
+            String metodoPago, Empleado empleado) {
         this.bicicleta = bicicleta;
         this.cliente = cliente;
         this.tiempo = tiempo;
         this.costo = costo;
         this.metodoPago = metodoPago;
+        this.empleado = empleado;
     }
 
-    public Renta(Long id, Bicicleta bicicleta, Cliente cliente, int tiempo, float costo, String metodoPago) {
+    public Renta(Long id, Bicicleta bicicleta, Cliente cliente, int tiempo,
+            float costo, String metodoPago, Empleado empleado) {
         this.id = id;
         this.bicicleta = bicicleta;
         this.cliente = cliente;
         this.tiempo = tiempo;
         this.costo = costo;
         this.metodoPago = metodoPago;
+        this.empleado = empleado;
     }
 
     public Bicicleta getBicicleta() {
@@ -142,6 +154,14 @@ public class Renta implements Serializable {
         this.id = id;
     }
 
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -166,7 +186,7 @@ public class Renta implements Serializable {
     public String toString() {
         return "Renta{" + "id=" + id + ", bicicleta=" + bicicleta + ", cliente="
                 + cliente + ", fecha=" + fecha + ", tiempo=" + tiempo + ", costo="
-                + costo + ", metodoPago=" + metodoPago + '}';
+                + costo + ", metodoPago=" + metodoPago + ", empleado=" + empleado + '}';
     }
     
 }

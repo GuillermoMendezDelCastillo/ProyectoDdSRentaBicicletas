@@ -52,7 +52,7 @@ public class BicicletaDAO implements IObjetoDAO<Bicicleta>{
     }
     
     @Override
-    public Bicicleta buscar(Long id){
+    public Bicicleta buscarPorId(Long id){
         try {
             Bicicleta u = em.find(Bicicleta.class, id);
             return u;

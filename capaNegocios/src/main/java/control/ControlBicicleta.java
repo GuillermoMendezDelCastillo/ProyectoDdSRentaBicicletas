@@ -50,7 +50,7 @@ public class ControlBicicleta {
     }
 
     public BicicletaDTO buscarBicicleta(Long id) {
-        Bicicleta bicicleta = bicicletaDAO.buscar(id);
+        Bicicleta bicicleta = bicicletaDAO.buscarPorId(id);
         return (bicicleta != null) ? convertirEntidadADTO(bicicleta) : null;
     }
 

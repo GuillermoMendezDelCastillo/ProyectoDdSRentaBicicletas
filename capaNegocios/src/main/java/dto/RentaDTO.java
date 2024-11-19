@@ -19,8 +19,10 @@ public class RentaDTO {
     private int tiempo;
     private float costo;
     private String metodoPago;
+    private EmpleadoDTO empleado;
 
-    public RentaDTO(Long id, BicicletaDTO bicicleta, ClienteDTO cliente, Date fecha, int tiempo, float costo, String metodoPago) {
+    public RentaDTO(Long id, BicicletaDTO bicicleta, ClienteDTO cliente, Date fecha,
+            int tiempo, float costo, String metodoPago, EmpleadoDTO empleado) {
         this.id = id;
         this.bicicleta = bicicleta;
         this.cliente = cliente;
@@ -28,17 +30,39 @@ public class RentaDTO {
         this.tiempo = tiempo;
         this.costo = costo;
         this.metodoPago = metodoPago;
+        this.empleado = empleado;
     }
 
-    public RentaDTO(BicicletaDTO bicicleta, ClienteDTO cliente, Date fecha, int tiempo, float costo, String metodoPago) {
+    public RentaDTO(BicicletaDTO bicicleta, ClienteDTO cliente, Date fecha, int tiempo,
+            float costo, String metodoPago, EmpleadoDTO empleado) {
         this.bicicleta = bicicleta;
         this.cliente = cliente;
         this.fecha = fecha;
         this.tiempo = tiempo;
         this.costo = costo;
         this.metodoPago = metodoPago;
+        this.empleado = empleado;
     }
 
+    public RentaDTO(Long id, BicicletaDTO bicicleta, ClienteDTO cliente,
+            int tiempo, float costo, EmpleadoDTO empleado) {
+        this.id = id;
+        this.bicicleta = bicicleta;
+        this.cliente = cliente;
+        this.tiempo = tiempo;
+        this.costo = costo;
+        this.empleado = empleado;
+    }
+
+    public RentaDTO(BicicletaDTO bicicleta, ClienteDTO cliente, int tiempo,
+            float costo, EmpleadoDTO empleado) {
+        this.bicicleta = bicicleta;
+        this.cliente = cliente;
+        this.tiempo = tiempo;
+        this.costo = costo;
+        this.empleado = empleado;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -65,6 +89,10 @@ public class RentaDTO {
 
     public String getMetodoPago() {
         return metodoPago;
+    }
+
+    public EmpleadoDTO getEmpleado() {
+        return empleado;
     }
     
 }

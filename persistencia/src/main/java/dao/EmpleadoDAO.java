@@ -52,7 +52,7 @@ public class EmpleadoDAO implements IObjetoDAO<Empleado>{
     }
     
     @Override
-    public Empleado buscar(Long id){
+    public Empleado buscarPorId(Long id){
         try {
             Empleado u = em.find(Empleado.class, id);
             return u;
@@ -128,14 +128,14 @@ public class EmpleadoDAO implements IObjetoDAO<Empleado>{
     
     public Empleado iniciar(String correo, String contrasena){
         try {
-            Query query = em.createQuery("SELECT e FROM Usuario e WHERE "
-                    + "e.correo = :correo AND "
-                    + "e.contrasena = :contrasena", Empleado.class);
+            Query query = em.createQuery("SELECT u FROM Usuario u WHERE "
+                    + "u.correo = :correo AND "
+                    + "u.contrasena = :contrasena", Empleado.class);
             query.setParameter("correo", correo);
             query.setParameter("contrasena", contrasena);
             return (Empleado) query.getSingleResult();
         } catch (NoResultException e) {
-            return null; // No se encontró ningún cliente con el correo y contraseña dados
+            return null; // No se encontró ningún empleado con el correo y contraseña dados
         } finally {
             if (em != null) {
                 em.close();

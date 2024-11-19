@@ -5,7 +5,11 @@
 package PantallasAdmin;
 
 import control.ControlBicicleta;
+import control.ControlRenta;
+import dto.BicicletaDTO;
+import dto.ClienteDTO;
 import dto.EmpleadoDTO;
+import dto.RentaDTO;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,16 +19,25 @@ import javax.swing.JPanel;
  * @author PC Gamer
  */
 public class PanelRenta extends javax.swing.JPanel {
+    
     private JFrame main;
     private EmpleadoDTO empleadoDto;
+    private ClienteDTO clienteDto;
+    private Integer idBicicleta;
+    private float tiempo;
+    private SeleccionarBicicleta sb;
+    private ControlRenta controlRenta;
     
     /**
      * Creates new form PanelRenta
      */
     public PanelRenta(JFrame main, EmpleadoDTO empleadoDto) {
         initComponents();
-        this.main=main;
+        this.main = main;
         this.empleadoDto = empleadoDto;
+        this.tiempo = (float) 0.5;
+        this.idBicicleta = null;
+        this.controlRenta = new ControlRenta();
     }
 
     /**
@@ -43,13 +56,15 @@ public class PanelRenta extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         cbTiempo = new javax.swing.JComboBox<>();
         txtTotal = new javax.swing.JTextField();
-        botonRentar = new javax.swing.JToggleButton();
         btnSeleccionar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         pswContrasena = new javax.swing.JPasswordField();
         txtCorreo = new javax.swing.JTextField();
+        btnRentar = new javax.swing.JButton();
+        txtIdBici = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         panelRound2 = new Utileria.PanelRound();
@@ -79,27 +94,21 @@ public class PanelRenta extends javax.swing.JPanel {
         panelRound5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, -1, -1));
 
         cbTiempo.setBackground(new java.awt.Color(250, 250, 250));
-        cbTiempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbTiempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "30 minutos", "1 hora", "2 horas", "3 horas", "5 horas" }));
+        cbTiempo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTiempoActionPerformed(evt);
+            }
+        });
         panelRound5.add(cbTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 254, -1));
 
         txtTotal.setEditable(false);
-        txtTotal.setBackground(new java.awt.Color(250, 250, 250));
-        txtTotal.setEnabled(false);
         txtTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTotalActionPerformed(evt);
             }
         });
         panelRound5.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 244, -1));
-
-        botonRentar.setBackground(new java.awt.Color(210, 210, 210));
-        botonRentar.setText("Rentar");
-        botonRentar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRentarActionPerformed(evt);
-            }
-        });
-        panelRound5.add(botonRentar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, 138, -1));
 
         btnSeleccionar.setBackground(new java.awt.Color(255, 174, 105));
         btnSeleccionar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -120,10 +129,25 @@ public class PanelRenta extends javax.swing.JPanel {
         panelRound5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel14.setText("Contraseña");
-        panelRound5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
+        jLabel14.setText("ID");
+        panelRound5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
         panelRound5.add(pswContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 210, -1));
         panelRound5.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 240, -1));
+
+        btnRentar.setText("Rentar");
+        btnRentar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRentarActionPerformed(evt);
+            }
+        });
+        panelRound5.add(btnRentar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, -1, -1));
+
+        txtIdBici.setEditable(false);
+        panelRound5.add(txtIdBici, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 100, -1));
+
+        jLabel15.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel15.setText("Contraseña");
+        panelRound5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
 
         panelRound3.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 800, 450));
 
@@ -208,10 +232,6 @@ public class PanelRenta extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalActionPerformed
 
-    private void botonRentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRentarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonRentarActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -226,18 +246,71 @@ public class PanelRenta extends javax.swing.JPanel {
         ControlBicicleta c = new ControlBicicleta();// prueba
         System.out.println(c.obtenerBicicletasDisponibles());// prueba
         
-        SeleccionarBicicleta sb= new SeleccionarBicicleta(main,true, main);
+        sb = new SeleccionarBicicleta(main,true, main);
         sb.show();
+        
+        this.idBicicleta = sb.getIdBicicleta();
+        
+        txtIdBici.setText(idBicicleta.toString());
         
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
-    
+    private void btnRentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarActionPerformed
+        
+        char[] passwordCharArray = pswContrasena.getPassword();
+        String password = new String(passwordCharArray);
+        
+        this.clienteDto = new ClienteDTO(txtCorreo.getText(), password);
+        
+        if ( ( empleadoDto != null ) && ( clienteDto != null ) &&
+                ( idBicicleta != null ) && ( tiempo >= 0.5)){
+            RentaDTO rentaDto = controlRenta.generarRenta(clienteDto, idBicicleta, tiempo, empleadoDto);
+            PagarRenta c = new PagarRenta(main, true, rentaDto);
+            c.show();
+        } else{
+            System.out.println("No se han llenado los campos");
+        }
+        
+    }//GEN-LAST:event_btnRentarActionPerformed
+
+    private void cbTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTiempoActionPerformed
+        setTiempo();
+    }//GEN-LAST:event_cbTiempoActionPerformed
+
     public JPanel getFondo() {
             return this;
     }
 
+    private void setTiempo(){
+        
+        String txtTiempo = cbTiempo.getSelectedItem().toString();
+
+        switch(txtTiempo) {
+            case "30 minutos":
+                this.tiempo = (float) 0.5;
+                break;
+            case "1 hora":
+                this.tiempo = 1;
+                break;
+            case "2 horas":
+                this.tiempo = 2;
+                break;
+            case "3 horas":
+                this.tiempo = 3;
+                break;
+            case "5 horas":
+                this.tiempo = 5;
+                break;
+            default:
+                this.tiempo = 0;
+                System.out.println("Error PanelRenta");
+                break;
+        }
+
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton botonRentar;
+    private javax.swing.JButton btnRentar;
     private javax.swing.JButton btnSeleccionar;
     private javax.swing.JComboBox<String> cbTiempo;
     private javax.swing.JButton jButton1;
@@ -247,6 +320,7 @@ public class PanelRenta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
@@ -255,6 +329,7 @@ public class PanelRenta extends javax.swing.JPanel {
     private Utileria.PanelRound panelRound5;
     private javax.swing.JPasswordField pswContrasena;
     private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtIdBici;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,6 +19,17 @@ public class ClienteDTO {
     private String telefono;
     private String direccion;
 
+    public ClienteDTO(String correo, String contrasena) {
+        this.correo = correo;
+        this.contrasena = contrasena;
+    }
+
+    public ClienteDTO(Long id, String correo, String contrasena) {
+        this.id = id;
+        this.correo = correo;
+        this.contrasena = contrasena;
+    }
+    
     public ClienteDTO(Long id, String nombre, String correo, String contrasena, Date nacimiento, String telefono, String direccion) {
         this.id = id;
         this.nombre = nombre;

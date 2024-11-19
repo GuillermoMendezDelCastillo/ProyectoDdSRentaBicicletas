@@ -4,10 +4,12 @@
  */
 package PantallasAdmin;
 
+import control.ControlBicicleta;
+import dto.BicicletaDTO;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.List;
+import java.util.List;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,46 +20,65 @@ import javax.swing.JScrollPane;
  *
  * @author PC Gamer
  */
-public class CompraBicis extends javax.swing.JPanel {
+public class CompraRentaBicis extends javax.swing.JPanel {
 
-    JFrame main;
-    ArrayList<JButton> botones;
-    ArrayList<JButton> seleccionados;
+    private JFrame main;
+    private ArrayList<JButton> botones;
+    //private ArrayList<BicicletaDTO> seleccionados;
+    private List<BicicletaDTO> listaBicisDto;
+    private ControlBicicleta controlBicicleta;
+    private Integer idBicicleta;
     
     /**
      * Creates new form CompraBicis
      */
-    public CompraBicis(JFrame main) {
+    public CompraRentaBicis(JFrame main, int tipoPantalla) {
         initComponents();
+        switch(tipoPantalla) {
+            case 1:
+                lblCompraRenta.setText("Compra Bicicleta");
+                break;
+            case 2:
+                lblCompraRenta.setText("Renta Bicicleta");
+                break;
+            default:
+                System.out.println("Error CompraRentaBicis");
+                break;
+        }
         this.main=main;
+        this.controlBicicleta = new ControlBicicleta();
+        this.listaBicisDto = controlBicicleta.obtenerBicicletasDisponibles();
         botones = new ArrayList<>();
-        seleccionados = new ArrayList<>();
+        //seleccionados = new ArrayList<>();
         crearBotones();
     }
     
     private void crearBotones() {
-        int numeroOpciones = 50; 
-
+        
+        //int numeroOpciones = 30;
+        
+        int numeroOpciones = listaBicisDto.size(); 
+        
         panelBotones.setLayout(new GridLayout(0, 3, 10, 10)); 
 
         for (int i = 0; i < numeroOpciones; i++) {
-            JButton boton = new JButton("Opción " + (i + 1));
-            boton.setPreferredSize(new Dimension(200, 300)); 
+            JButton boton = new JButton(listaBicisDto.get(i).getId().toString());
+            boton.setPreferredSize(new Dimension(150, 100)); 
             boton.setBackground(Color.LIGHT_GRAY); 
 
             boton.addActionListener(e -> {
-                if (seleccionados.contains(boton)) {
-                    boton.setBackground(Color.LIGHT_GRAY); 
-                    seleccionados.remove(boton);
-                } else {
-                    boton.setBackground(Color.GREEN);
-                    seleccionados.add(boton); 
-                }
+                this.idBicicleta = Integer.parseInt(boton.getText());
+//                if (seleccionados.contains(boton)) {
+//                    boton.setBackground(Color.LIGHT_GRAY); 
+//                    //seleccionados.remove(listaBicisDto.get(Integer.parseInt(boton.getText())));
+//                } else {
+//                    boton.setBackground(Color.GREEN);
+//                    //seleccionados.add(listaBicisDto.get(Integer.parseInt(boton.getText()))); 
+//                }
             });
 
             panelBotones.add(boton); 
         }
-
 
         JScrollPane scrollPane = new JScrollPane(panelBotones);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -81,7 +102,7 @@ public class CompraBicis extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblCompraRenta = new javax.swing.JLabel();
         panelRound1 = new Utileria.PanelRound();
         panelBotones = new Utileria.PanelRound();
 
@@ -91,10 +112,9 @@ public class CompraBicis extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(250, 210, 105));
         jPanel2.setForeground(new java.awt.Color(255, 138, 0));
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Compra bicicleta");
+        lblCompraRenta.setBackground(new java.awt.Color(0, 0, 0));
+        lblCompraRenta.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblCompraRenta.setText("Escoger bicicleta");
 
         panelRound1.setBackground(new java.awt.Color(230, 230, 230));
         panelRound1.setRoundBottomLeft(100);
@@ -119,8 +139,8 @@ public class CompraBicis extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 580, Short.MAX_VALUE)
+                .addComponent(lblCompraRenta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 577, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
@@ -128,7 +148,7 @@ public class CompraBicis extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel1)
+                .addComponent(lblCompraRenta)
                 .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -142,7 +162,7 @@ public class CompraBicis extends javax.swing.JPanel {
         panelBotones.setRoundBottomRight(50);
         panelBotones.setRoundTopLeft(50);
         panelBotones.setRoundTopRight(50);
-        panelBotones.setLayout(new java.awt.GridLayout());
+        panelBotones.setLayout(new java.awt.GridLayout(0, 3, 10, 10));
         jPanel1.add(panelBotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 810, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -161,11 +181,14 @@ public class CompraBicis extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
+    public Integer getIdBicicleta() {
+        return idBicicleta;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblCompraRenta;
     private Utileria.PanelRound panelBotones;
     private Utileria.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables

@@ -10,14 +10,14 @@ import dto.EmpleadoDTO;
  *
  * @author PC Gamer
  */
-public class RentaConfirmadaJFrame extends javax.swing.JFrame {
+public class RentaConfirmada extends javax.swing.JDialog {
 
     private EmpleadoDTO empleadoDto;
     
     /**
      * Creates new form RentaConfirmadaJFrame
      */
-    public RentaConfirmadaJFrame() {
+    public RentaConfirmada() {
         initComponents();
     }
 
@@ -41,7 +41,6 @@ public class RentaConfirmadaJFrame extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Renta Confirmada");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
 
@@ -92,8 +91,8 @@ public class RentaConfirmadaJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        PantallaMenu p=new PantallaMenu(empleadoDto);
-        p.show();
+//        PantallaMenu p=new PantallaMenu(empleadoDto);
+//        p.show();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
