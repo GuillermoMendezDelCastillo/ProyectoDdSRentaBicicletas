@@ -24,7 +24,6 @@ public class AdminBicis extends javax.swing.JPanel {
     JFrame main;
     //DTOS
     EmpleadoDTO empleado;
-    BicicletaDTO bici;
     List<BicicletaDTO> bicis;
     //Tabla
     DefaultTableModel tableModel;
