@@ -5,11 +5,11 @@
 package PantallasAdmin;
 
 import control.ControlBicicleta;
-import control.ControlEmpleado;
 import dto.BicicletaDTO;
 import dto.EmpleadoDTO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -28,11 +28,12 @@ public class AgregarBici extends javax.swing.JPanel {
         initComponents();
         this.biciBO=new ControlBicicleta();
         this.em=em;
-        this.setLocation(null);
         this.main=main;
-        
     }
 
+    public JPanel getFondo() {
+            return this;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,8 +145,9 @@ public class AgregarBici extends javax.swing.JPanel {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        PantallaMenu pM = new PantallaMenu(em);
-        pM.show();
+        PantallaMenu p=(PantallaMenu) main;
+        AdminBicis b=new AdminBicis(main,em);
+        p.showPanel(b);
         this.disable();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -166,10 +168,10 @@ public class AgregarBici extends javax.swing.JPanel {
                 "La bicicleta se guardó exitosamente.", 
                 "Éxito", 
                 JOptionPane.INFORMATION_MESSAGE);
-            AdminBicis aB=new AdminBicis(main,em);
-            PantallaMenu pM = new PantallaMenu(em,aB);
-            pM.show();
-            this.disable();
+           PantallaMenu p=(PantallaMenu) main;
+           AdminBicis aB=new AdminBicis(main,em);
+           p.showPanel(aB);
+           this.disable();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, 
                 "Ocurrió un error al guardar la bicicleta: " + e.getMessage(), 

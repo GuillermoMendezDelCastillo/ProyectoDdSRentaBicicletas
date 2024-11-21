@@ -46,27 +46,38 @@ public class AdminBicis extends javax.swing.JPanel {
             return this;
     }
      
-     private void cargarDatos() {
-    bicis = biciBO.obtenerTodasLasBicicletas(); 
-    for (BicicletaDTO bici : bicis) {
-        agregarFila(bici.getEstado(), "" + bici.getPrecio(), bici.getRodado());
+    private void cargarDatos() {
+        bicis = biciBO.obtenerTodasLasBicicletas();
+        System.out.println("Bicicletas obtenidas: " + bicis);
+        for (BicicletaDTO bici : bicis) {
+            agregarFila(bici.getEstado(), String.valueOf(bici.getPrecio()), bici.getRodado());
+        }
     }
-     }
-    
-      private void configurarTabla() {
+
+    private void configurarTabla() {
         tableModel = new DefaultTableModel(
-            new Object[]{"Estado", "Precio", "Servicio", "Editar", "Eliminar"},
-            0 
+            new Object[]{"Estado", "Precio", "Servicio", "Acciones"},
+            0
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return column == 3; 
             }
         };
-            jTable1.getColumn("Acciones").setCellRenderer((table, value, isSelected, hasFocus, row, column) -> {
+
+        jTable1.setModel(tableModel);
+        
+        //El tamaño de la linea de los datos
+        jTable1.setRowHeight(30);
+        
+        
+        jTable1.getColumn("Acciones").setCellRenderer((table, value, isSelected, hasFocus, row, column) -> {
             JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
             JButton btnEditar = new JButton("Editar");
             JButton btnEliminar = new JButton("Eliminar");
+            
+            btnEditar.setBackground(new Color(173, 216, 230)); 
+            btnEliminar.setBackground(new Color(255, 182, 193));
 
             btnEditar.addActionListener(e -> editarFila(row));
             btnEliminar.addActionListener(e -> eliminarFila(row));
@@ -105,12 +116,13 @@ public class AdminBicis extends javax.swing.JPanel {
             }
         });
     }
-      
-      private void editarFila(int row) {
+
+    private void editarFila(int row) {
         BicicletaDTO biciSeleccionada = bicis.get(row);
         EditarBici editarBici = new EditarBici(empleado, biciSeleccionada);
-        editarBici.show();
-        main.disable();
+        PantallaMenu p=(PantallaMenu) main;
+        p.showPanel(editarBici);
+        this.disable();
     }
 
     private void eliminarFila(int row) {
@@ -121,9 +133,9 @@ public class AdminBicis extends javax.swing.JPanel {
             tableModel.removeRow(row); 
         }
     }
-      
+
     private void agregarFila(String estado, String precio, String servicio) {
-        tableModel.addRow(new Object[]{estado, precio, servicio, "Acciones"}); 
+        tableModel.addRow(new Object[]{estado, precio, servicio, "Acciones"});
     }
      
     /**
@@ -136,101 +148,27 @@ public class AdminBicis extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        panelRound1 = new Utileria.PanelRound();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        rSDateChooser1 = new rojeru_san.componentes.RSDateChooser();
-        rSDateChooser2 = new rojeru_san.componentes.RSDateChooser();
-        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        rSDateChooser1 = new rojeru_san.componentes.RSDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        rSDateChooser2 = new rojeru_san.componentes.RSDateChooser();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelRound1.setBackground(new java.awt.Color(255, 194, 105));
-        panelRound1.setRoundBottomLeft(50);
-        panelRound1.setRoundBottomRight(50);
-        panelRound1.setRoundTopLeft(50);
-        panelRound1.setRoundTopRight(50);
-
-        jButton1.setBackground(new java.awt.Color(255, 174, 105));
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Generar");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jButton1.setBorderPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Fecha inicio:");
-
-        rSDateChooser1.setColorBackground(new java.awt.Color(0, 0, 0));
-        rSDateChooser1.setColorButtonHover(new java.awt.Color(0, 0, 0));
-        rSDateChooser1.setColorForeground(new java.awt.Color(255, 174, 105));
-
-        rSDateChooser2.setColorBackground(new java.awt.Color(0, 0, 0));
-        rSDateChooser2.setColorButtonHover(new java.awt.Color(0, 0, 0));
-        rSDateChooser2.setColorForeground(new java.awt.Color(255, 174, 105));
-
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Fecha fin:");
-
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rSDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addContainerGap(418, Short.MAX_VALUE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(rSDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47))))
-        );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rSDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSDateChooser2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(31, 31, 31))
-        );
-
-        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 770, 100));
 
         jTable1.setBackground(new java.awt.Color(204, 169, 221));
         jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Estado", "Recibos", "Servicio", "Editar", "Eliminar"
+                "Estado", "Precio", "Servicio", "Acciones"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -248,6 +186,73 @@ public class AdminBicis extends javax.swing.JPanel {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 120, -1));
 
+        jPanel2.setBackground(new java.awt.Color(255, 194, 105));
+
+        rSDateChooser1.setColorBackground(new java.awt.Color(0, 0, 0));
+        rSDateChooser1.setColorButtonHover(new java.awt.Color(0, 0, 0));
+        rSDateChooser1.setColorForeground(new java.awt.Color(255, 174, 105));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Fecha inicio:");
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Fecha fin:");
+
+        rSDateChooser2.setColorBackground(new java.awt.Color(0, 0, 0));
+        rSDateChooser2.setColorButtonHover(new java.awt.Color(0, 0, 0));
+        rSDateChooser2.setColorForeground(new java.awt.Color(255, 174, 105));
+
+        jButton1.setBackground(new java.awt.Color(255, 174, 105));
+        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("Generar");
+        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(rSDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(121, 121, 121)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(rSDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rSDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rSDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(35, 35, 35))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 760, 110));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,18 +269,17 @@ public class AdminBicis extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        AgregarBici aB=new AgregarBici(main,empleado);
+         PantallaMenu pM=(PantallaMenu) main;
+         pM.showPanel(aB.getFondo());
+         this.disable();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        
-        AgregarBici aB=new AgregarBici(main,empleado);
-        aB.show();
-        this.disable();
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -284,9 +288,9 @@ public class AdminBicis extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private Utileria.PanelRound panelRound1;
     private rojeru_san.componentes.RSDateChooser rSDateChooser1;
     private rojeru_san.componentes.RSDateChooser rSDateChooser2;
     // End of variables declaration//GEN-END:variables

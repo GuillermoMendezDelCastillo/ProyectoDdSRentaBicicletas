@@ -190,7 +190,7 @@ public class PantallaMenu extends javax.swing.JFrame {
         showPanel(c);
     }//GEN-LAST:event_btnAdminClientesActionPerformed
     
-    private void showPanel(JPanel p){
+    public void showPanel(JPanel p){
         p.setSize(850, 550);
         p.setLocation(0, 0);
         dashBoard.removeAll();
