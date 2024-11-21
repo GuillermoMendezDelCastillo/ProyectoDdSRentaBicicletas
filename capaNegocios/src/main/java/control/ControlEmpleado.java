@@ -17,68 +17,119 @@ public class ControlEmpleado {
     
     private EmpleadoDAO empleadoDAO;
     
+    /**
+     * 
+     */
     public ControlEmpleado(){
         this.empleadoDAO = new EmpleadoDAO();
     }
     
+    /**
+     * metodo para iniciar sesion
+     * @param correo correo del empleado
+     * @param contrasena contraseña del empleado
+     * @return dto del empleado o null en caso de no poder iniciar sesion
+     */
     public EmpleadoDTO iniciarSesion(String correo, String contrasena) {
         Empleado empleado = empleadoDAO.iniciar(correo, contrasena);
         
         if (empleado != null) {
             System.out.println("Inicio de sesión exitoso para: " + empleado.getNombre());
-            return convertirEmpleadoAdto(empleado);
+            return convertirEntidadADTO(empleado);
         } else {
             System.out.println("Credenciales incorrectas.");
             return null;
         }
     }
 
-    public void agregarEmpleado(EmpleadoDTO empleadoDTO) {
-        Empleado empleado = convertirDTOaEmpleado(empleadoDTO);
+    /**
+     * metodo para agregar empleado
+     * @param empleadoDTO dto del empleado a agregar
+     * @return dto del empleado agregado
+     */
+    public EmpleadoDTO agregarEmpleado(EmpleadoDTO empleadoDTO) {
+        Empleado empleado = convertirDTOaEntidad(empleadoDTO);
         empleadoDAO.agregar(empleado);
-        System.out.println("Empleado agregado: " + empleado.getNombre());
+        return convertirEntidadADTO(empleado);
     }
     
-    public Empleado obtenerEmpleadoPorId(Long id) {
+    /**
+     * metodo para buscar un empleado
+     * @param id id del empleado a buscar
+     * @return regresa el empleado encontrado o unll en caso de que no lo encuentre
+     */
+    public EmpleadoDTO buscarEmpleado(Long id) {
         Empleado empleado = empleadoDAO.buscarPorId(id);
-        if (empleado != null) {
-            return empleado;
-        } else {
-            System.out.println("Empleado con ID " + id + " no encontrado.");
-            return null;
-        }
+        return (empleado != null) ? convertirEntidadADTO(empleado) : null;
     }
     
-    public void actualizarEmpleado(Long id, EmpleadoDTO empleadoDTO) {
-        Empleado empleadoExistente = obtenerEmpleadoPorId(id);
+    /**
+     * metodo para actualizar empleado
+     * @param empleadoDTO dto del empleado a actualizar
+     * @return dto del empleado actualizado o null en caso de que no se pueda actualizar
+     */
+    public EmpleadoDTO actualizarEmpleado(EmpleadoDTO empleadoDTO) {
+        EmpleadoDTO empleadoExistente = buscarEmpleado(empleadoDTO.getId());
         if (empleadoExistente != null) {
-            empleadoExistente.setCorreo(empleadoDTO.getCorreo());
-            empleadoExistente.setContrasena(empleadoDTO.getContrasena());
-            empleadoDAO.actualizar(empleadoExistente);
-            System.out.println("Empleado actualizado: " + empleadoExistente.getNombre());
+              Empleado empleadoActualizado = convertirDTOaEntidad(empleadoDTO);
+//            empleadoExistente.setCorreo(empleadoDTO.getCorreo());
+//            empleadoExistente.setContrasena(empleadoDTO.getContrasena());
+            empleadoDAO.actualizar(empleadoActualizado);
+            return convertirEntidadADTO(empleadoActualizado);
         }
+        return null;
     }
     
+    /**
+     * metodo para obtener una lista con todos los empleados
+     * @return una lista con los dto de todos los empleados
+     */
     public List<Empleado> obtenerTodosEmpleados() {
         return empleadoDAO.lista();
     }
     
-    public void eliminarEmpleado(Long id) {
-        Empleado empleado = obtenerEmpleadoPorId(id);
+    /**
+     * metodo para eliminar un empleado
+     * @param id id del empleado a eliminar
+     * @return dto del empleado eliminado o null en caso de que no se elimine
+     */
+    public EmpleadoDTO eliminarEmpleado(Long id) {
+        EmpleadoDTO empleado = buscarEmpleado(id);
         if (empleado != null) {
-            empleadoDAO.eliminar(id);
-            System.out.println("Empleado eliminado: " + empleado.getNombre());
+             Empleado empleadoEliminado = empleadoDAO.eliminar(id);
+        return (empleadoEliminado != null) ? convertirEntidadADTO(empleadoEliminado) : null;
         }
+        return null;
     }
 
-    public Empleado convertirDTOaEmpleado(EmpleadoDTO empleadoDTO) {
-        return new Empleado(empleadoDTO.getId(),empleadoDTO.getCorreo(), empleadoDTO.getContrasena());
+    /**
+     * metodo para converitr dto en un empleado
+     * @param empleadoDTO dto del empleado a crear
+     * @return el empleado creado a partir del dto
+     */
+    public Empleado convertirDTOaEntidad(EmpleadoDTO empleadoDTO) {
+        return new Empleado(
+                empleadoDTO.getId(),
+                empleadoDTO.getNombre(),
+                empleadoDTO.getCorreo(),
+                empleadoDTO.getContrasena(),
+                empleadoDTO.getNacimiento()
+        );
     }
     
-    public EmpleadoDTO convertirEmpleadoAdto(Empleado empleado){
-        EmpleadoDTO empleadoDto = new EmpleadoDTO(empleado.getId(),
-                empleado.getNombre(),empleado.getCorreo());
-        return empleadoDto;
+    /**
+     * metodo para convertir empleado a dto
+     * @param empleado empleado a convertir
+     * @return el dto del empleado convertido
+     */
+    public EmpleadoDTO convertirEntidadADTO(Empleado empleado){
+        return new EmpleadoDTO(
+                empleado.getId(),
+                empleado.getNombre(),
+                empleado.getCorreo(),
+                empleado.getContrasena(),
+                empleado.getNacimiento()
+        );
     }
     
 }
