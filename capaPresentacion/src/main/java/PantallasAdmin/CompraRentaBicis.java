@@ -27,7 +27,7 @@ public class CompraRentaBicis extends javax.swing.JPanel {
     //private ArrayList<BicicletaDTO> seleccionados;
     private List<BicicletaDTO> listaBicisDto;
     private ControlBicicleta controlBicicleta;
-    private Integer idBicicleta;
+    private int idBicicleta;
     
     /**
      * Creates new form CompraBicis
@@ -62,12 +62,15 @@ public class CompraRentaBicis extends javax.swing.JPanel {
         panelBotones.setLayout(new GridLayout(0, 3, 10, 10)); 
 
         for (int i = 0; i < numeroOpciones; i++) {
-            JButton boton = new JButton(listaBicisDto.get(i).getId().toString());
+            JButton boton = new JButton(listaBicisDto.get(i).getTipo()+ " con rodada de "+listaBicisDto.get(i).getRodado());
+            boton.setName(String.valueOf(i));
+            boton.setForeground(new Color(255,153,0));
             boton.setPreferredSize(new Dimension(150, 100)); 
-            boton.setBackground(Color.LIGHT_GRAY); 
+            boton.setBackground(new Color(243,232,255)); 
 
             boton.addActionListener(e -> {
-                this.idBicicleta = Integer.parseInt(boton.getText());
+                int num=Integer.parseInt(boton.getName());
+                this.idBicicleta = listaBicisDto.get(num).getId().intValue();
 //                if (seleccionados.contains(boton)) {
 //                    boton.setBackground(Color.LIGHT_GRAY); 
 //                    //seleccionados.remove(listaBicisDto.get(Integer.parseInt(boton.getText())));

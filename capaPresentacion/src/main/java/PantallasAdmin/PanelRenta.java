@@ -4,13 +4,13 @@
  */
 package PantallasAdmin;
 
+import PantallasAdmin.PagarRenta;
+import PantallasAdmin.SeleccionarBicicleta;
 import control.ControlBicicleta;
 import control.ControlRenta;
-import dto.BicicletaDTO;
 import dto.ClienteDTO;
 import dto.EmpleadoDTO;
 import dto.RentaDTO;
-import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -27,6 +27,7 @@ public class PanelRenta extends javax.swing.JPanel {
     private float tiempo;
     private SeleccionarBicicleta sb;
     private ControlRenta controlRenta;
+    private ControlBicicleta biciBO;
     
     /**
      * Creates new form PanelRenta
@@ -38,8 +39,45 @@ public class PanelRenta extends javax.swing.JPanel {
         this.tiempo = (float) 0.5;
         this.idBicicleta = null;
         this.controlRenta = new ControlRenta();
+        this.biciBO=new ControlBicicleta();
+        
+        txtTotal.setText("0.00$");
+        cbTiempo.addActionListener(e -> actualizarPrecio());
     }
 
+    private void actualizarPrecio() {
+    if (idBicicleta != null) {
+        float precioPorHora = biciBO.buscarBicicleta(idBicicleta.longValue()).getPrecio();
+
+        float tiempoEnHoras = 0;
+        switch (String.valueOf(cbTiempo.getSelectedItem())) {
+            case "30 minutos":
+                tiempoEnHoras = 0.5f;
+                break;
+            case "1 hora":
+                tiempoEnHoras = 1.0f;
+                break;
+            case "2 horas":
+                tiempoEnHoras = 2.0f;
+                break;
+            case "3 horas":
+                tiempoEnHoras = 3.0f;
+                break;
+            case "5 horas":
+                tiempoEnHoras = 5.0f;
+                break;
+            default:
+                System.out.println("Tiempo no válido");
+                return;
+        }
+        float costoTotal = precioPorHora * tiempoEnHoras;
+
+        txtTotal.setText(String.format("%.2f$", costoTotal));
+    } else {
+        txtTotal.setText("0.00$");
+    }
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,107 +87,26 @@ public class PanelRenta extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelRound3 = new Utileria.PanelRound();
-        panelRound5 = new Utileria.PanelRound();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        cbTiempo = new javax.swing.JComboBox<>();
-        txtTotal = new javax.swing.JTextField();
-        btnSeleccionar = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        pswContrasena = new javax.swing.JPasswordField();
-        txtCorreo = new javax.swing.JTextField();
-        btnRentar = new javax.swing.JButton();
-        txtIdBici = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
+        panelRound3 = new org.netbeans.modules.form.InvalidComponent();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        panelRound2 = new Utileria.PanelRound();
         jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        panelRound1 = new Utileria.PanelRound();
+        cbTiempo = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        btnRentar = new javax.swing.JButton();
+        txtTotal = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        btnSeleccionar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JTextField();
+        pswContrasena = new javax.swing.JPasswordField();
 
-        panelRound3.setBackground(new java.awt.Color(255, 255, 255));
         panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelRound5.setBackground(new java.awt.Color(230, 230, 230));
-        panelRound5.setRoundBottomLeft(50);
-        panelRound5.setRoundBottomRight(50);
-        panelRound5.setRoundTopLeft(50);
-        panelRound5.setRoundTopRight(50);
-        panelRound5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel7.setText("Tiempo:");
-        panelRound5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel8.setText("Bicicleta:");
-        panelRound5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
-
-        jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel10.setText("Total:");
-        panelRound5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, -1, -1));
-
-        cbTiempo.setBackground(new java.awt.Color(250, 250, 250));
-        cbTiempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "30 minutos", "1 hora", "2 horas", "3 horas", "5 horas" }));
-        cbTiempo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTiempoActionPerformed(evt);
-            }
-        });
-        panelRound5.add(cbTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 254, -1));
-
-        txtTotal.setEditable(false);
-        txtTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalActionPerformed(evt);
-            }
-        });
-        panelRound5.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 244, -1));
-
-        btnSeleccionar.setBackground(new java.awt.Color(255, 174, 105));
-        btnSeleccionar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnSeleccionar.setText("Seleccionar");
-        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSeleccionarActionPerformed(evt);
-            }
-        });
-        panelRound5.add(btnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 161, -1));
-
-        jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel11.setText("Correo");
-        panelRound5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
-
-        jLabel13.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel13.setText("Cliente:");
-        panelRound5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
-
-        jLabel14.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel14.setText("ID");
-        panelRound5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
-        panelRound5.add(pswContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 210, -1));
-        panelRound5.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 240, -1));
-
-        btnRentar.setText("Rentar");
-        btnRentar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRentarActionPerformed(evt);
-            }
-        });
-        panelRound5.add(btnRentar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, -1, -1));
-
-        txtIdBici.setEditable(false);
-        panelRound5.add(txtIdBici, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 100, -1));
-
-        jLabel15.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel15.setText("Contraseña");
-        panelRound5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
-
-        panelRound3.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 800, 450));
 
         jPanel2.setBackground(new java.awt.Color(250, 210, 105));
         jPanel2.setForeground(new java.awt.Color(255, 138, 0));
@@ -158,23 +115,6 @@ public class PanelRenta extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel12.setText("Rentar Bicicleta");
 
-        panelRound2.setBackground(new java.awt.Color(230, 230, 230));
-        panelRound2.setRoundBottomLeft(100);
-        panelRound2.setRoundBottomRight(100);
-        panelRound2.setRoundTopLeft(100);
-        panelRound2.setRoundTopRight(100);
-
-        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
-        panelRound2.setLayout(panelRound2Layout);
-        panelRound2Layout.setHorizontalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 49, Short.MAX_VALUE)
-        );
-        panelRound2Layout.setVerticalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -182,9 +122,7 @@ public class PanelRenta extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 591, Short.MAX_VALUE)
-                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addContainerGap(658, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,10 +130,6 @@ public class PanelRenta extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel12)
                 .addContainerGap(14, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
         );
 
         panelRound3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 60));
@@ -216,6 +150,137 @@ public class PanelRenta extends javax.swing.JPanel {
         });
         panelRound3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, 70, 60));
 
+        panelRound1.setBackground(new java.awt.Color(230, 230, 230));
+        panelRound1.setRoundBottomLeft(50);
+        panelRound1.setRoundBottomRight(50);
+        panelRound1.setRoundTopLeft(50);
+        panelRound1.setRoundTopRight(50);
+
+        cbTiempo.setBackground(new java.awt.Color(250, 250, 250));
+        cbTiempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "30 minutos", "1 hora", "2 horas", "3 horas", "5 horas" }));
+        cbTiempo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTiempoActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel7.setText("Tiempo:");
+
+        btnRentar.setText("Rentar");
+        btnRentar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRentarActionPerformed(evt);
+            }
+        });
+
+        txtTotal.setEditable(false);
+        txtTotal.setEnabled(false);
+        txtTotal.setFocusable(false);
+        txtTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel10.setText("Total:");
+
+        btnSeleccionar.setBackground(new java.awt.Color(255, 174, 105));
+        btnSeleccionar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel8.setText("Bicicleta:");
+
+        jLabel13.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel13.setText("Cliente:");
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel11.setText("Correo");
+
+        jLabel15.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel15.setText("Contraseña");
+
+        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
+        panelRound1.setLayout(panelRound1Layout);
+        panelRound1Layout.setHorizontalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(139, 139, 139)
+                        .addComponent(btnRentar)
+                        .addGap(152, 152, 152))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101))))
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(panelRound1Layout.createSequentialGroup()
+                                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel11)
+                                        .addComponent(jLabel15))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(pswContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(11, 11, 11))
+                                .addGroup(panelRound1Layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel8)))
+                .addContainerGap(416, Short.MAX_VALUE))
+        );
+        panelRound1Layout.setVerticalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel13)
+                .addGap(57, 57, 57)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pswContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(28, 28, 28)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeleccionar)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRentar)
+                    .addComponent(jLabel10))
+                .addGap(18, 18, 18))
+        );
+
+        panelRound3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 810, 450));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,86 +293,88 @@ public class PanelRenta extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-        // TODO add your handling code here:
-        
-        ControlBicicleta c = new ControlBicicleta();// prueba
-        System.out.println(c.obtenerBicicletasDisponibles());// prueba
-        
-        sb = new SeleccionarBicicleta(main,true, main);
-        sb.show();
-        
-        this.idBicicleta = sb.getIdBicicleta();
-        
-        txtIdBici.setText(idBicicleta.toString());
-        
-    }//GEN-LAST:event_btnSeleccionarActionPerformed
-
     private void btnRentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarActionPerformed
-        
+
         char[] passwordCharArray = pswContrasena.getPassword();
         String password = new String(passwordCharArray);
-        
+
         this.clienteDto = new ClienteDTO(txtCorreo.getText(), password);
-        
+
         if ( ( empleadoDto != null ) && ( clienteDto != null ) &&
-                ( idBicicleta != null ) && ( tiempo >= 0.5)){
+            ( idBicicleta != null ) && ( tiempo >= 0.5)){
             RentaDTO rentaDto = controlRenta.generarRenta(clienteDto, idBicicleta, tiempo, empleadoDto);
             PagarRenta c = new PagarRenta(main, true, rentaDto);
             c.show();
         } else{
             System.out.println("No se han llenado los campos");
         }
-        
     }//GEN-LAST:event_btnRentarActionPerformed
 
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // TODO add your handling code here:
+
+        ControlBicicleta c = new ControlBicicleta();
+        System.out.println(c.obtenerBicicletasDisponibles());
+
+        sb = new SeleccionarBicicleta(main,true, main);
+        sb.show();
+
+        this.idBicicleta = sb.getIdBicicleta();
+        
+        if (idBicicleta != null) {
+        float precioPorHora = biciBO.buscarBicicleta(idBicicleta.longValue()).getPrecio();
+
+        float tiempoEnHoras = 0;
+        switch (String.valueOf(cbTiempo.getSelectedItem())) {
+            case "30 minutos":
+                tiempoEnHoras = 0.5f;
+                break;
+            case "1 hora":
+                tiempoEnHoras = 1.0f;
+                break;
+            case "2 horas":
+                tiempoEnHoras = 2.0f;
+                break;
+            case "3 horas":
+                tiempoEnHoras = 2.5f;
+                break;
+            case "5 horas":
+                tiempoEnHoras = 3.5f;
+                break;
+            default:
+                System.out.println("Tiempo no válido");
+                return;
+        }
+
+        float costoTotal = precioPorHora * tiempoEnHoras;
+
+        txtTotal.setText(String.format("%.2f$", costoTotal));
+    } else {
+        txtTotal.setText("0.00$");
+    }
+
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalActionPerformed
+
     private void cbTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTiempoActionPerformed
-        setTiempo();
+
     }//GEN-LAST:event_cbTiempoActionPerformed
 
     public JPanel getFondo() {
             return this;
     }
-
-    private void setTiempo(){
-        
-        String txtTiempo = cbTiempo.getSelectedItem().toString();
-
-        switch(txtTiempo) {
-            case "30 minutos":
-                this.tiempo = (float) 0.5;
-                break;
-            case "1 hora":
-                this.tiempo = 1;
-                break;
-            case "2 horas":
-                this.tiempo = 2;
-                break;
-            case "3 horas":
-                this.tiempo = 3;
-                break;
-            case "5 horas":
-                this.tiempo = 5;
-                break;
-            default:
-                this.tiempo = 0;
-                System.out.println("Error PanelRenta");
-                break;
-        }
-
-    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRentar;
@@ -319,17 +386,14 @@ public class PanelRenta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
-    private Utileria.PanelRound panelRound2;
-    private Utileria.PanelRound panelRound3;
-    private Utileria.PanelRound panelRound5;
+    private Utileria.PanelRound panelRound1;
+    private org.netbeans.modules.form.InvalidComponent panelRound3;
     private javax.swing.JPasswordField pswContrasena;
     private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextField txtIdBici;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

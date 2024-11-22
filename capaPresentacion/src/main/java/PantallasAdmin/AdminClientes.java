@@ -202,7 +202,7 @@ public class AdminClientes extends javax.swing.JPanel {
     }
 
     private void eliminarFila(int row) {
-        int confirm = JOptionPane.showConfirmDialog(this, "¿Eliminar esta bicicleta?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Eliminar este cliente?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             clienteBO.eliminarCliente(clientes.get(row).getId());
             configurarTabla();
