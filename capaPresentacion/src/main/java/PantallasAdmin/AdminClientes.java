@@ -4,7 +4,23 @@
  */
 package PantallasAdmin;
 
+import control.ControlBicicleta;
+import control.ControlCliente;
+import dto.BicicletaDTO;
+import dto.ClienteDTO;
+import dto.EmpleadoDTO;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.util.List;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,11 +28,25 @@ import javax.swing.JPanel;
  */
 public class AdminClientes extends javax.swing.JPanel {
 
+    //Pantallas
+    ControlCliente clienteBO;
+    JFrame main;
+    //DTOS
+    EmpleadoDTO empleado;
+    List<ClienteDTO> clientes;
+    //Tabla
+    DefaultTableModel tableModel;
+    
     /**
      * Creates new form AdminClientes
      */
-    public AdminClientes() {
+    public AdminClientes(JFrame main,EmpleadoDTO empleado) {
         initComponents();
+        clienteBO=new ControlCliente();
+        this.main=main;
+        this.empleado=empleado;
+        configurarTabla();
+        cargarDatos();
     }
 
      public JPanel getFondo() {
@@ -44,12 +74,12 @@ public class AdminClientes extends javax.swing.JPanel {
         jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Correo", "Acciones"
+                "Nombre", "Correo", "Telefono", "Contraseña", "Acciones"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -85,8 +115,104 @@ public class AdminClientes extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        AgregarUsuario aU=new AgregarUsuario(main,empleado);
+        PantallaMenu pM=(PantallaMenu) main;
+         pM.showPanel(aU.getFondo());
+         this.disable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
+    private void cargarDatos() {
+        clientes = clienteBO.obtenerTodosLosClientes();
+        System.out.println("Clientes obtenidos: " + clientes);
+        for (ClienteDTO cliente : clientes) {
+            agregarFila(cliente.getNombre(),cliente.getCorreo(), cliente.getTelefono(), cliente.getContrasena());
+        }
+    }
+
+    private void configurarTabla() {
+        tableModel = new DefaultTableModel(
+            new Object[]{"Nombre","Correo", "Telefono", "Contraseña", "Acciones"},
+            0
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 5; 
+            }
+        };
+
+        jTable1.setModel(tableModel);
+        
+        //El tamaño de la linea de los datos
+        jTable1.setRowHeight(30);
+        
+        
+        jTable1.getColumn("Acciones").setCellRenderer((table, value, isSelected, hasFocus, row, column) -> {
+            JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
+            JButton btnEditar = new JButton("Editar");
+            JButton btnEliminar = new JButton("Eliminar");
+            
+            btnEditar.setBackground(new Color(173, 216, 230)); 
+            btnEliminar.setBackground(new Color(255, 182, 193));
+
+            btnEditar.addActionListener(e -> editarFila(row));
+            btnEliminar.addActionListener(e -> eliminarFila(row));
+
+            panel.add(btnEditar);
+            panel.add(btnEliminar);
+
+            return panel;
+        });
+
+        jTable1.getColumn("Acciones").setCellEditor(new DefaultCellEditor(new JCheckBox()) {
+            private final JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
+            private final JButton btnEditar = new JButton("Editar");
+            private final JButton btnEliminar = new JButton("Eliminar");
+
+            {
+                btnEditar.addActionListener(e -> {
+                    int row = jTable1.getSelectedRow();
+                    editarFila(row);
+                    fireEditingStopped();
+                });
+
+                btnEliminar.addActionListener(e -> {
+                    int row = jTable1.getSelectedRow();
+                    eliminarFila(row);
+                    fireEditingStopped();
+                });
+
+                panel.add(btnEditar);
+                panel.add(btnEliminar);
+            }
+
+            @Override
+            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+                return panel;
+            }
+        });
+    }
+
+    private void editarFila(int row) {
+        ClienteDTO clienteSeleccionado = clientes.get(row);
+        EditarUsuario editarUsuario = new EditarUsuario(main, empleado, clienteSeleccionado);
+        PantallaMenu p=(PantallaMenu) main;
+        p.showPanel(editarUsuario);
+        this.disable();
+    }
+
+    private void eliminarFila(int row) {
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Eliminar esta bicicleta?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            clienteBO.eliminarCliente(clientes.get(row).getId());
+            configurarTabla();
+            cargarDatos();
+        }
+    }
+
+    private void agregarFila(String nombre,String correo, String telefono, String contraseña) {
+        tableModel.addRow(new Object[]{nombre,correo, telefono, contraseña, "Acciones"});
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

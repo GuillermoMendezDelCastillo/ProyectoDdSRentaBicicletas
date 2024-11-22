@@ -186,7 +186,7 @@ public class PantallaMenu extends javax.swing.JFrame {
 
     private void btnAdminClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminClientesActionPerformed
         // TODO add your handling code here:
-        AdminClientes c=new AdminClientes();
+        AdminClientes c=new AdminClientes(this,empleadoDto);
         showPanel(c);
     }//GEN-LAST:event_btnAdminClientesActionPerformed
     
