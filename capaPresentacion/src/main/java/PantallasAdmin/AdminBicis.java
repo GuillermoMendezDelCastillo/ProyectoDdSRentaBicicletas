@@ -129,8 +129,8 @@ public class AdminBicis extends javax.swing.JPanel {
         int confirm = JOptionPane.showConfirmDialog(this, "¿Eliminar esta bicicleta?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             biciBO.eliminarBicicleta(bicis.get(row).getId());
-            bicis.remove(row); 
-            tableModel.removeRow(row); 
+            configurarTabla();
+            cargarDatos();
         }
     }
 

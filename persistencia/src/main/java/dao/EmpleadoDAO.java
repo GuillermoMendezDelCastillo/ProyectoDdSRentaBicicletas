@@ -4,6 +4,7 @@
  */
 package dao;
 
+import conexion.Conexion;
 import entidades.Empleado;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,126 +21,93 @@ import javax.persistence.criteria.Root;
  * @author Gui26
  */
 public class EmpleadoDAO implements IObjetoDAO<Empleado>{
-//    private IConexion conexion;
-    EntityManager em;
+    private EntityManager em;
 
     public EmpleadoDAO() {
-        this.em = Persistence.createEntityManagerFactory("renta_bicicletas").createEntityManager();
+        this.em = Conexion.getEntityManager();
     }
     
     @Override
     public Empleado agregar(Empleado empleado){
-       // EntityManager entityManager = conexion.getConexion();
-        EntityTransaction transaction = null;
-
-        try {
-             
+      try {
             em.getTransaction().begin();
-
             em.persist(empleado);
-            em.getTransaction()
-                    .commit();
+            em.getTransaction().commit();
         } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
             }
             e.printStackTrace();
-        } finally {
-            em.close();
         }
-
         return empleado;
     }
     
-    @Override
-    public Empleado buscarPorId(Long id){
+     @Override
+    public Empleado buscarPorId(Long id) {
         try {
-            Empleado u = em.find(Empleado.class, id);
-            return u;
-//            Query query = em.createQuery("SELECT u FROM Empleado u WHERE u.id = :id", Empleado.class);
-//            query.setParameter("id", id);
-//            return (Empleado) query.getSingleResult();
+            return em.find(Empleado.class, id);
         } catch (NoResultException e) {
             return null;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
-    
+
     @Override
-    public Empleado actualizar(Empleado empleado){
-        EntityTransaction transaction = null;
+    public Empleado actualizar(Empleado empleado) {
         try {
             em.getTransaction().begin();
             em.merge(empleado);
-            em.getTransaction()
-                    .commit();
+            em.getTransaction().commit();
         } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
             }
             e.printStackTrace();
-        } finally {
-            em.close();
         }
         return empleado;
     }
-    
-    public Empleado eliminar(Long id){
-        Empleado u = em.find(Empleado.class, id);
-        EntityTransaction transaction = null;
+
+    public Empleado eliminar(Long id) {
         try {
-            em.getTransaction().begin();
-            em.remove(u);
-            em.getTransaction()
-                    .commit();
+            Empleado empleado = em.find(Empleado.class, id);
+            if (empleado != null) {
+                em.getTransaction().begin();
+                em.remove(empleado);
+                em.getTransaction().commit();
+            }
+            return empleado;
         } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
             }
             e.printStackTrace();
-        } finally {
-            em.close();
+            return null;
         }
-        return u;
     }
-    
+
     @Override
-    public List<Empleado> lista(){
+    public List<Empleado> lista() {
         try {
-            
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
             CriteriaQuery<Empleado> criteriaQuery = criteriaBuilder.createQuery(Empleado.class);
             Root<Empleado> empleadoRoot = criteriaQuery.from(Empleado.class);
             criteriaQuery.select(empleadoRoot);
             Query query = em.createQuery(criteriaQuery);
             return query.getResultList();
-            
         } catch (NoResultException e) {
             return null;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
-    
-    public Empleado iniciar(String correo, String contrasena){
+
+    public Empleado iniciar(String correo, String contrasena) {
         try {
-            Query query = em.createQuery("SELECT u FROM Usuario u WHERE "
+            Query query = em.createQuery("SELECT u FROM Empleado u WHERE "
                     + "u.correo = :correo AND "
                     + "u.contrasena = :contrasena", Empleado.class);
             query.setParameter("correo", correo);
             query.setParameter("contrasena", contrasena);
             return (Empleado) query.getSingleResult();
         } catch (NoResultException e) {
-            return null; // No se encontró ningún empleado con el correo y contraseña dados
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+            return null;
         }
     }
     

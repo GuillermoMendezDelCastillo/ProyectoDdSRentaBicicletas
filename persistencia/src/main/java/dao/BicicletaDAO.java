@@ -4,6 +4,7 @@
  */
 package dao;
 
+import conexion.Conexion;
 import entidades.Bicicleta;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -21,108 +22,80 @@ import javax.persistence.criteria.Root;
  */
 public class BicicletaDAO implements IObjetoDAO<Bicicleta>{
     
-    EntityManager em;
+    private EntityManager em;
     
     public BicicletaDAO() {
-        this.em = Persistence.createEntityManagerFactory("renta_bicicletas").createEntityManager();
+        this.em = Conexion.getEntityManager();
     }
     
     @Override
     public Bicicleta agregar(Bicicleta bicicleta){
-       // EntityManager entityManager = conexion.getConexion();
-        EntityTransaction transaction = null;
-
-        try {
-             
+       try {
             em.getTransaction().begin();
-
             em.persist(bicicleta);
-            em.getTransaction()
-                    .commit();
+            em.getTransaction().commit();
         } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
             }
             e.printStackTrace();
-        } finally {
-            em.close();
         }
-
         return bicicleta;
     }
     
     @Override
     public Bicicleta buscarPorId(Long id){
         try {
-            Bicicleta u = em.find(Bicicleta.class, id);
-            return u;
-//            Query query = em.createQuery("SELECT u FROM Bicicleta u WHERE u.id = :id", Bicicleta.class);
-//            query.setParameter("id", id);
-//            return (Bicicleta) query.getSingleResult();
+            return em.find(Bicicleta.class, id);
         } catch (NoResultException e) {
             return null;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
     
     @Override
     public Bicicleta actualizar(Bicicleta bicicleta){
-        EntityTransaction transaction = null;
-        try {
+         try {
             em.getTransaction().begin();
             em.merge(bicicleta);
-            em.getTransaction()
-                    .commit();
+            em.getTransaction().commit();
         } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
             }
             e.printStackTrace();
-        } finally {
-            em.close();
         }
         return bicicleta;
     }
     
     public Bicicleta eliminar(Long id){
-        Bicicleta u = em.find(Bicicleta.class, id);
-        EntityTransaction transaction = null;
-        try {
-            em.getTransaction().begin();
-            em.remove(u);
-            em.getTransaction()
-                    .commit();
+      try {
+            Bicicleta bicicleta = em.find(Bicicleta.class, id);
+            if (bicicleta != null) {
+                em.getTransaction().begin();
+                em.remove(bicicleta);
+                em.getTransaction().commit();
+            }
+            return bicicleta;
         } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
             }
             e.printStackTrace();
-        } finally {
-            em.close();
+            return null;
         }
-        return u;
     }
     
     @Override
     public List<Bicicleta> lista(){
-        try {
-            
+         try {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
             CriteriaQuery<Bicicleta> criteriaQuery = criteriaBuilder.createQuery(Bicicleta.class);
             Root<Bicicleta> bicicletaRoot = criteriaQuery.from(Bicicleta.class);
             criteriaQuery.select(bicicletaRoot);
             Query query = em.createQuery(criteriaQuery);
             return query.getResultList();
-            
         } catch (NoResultException e) {
             return null;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
     

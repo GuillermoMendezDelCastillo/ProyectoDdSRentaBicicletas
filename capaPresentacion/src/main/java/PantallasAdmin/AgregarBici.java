@@ -50,11 +50,11 @@ public class AgregarBici extends javax.swing.JPanel {
         txtPrecio = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtTipo = new javax.swing.JTextField();
         txtRodada = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        txtTipo = new javax.swing.JComboBox<>();
 
-        jPanel1.setBackground(new java.awt.Color(250, 250, 250));
+        jPanel1.setBackground(new java.awt.Color(243, 232, 255));
         jPanel1.setToolTipText("");
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -104,15 +104,6 @@ public class AgregarBici extends javax.swing.JPanel {
         jLabel3.setText("Tipo: ");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
 
-        txtTipo.setBackground(new java.awt.Color(250, 250, 250));
-        txtTipo.setSelectionColor(new java.awt.Color(0, 0, 0));
-        txtTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTipoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 340, 30));
-
         txtRodada.setBackground(new java.awt.Color(250, 250, 250));
         txtRodada.setSelectionColor(new java.awt.Color(0, 0, 0));
         txtRodada.addActionListener(new java.awt.event.ActionListener() {
@@ -120,12 +111,17 @@ public class AgregarBici extends javax.swing.JPanel {
                 txtRodadaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtRodada, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 340, 30));
+        jPanel1.add(txtRodada, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 180, 30));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Guardar bicicleta");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
+
+        txtTipo.setBackground(new java.awt.Color(250, 250, 250));
+        txtTipo.setForeground(new java.awt.Color(0, 0, 0));
+        txtTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Urbana", "", "De ruta", "Triatlon", "Montaña" }));
+        jPanel1.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 160, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -161,7 +157,7 @@ public class AgregarBici extends javax.swing.JPanel {
         if (confirm == JOptionPane.YES_OPTION) {
             try {
 
-            BicicletaDTO b=new BicicletaDTO(txtRodada.getText(),txtTipo.getText(),"Disponible",Float.valueOf(txtPrecio.getText()));
+            BicicletaDTO b=new BicicletaDTO(txtRodada.getText(),String.valueOf(txtTipo.getSelectedItem()),"Disponible",Float.valueOf(txtPrecio.getText()));
             biciBO.agregarBicicleta(b);
 
             JOptionPane.showMessageDialog(this, 
@@ -185,10 +181,6 @@ public class AgregarBici extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioActionPerformed
 
-    private void txtTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTipoActionPerformed
-
     private void txtRodadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRodadaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRodadaActionPerformed
@@ -204,6 +196,6 @@ public class AgregarBici extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtRodada;
-    private javax.swing.JTextField txtTipo;
+    private javax.swing.JComboBox<String> txtTipo;
     // End of variables declaration//GEN-END:variables
 }
