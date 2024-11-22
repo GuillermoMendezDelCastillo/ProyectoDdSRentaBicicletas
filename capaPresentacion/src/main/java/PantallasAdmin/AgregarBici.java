@@ -156,7 +156,7 @@ public class AgregarBici extends javax.swing.JPanel {
 
         if (confirm == JOptionPane.YES_OPTION) {
             try {
-
+            System.out.println(String.valueOf(txtTipo.getSelectedItem()));
             BicicletaDTO b=new BicicletaDTO(txtRodada.getText(),String.valueOf(txtTipo.getSelectedItem()),"Disponible",Float.valueOf(txtPrecio.getText()));
             biciBO.agregarBicicleta(b);
 

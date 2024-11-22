@@ -50,18 +50,18 @@ public class AdminBicis extends javax.swing.JPanel {
         bicis = biciBO.obtenerTodasLasBicicletas();
         System.out.println("Bicicletas obtenidas: " + bicis);
         for (BicicletaDTO bici : bicis) {
-            agregarFila(bici.getEstado(), String.valueOf(bici.getPrecio()), bici.getRodado());
+            agregarFila(bici.getTipo(),bici.getEstado(), String.valueOf(bici.getPrecio()), bici.getRodado());
         }
     }
 
     private void configurarTabla() {
         tableModel = new DefaultTableModel(
-            new Object[]{"Estado", "Precio", "Servicio", "Acciones"},
+            new Object[]{"Tipo","Estado", "Precio", "Servicio", "Acciones"},
             0
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 3; 
+                return column == 4; 
             }
         };
 
@@ -119,7 +119,7 @@ public class AdminBicis extends javax.swing.JPanel {
 
     private void editarFila(int row) {
         BicicletaDTO biciSeleccionada = bicis.get(row);
-        EditarBici editarBici = new EditarBici(empleado, biciSeleccionada);
+        EditarBici editarBici = new EditarBici(main, empleado, biciSeleccionada);
         PantallaMenu p=(PantallaMenu) main;
         p.showPanel(editarBici);
         this.disable();
@@ -134,8 +134,8 @@ public class AdminBicis extends javax.swing.JPanel {
         }
     }
 
-    private void agregarFila(String estado, String precio, String servicio) {
-        tableModel.addRow(new Object[]{estado, precio, servicio, "Acciones"});
+    private void agregarFila(String tipo,String estado, String precio, String servicio) {
+        tableModel.addRow(new Object[]{tipo,estado, precio, servicio, "Acciones"});
     }
      
     /**
@@ -168,7 +168,7 @@ public class AdminBicis extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Estado", "Precio", "Servicio", "Acciones"
+                "Tipo", "Estado", "Precio", "Servicio", "Acciones"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
