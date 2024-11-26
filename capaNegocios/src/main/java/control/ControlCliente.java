@@ -80,6 +80,16 @@ public class ControlCliente {
     }
 
     /**
+     *  metodo para buscar un cliente por su correo y contraseña
+     * @param correo
+     * @param contrasena
+     * @return dto del cliente encontrado o null en caso de que no lo encuentre
+     */
+    public ClienteDTO buscar(String correo, String contrasena){
+        return convertirEntidadADTO(clienteDAO.buscar(correo, contrasena));
+    }
+    
+    /**
      * metodo para convertir un cliente en un dto
      * @param cliente cliente a convertir
      * @return dto del cliente convertido
@@ -95,6 +105,8 @@ public class ControlCliente {
                 cliente.getDireccion()
         );
     }
+    
+    
 
     /**
      * metodo para convertir un dto en un cliente

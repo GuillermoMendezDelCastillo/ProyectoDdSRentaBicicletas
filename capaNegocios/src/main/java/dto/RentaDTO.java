@@ -94,5 +94,39 @@ public class RentaDTO {
     public EmpleadoDTO getEmpleado() {
         return empleado;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setBicicleta(BicicletaDTO bicicleta) {
+        this.bicicleta = bicicleta;
+    }
+
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setTiempo(int tiempo) {
+        this.tiempo = tiempo;
+    }
+
+    public void setCosto(float costo) {
+        this.costo = costo;
+    }
+
+    public void setMetodoPago(String metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+
+    public void setEmpleado(EmpleadoDTO empleado) {
+        this.empleado = empleado;
+    }
+    
+    
     
 }

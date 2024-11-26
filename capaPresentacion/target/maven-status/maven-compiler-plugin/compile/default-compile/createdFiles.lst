@@ -1,6 +1,7 @@
 Pantallas\PantallaRegistro$2.class
 PantallasAdmin\EditarBici$3.class
 PantallasAdmin\PanelRenta$6.class
+PantallasAdmin\PagarRenta$5.class
 PantallasAdmin\PantallaMenu$3.class
 PantallasAdmin\RentaConfirmada.class
 PantallasAdmin\InfoBici$1.class
@@ -56,6 +57,7 @@ Pantallas\PantallaRegistro$3.class
 PantallasAdmin\PanelRenta$5.class
 PantallasAdmin\PantallaMenu$4.class
 PantallasAdmin\AgregarUsuario$1.class
+PantallasAdmin\PagarRenta$6.class
 PantallasAdmin\AdminBicis$3.class
 PantallasAdmin\EditarUsuario$3.class
 PantallasAdmin\PanelRenta$2.class
