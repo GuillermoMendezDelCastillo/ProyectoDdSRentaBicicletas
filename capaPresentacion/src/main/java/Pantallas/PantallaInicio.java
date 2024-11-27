@@ -22,6 +22,7 @@ public class PantallaInicio extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.controlEmpleado = new ControlEmpleado();
+    
     }
 
     /**

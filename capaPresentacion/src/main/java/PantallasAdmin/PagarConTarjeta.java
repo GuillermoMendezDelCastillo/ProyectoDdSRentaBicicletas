@@ -45,6 +45,8 @@ public class PagarConTarjeta extends javax.swing.JPanel {
         btnAceptar.setVisible(false);
         btnAceptar.setEnabled(false);
         
+        pagoR.setVisible(false);
+        
         tiempo();
         
         main.setFocusable(true);
@@ -58,6 +60,10 @@ public class PagarConTarjeta extends javax.swing.JPanel {
                 jPanel2.setVisible(false);
                 btnAceptar.setVisible(true);
                 btnAceptar.setEnabled(true);
+                lab.setVisible(false);
+                pagoR.setVisible(true);
+                btnCancelar.setVisible(false);
+                btnCancelar.setEnabled(false);
             }
         }
     });
@@ -90,18 +96,20 @@ public class PagarConTarjeta extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lab = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        pagoR = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Inserte la tarjeta en la terminal");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
+        lab.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lab.setForeground(new java.awt.Color(0, 0, 0));
+        lab.setText("Inserte la tarjeta en la terminal");
+        jPanel1.add(lab, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
 
         btnAceptar.setBackground(new java.awt.Color(173, 216, 230));
         btnAceptar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -134,6 +142,20 @@ public class PagarConTarjeta extends javax.swing.JPanel {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 570, 60));
 
+        pagoR.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
+        pagoR.setForeground(new java.awt.Color(0, 0, 0));
+        pagoR.setText("Pago realizado");
+        jPanel1.add(pagoR, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, -1, -1));
+
+        btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 100, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,12 +186,21 @@ public class PagarConTarjeta extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Pago confirmado y renta exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        PantallaMenu p=(PantallaMenu) main;
+        PanelRenta panel=new PanelRenta(main,empleado);
+        p.showPanel(panel);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lab;
+    private javax.swing.JLabel pagoR;
     // End of variables declaration//GEN-END:variables
 }

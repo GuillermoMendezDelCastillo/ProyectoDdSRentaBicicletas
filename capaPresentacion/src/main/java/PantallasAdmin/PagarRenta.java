@@ -36,6 +36,8 @@ public class PagarRenta extends javax.swing.JDialog {
         this.main=main;
         
         this.setLocationRelativeTo(null);
+        
+        txtTotal.setText(total+"$");
     }
 
     /**
@@ -224,7 +226,9 @@ public class PagarRenta extends javax.swing.JDialog {
         }else{
             rentaDto.setMetodoPago("Efectivo");
             PagarConEfectivo pagar=new PagarConEfectivo(main,rentaDto.getEmpleado(),rentaDto);
-
+            PantallaMenu p=(PantallaMenu) main;
+            p.showPanel(pagar);
+            this.dispose();
         }
         }else{
             JOptionPane.showMessageDialog(this, "No has seleccionado ninguna forma de pago", 

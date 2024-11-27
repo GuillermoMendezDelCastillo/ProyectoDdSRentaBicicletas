@@ -72,6 +72,7 @@ public class RentaConfirmada extends javax.swing.JDialog {
         document.add(new Paragraph("Fecha de Renta: " + fechaFormateada));
 
         document.add(new Paragraph("Tipo de Bicicleta: " + rentaDto.getBicicleta().getTipo()));
+        document.add(new Paragraph("Tipo de Pago: " + rentaDto.getMetodoPago()));
         document.add(new Paragraph("Costo Total: " + rentaDto.getCosto() + "$"));
 
         if (rentaDto.getTiempo() == 30) {
@@ -182,6 +183,7 @@ public class RentaConfirmada extends javax.swing.JDialog {
         rentalInfo.append("<b>Empleado:</b> ").append(empleado.getNombre()).append("<br>");
         rentalInfo.append("<b>Fecha de Renta:</b> ").append(fechaFormateada).append("<br>");
         rentalInfo.append("<b>Tipo de bicicleta:</b> ").append(rentaDto.getBicicleta().getTipo()).append("<br>");
+        rentalInfo.append("<b>Tipo de pago:</b> ").append(rentaDto.getMetodoPago()).append("<br>");
         rentalInfo.append("<b>CostoTotal:</b> ").append(rentaDto.getCosto()+"$").append("<br>");
         if(rentaDto.getTiempo()==30){
             String tiempo="30 minutos";
