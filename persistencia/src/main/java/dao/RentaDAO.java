@@ -6,12 +6,15 @@ package dao;
 
 import conexion.Conexion;
 import entidades.Renta;
+import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
@@ -94,6 +97,25 @@ public class RentaDAO implements IObjetoDAO<Renta>{
             return query.getResultList();
         } catch (NoResultException e) {
             return null;
+        }
+    }
+    
+    public List<Renta> buscarEntreFechas(java.sql.Date fechaInicio, java.sql.Date fechaFin) {
+        try {
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaQuery<Renta> criteriaQuery = criteriaBuilder.createQuery(Renta.class);
+            Root<Renta> rentaRoot = criteriaQuery.from(Renta.class);
+
+            Predicate condition = criteriaBuilder.between(rentaRoot.get("fecha"), fechaInicio, fechaFin);
+            criteriaQuery.select(rentaRoot).where(condition);
+
+            Query query = em.createQuery(criteriaQuery);
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return Collections.emptyList(); 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList(); 
         }
     }
     

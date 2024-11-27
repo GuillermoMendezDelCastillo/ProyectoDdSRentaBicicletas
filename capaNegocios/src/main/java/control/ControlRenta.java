@@ -17,7 +17,6 @@ import entidades.Cliente;
 import entidades.Empleado;
 import entidades.Renta;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,6 +65,18 @@ public class ControlRenta {
         Renta renta = rentaDAO.buscarPorId(id);
         return (renta != null) ? convertirEntidadADTO(renta) : null;
         
+    }
+    
+    /**
+     * metodo para buscar entre fechas
+     * @param fechaInicio
+     * @param fechaFin
+     * @return
+     */
+    public List<RentaDTO> buscarEntreFechas(java.sql.Date fechaInicio, java.sql.Date fechaFin){
+        return rentaDAO.buscarEntreFechas(fechaInicio, fechaFin).stream()
+                    .map(this::convertirEntidadADTO)  
+                    .toList();
     }
 
     /**
@@ -170,27 +181,4 @@ public class ControlRenta {
         return (int) tiempo * 60;
     }
     
-    
-    /**
-     * metodo para realizar pagos
-     * @return 
-     */
-    public boolean realizarPagoRenta(){
-        //pendiente
-    return true;
-    }
-    
-    /**
-     * metodo para imprimir recibos
-     */
-    public void imprimirRecibo(){
-        //pendiente
-    }
-    
-    /**
-     * metodo para liberar bicicletas
-     */
-    public void liberarBici(){
-        //pendiente
-    }
 }

@@ -118,15 +118,5 @@ public class ControlBicicleta {
                 bicicletaDTO.getPrecio());
     }
     
-    /**
-     * metodo para verificar si una bicicleta esta disponible
-     * @param id id de la bicicleta que se desea verificar
-     * @return true en caso de que este disponible y false en caso contrario
-     */
-    public boolean biciDisponible(Long id){
-        //pendiente
-        
-        return true;
-    }
     
 }

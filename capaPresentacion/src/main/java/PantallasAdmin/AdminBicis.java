@@ -4,9 +4,15 @@
  */
 package PantallasAdmin;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import control.ControlBicicleta;
+import control.ControlRenta;
 import dto.BicicletaDTO;
 import dto.EmpleadoDTO;
+import dto.RentaDTO;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,13 +20,18 @@ import javax.swing.JPanel;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.FileOutputStream;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author PC Gamer
  */
 public class AdminBicis extends javax.swing.JPanel {
-    //Pantallas
+    //Controles
     ControlBicicleta biciBO;
+    ControlRenta rentaBO;
+    //Pantallas
     JFrame main;
     //DTOS
     EmpleadoDTO empleado;
@@ -33,9 +44,13 @@ public class AdminBicis extends javax.swing.JPanel {
      */
     public AdminBicis(JFrame main,EmpleadoDTO empleado) {
         initComponents();
+        
+        rentaBO=new ControlRenta();
         biciBO=new ControlBicicleta();
+        
         this.main=main;
         this.empleado=empleado;
+        
         configurarTabla();
         cargarDatos();
     }
@@ -256,6 +271,88 @@ public class AdminBicis extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Date fechaInicioUtil = new Date(rSDateChooser1.getDatoFecha().getYear(),rSDateChooser1.getDatoFecha().getMonth(),rSDateChooser1.getDatoFecha().getDate()); 
+        Date fechaFinUtil = new Date(rSDateChooser2.getDatoFecha().getYear(),rSDateChooser2.getDatoFecha().getMonth(),rSDateChooser2.getDatoFecha().getDate());
+
+        if (fechaInicioUtil == null || fechaFinUtil == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione ambas fechas.");
+            return;
+        }
+
+        if (fechaInicioUtil.after(fechaFinUtil)) {
+            JOptionPane.showMessageDialog(this, "La fecha inicial debe ser antes de la fecha final.");
+            return;
+        }
+
+        java.sql.Date fechaActual = new java.sql.Date(System.currentTimeMillis());
+        if (fechaFinUtil.after(fechaActual)) {
+            JOptionPane.showMessageDialog(this, "La fecha final no puede ser un día después de la fecha actual.");
+            return;
+        }
+
+        java.sql.Date fechaInicio = new java.sql.Date(fechaInicioUtil.getTime());
+        java.sql.Date fechaFin = new java.sql.Date(fechaFinUtil.getTime());
+
+        generarReporte(fechaInicio, fechaFin);
+    }                                    
+
+    private void generarReporte(java.sql.Date fechaInicio, java.sql.Date fechaFin) {
+        List<RentaDTO> rentas = rentaBO.buscarEntreFechas(fechaInicio, fechaFin);
+        Double totalDia = 0.0,totalGeneral = 0.0;
+        
+        
+        if (rentas != null && !rentas.isEmpty()) {
+                try {
+                     java.sql.Date fecha = new java.sql.Date(System.currentTimeMillis());
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Document document = new Document();
+                    PdfWriter.getInstance(document, new FileOutputStream("Reporte_Rentas_" + sdf.format(fechaInicio) + "_a_" + sdf.format(fechaFin) + ".pdf"));
+                    document.open();
+
+                    document.add(new Paragraph("Reporte de Rentas", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 24)));
+                    document.add(new Paragraph("Fecha del Reporte: " + sdf.format(fecha)));
+                    document.add(new Paragraph("\n"));
+
+                    for (RentaDTO rentaDto : rentas) {
+                        String fechaFormateada = sdf.format(rentaDto.getFecha());
+                        double costoRenta = rentaDto.getCosto();
+
+                        document.add(new Paragraph("Renta ID: " + rentaDto.getId()));
+                        document.add(new Paragraph("Cliente: " + rentaDto.getCliente().getNombre()));
+                        document.add(new Paragraph("Teléfono del Cliente: " + rentaDto.getCliente().getTelefono()));
+                        document.add(new Paragraph("Empleado: " + rentaDto.getEmpleado().getNombre()));
+                        document.add(new Paragraph("Fecha de Renta: " + fechaFormateada));
+
+                        document.add(new Paragraph("Tipo de Bicicleta: " + rentaDto.getBicicleta().getTipo()));
+                        document.add(new Paragraph("Tipo de Pago: " + rentaDto.getMetodoPago()));
+                        document.add(new Paragraph("Costo Total: " + costoRenta + "$"));
+
+                        if (rentaDto.getTiempo() == 30) {
+                            document.add(new Paragraph("Tiempo: 30 minutos"));
+                        } else {
+                            document.add(new Paragraph("Tiempo: " + rentaDto.getTiempo() + " horas"));
+                        }
+
+                        totalDia += costoRenta;
+                        totalGeneral += costoRenta;
+
+                        document.add(new Paragraph("\n"));
+                    }
+
+                    document.add(new Paragraph("Total del día (" + sdf.format(fechaInicio) + "): " + totalDia + "$", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12)));
+                    document.add(new Paragraph("\n"));
+
+                    document.add(new Paragraph("Total General: " + totalGeneral + "$", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12)));
+                    document.add(new Paragraph("\nGracias por su preferencia.", FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 12)));
+
+                    document.close();
+                    JOptionPane.showMessageDialog(this, "PDF generado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontraron rentas para el rango de fechas seleccionado.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
