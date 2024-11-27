@@ -4,8 +4,6 @@
  */
 package PantallasAdmin;
 
-import PantallasAdmin.PagarRenta;
-import PantallasAdmin.SeleccionarBicicleta;
 import control.ControlBicicleta;
 import control.ControlCliente;
 import control.ControlRenta;
@@ -13,9 +11,9 @@ import dto.BicicletaDTO;
 import dto.ClienteDTO;
 import dto.EmpleadoDTO;
 import dto.RentaDTO;
-import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -94,75 +92,57 @@ public class PanelRenta extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelRound3 = new org.netbeans.modules.form.InvalidComponent();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        panelRound1 = new Utileria.PanelRound();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        panelRound2 = new Utileria.PanelRound();
         cbTiempo = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        btnRentar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        btnRentar1 = new javax.swing.JButton();
         txtTotal = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        btnSeleccionar = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        btnSeleccionar1 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         pswContrasena = new javax.swing.JPasswordField();
 
-        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(250, 210, 105));
-        jPanel2.setForeground(new java.awt.Color(255, 138, 0));
+        jPanel3.setBackground(new java.awt.Color(250, 210, 105));
+        jPanel3.setForeground(new java.awt.Color(255, 138, 0));
 
-        jLabel12.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel12.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel12.setText("Rentar Bicicleta");
+        jLabel14.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel14.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel14.setText("Rentar Bicicleta");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel12)
+                .addComponent(jLabel14)
                 .addContainerGap(658, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel12)
+                .addComponent(jLabel14)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        panelRound3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 60));
 
-        jButton4.setText("jButton1");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        panelRound3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 4, 50, 50));
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        panelRound3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, 70, 60));
-
-        panelRound1.setBackground(new java.awt.Color(230, 230, 230));
-        panelRound1.setRoundBottomLeft(50);
-        panelRound1.setRoundBottomRight(50);
-        panelRound1.setRoundTopLeft(50);
-        panelRound1.setRoundTopRight(50);
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelRound2.setBackground(new java.awt.Color(230, 230, 230));
+        panelRound2.setRoundBottomLeft(50);
+        panelRound2.setRoundBottomRight(50);
+        panelRound2.setRoundTopLeft(50);
+        panelRound2.setRoundTopRight(50);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cbTiempo.setBackground(new java.awt.Color(250, 250, 250));
         cbTiempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "30 minutos", "1 hora", "2 horas", "3 horas", "5 horas" }));
@@ -171,19 +151,19 @@ public class PanelRenta extends javax.swing.JPanel {
                 cbTiempoActionPerformed(evt);
             }
         });
-        panelRound1.add(cbTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 269, 254, -1));
+        panelRound2.add(cbTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 269, 254, -1));
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel7.setText("Tiempo:");
-        panelRound1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 268, -1, -1));
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel9.setText("Tiempo:");
+        panelRound2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 268, -1, -1));
 
-        btnRentar.setText("Rentar");
-        btnRentar.addActionListener(new java.awt.event.ActionListener() {
+        btnRentar1.setText("Rentar");
+        btnRentar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRentarActionPerformed(evt);
+                btnRentar1ActionPerformed(evt);
             }
         });
-        panelRound1.add(btnRentar, new org.netbeans.lib.awtextra.AbsoluteConstraints(609, 408, -1, -1));
+        panelRound2.add(btnRentar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(609, 408, -1, -1));
 
         txtTotal.setEditable(false);
         txtTotal.setEnabled(false);
@@ -193,87 +173,84 @@ public class PanelRenta extends javax.swing.JPanel {
                 txtTotalActionPerformed(evt);
             }
         });
-        panelRound1.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 244, -1));
+        panelRound2.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 244, -1));
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel10.setText("Total:");
-        panelRound1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, -1, -1));
+        jLabel16.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel16.setText("Total:");
+        panelRound2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, -1, -1));
 
-        btnSeleccionar.setBackground(new java.awt.Color(255, 174, 105));
-        btnSeleccionar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnSeleccionar.setText("Seleccionar");
-        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+        btnSeleccionar1.setBackground(new java.awt.Color(255, 174, 105));
+        btnSeleccionar1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnSeleccionar1.setText("Seleccionar");
+        btnSeleccionar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSeleccionarActionPerformed(evt);
+                btnSeleccionar1ActionPerformed(evt);
             }
         });
-        panelRound1.add(btnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 229, 161, -1));
+        panelRound2.add(btnSeleccionar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 229, 161, -1));
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel8.setText("Bicicleta:");
-        panelRound1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 229, -1, -1));
+        jLabel17.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel17.setText("Bicicleta:");
+        panelRound2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 229, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel13.setText("Cliente:");
-        panelRound1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 38, -1, -1));
+        jLabel18.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel18.setText("Cliente:");
+        panelRound2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 38, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel11.setText("Correo");
-        panelRound1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 120, -1, -1));
+        jLabel19.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel19.setText("Correo");
+        panelRound2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 120, -1, -1));
 
-        jLabel15.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel15.setText("Contraseña");
-        panelRound1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 171, -1, -1));
-        panelRound1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 118, 240, -1));
-        panelRound1.add(pswContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 210, -1));
+        jLabel20.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel20.setText("Contraseña");
+        panelRound2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 171, -1, -1));
+        panelRound2.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 118, 240, -1));
+        panelRound2.add(pswContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 210, -1));
 
-        panelRound3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 810, 450));
+        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 810, 450));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cbTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTiempoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cbTiempoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnRentar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentar1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void btnRentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarActionPerformed
-
-        char[] passwordCharArray = pswContrasena.getPassword();
+        if (txtCorreo.getText().isEmpty() || pswContrasena.getPassword().length == 0 || idBicicleta == null) { JOptionPane.showMessageDialog(null, "No se han llenado los campos correctamente", "Error", JOptionPane.ERROR_MESSAGE);return; }
+          char[] passwordCharArray = pswContrasena.getPassword();
         String password = new String(passwordCharArray);
 
         this.clienteDto = controlCliente.buscar(txtCorreo.getText(), password);
 
         BicicletaDTO bici=biciBO.buscarBicicleta(idBicicleta.longValue());
-        if ( ( empleadoDto != null ) && ( clienteDto != null ) &&
-            ( idBicicleta != null )){
+      
             if(tiempo==.5){
             
             RentaDTO rentaDto=new RentaDTO(bici,clienteDto, 30,costoTotal,empleadoDto);
             
-            PagarRenta c = new PagarRenta(main, true, rentaDto, costoTotal);
+            PagarRenta c = new PagarRenta(main, true, rentaDto, costoTotal, main);
             c.show();
         }
-        } else{
-            System.out.println("No se han llenado los campos");
-        }
-    }//GEN-LAST:event_btnRentarActionPerformed
+                 
+    }//GEN-LAST:event_btnRentar1ActionPerformed
 
-    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalActionPerformed
 
+    private void btnSeleccionar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionar1ActionPerformed
+        // TODO add your handling code here:
         ControlBicicleta c = new ControlBicicleta();
         System.out.println(c.obtenerBicicletasDisponibles());
 
@@ -312,17 +289,12 @@ public class PanelRenta extends javax.swing.JPanel {
         txtTotal.setText(String.format("%.2f$", costoTotal));
     } else {
         txtTotal.setText("0.00$");
-    }
-
-    }//GEN-LAST:event_btnSeleccionarActionPerformed
-
-    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalActionPerformed
-
-    private void cbTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTiempoActionPerformed
-
-    }//GEN-LAST:event_cbTiempoActionPerformed
+        }  
+        
+        
+        
+        
+    }//GEN-LAST:event_btnSeleccionar1ActionPerformed
 
     public JPanel getFondo() {
             return this;
@@ -330,21 +302,19 @@ public class PanelRenta extends javax.swing.JPanel {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRentar;
-    private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JButton btnRentar1;
+    private javax.swing.JButton btnSeleccionar1;
     private javax.swing.JComboBox<String> cbTiempo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel2;
-    private Utileria.PanelRound panelRound1;
-    private org.netbeans.modules.form.InvalidComponent panelRound3;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private Utileria.PanelRound panelRound2;
     private javax.swing.JPasswordField pswContrasena;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtTotal;

@@ -4,12 +4,11 @@
  */
 package PantallasAdmin;
 
-import control.ControlCliente;
 import control.ControlRenta;
 import dto.RentaDTO;
-import static entidades.Renta_.fecha;
-import java.util.Date;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,17 +20,22 @@ public class PagarRenta extends javax.swing.JDialog {
     private ControlRenta controlRenta;
     private float total;
     private int seleccionado;
+    private JFrame main;
     
     /**
      * Creates new form PagarRenta
      */
-    public PagarRenta(java.awt.Frame parent, boolean modal, RentaDTO rentaDto, float total) {
+    public PagarRenta(java.awt.Frame parent, boolean modal, RentaDTO rentaDto, float total,JFrame main) {
         super(parent, modal);
         initComponents();
         this.rentaDto = rentaDto;
         this.controlRenta = new ControlRenta();
         seleccionado=0;
         this.total=total;
+        
+        this.main=main;
+        
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -206,45 +210,36 @@ public class PagarRenta extends javax.swing.JDialog {
     }//GEN-LAST:event_txtTotalActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-        // TODO add your handling code here:
+        rentaDto.setCosto(total);
+        java.util.Date fechaActualUtil = new java.util.Date(System.currentTimeMillis());
+        java.sql.Date fechaActualSql = new java.sql.Date(fechaActualUtil.getTime());
+        rentaDto.setFecha(fechaActualSql);
         if(seleccionado!=0){
-          rentaDto.setCosto(total);
-        Date d=new Date();
-        rentaDto.setFecha((java.sql.Date) fecha);
         if(seleccionado==1){
             rentaDto.setMetodoPago("Tarjeta");
+            PagarConTarjeta pagar=new PagarConTarjeta(main,rentaDto.getEmpleado(),rentaDto);
+            PantallaMenu p=(PantallaMenu) main;
+            p.showPanel(pagar);
+            this.dispose();
         }else{
             rentaDto.setMetodoPago("Efectivo");
+            PagarConEfectivo pagar=new PagarConEfectivo(main,rentaDto.getEmpleado(),rentaDto);
+
         }
-        controlRenta.agregarRenta(rentaDto);
-        this.dispose();  
+        }else{
+            JOptionPane.showMessageDialog(this, "No has seleccionado ninguna forma de pago", 
+                                      "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void btnTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarjetaActionPerformed
         // TODO add your handling code here:
         seleccionado = 1;
-        seleccionarFormaDePago();
-        
     }//GEN-LAST:event_btnTarjetaActionPerformed
-
-    private void seleccionarFormaDePago(){
-        if (seleccionado == 1) {
-            seleccionado = 2;
-            btnTarjeta.setSelected(false);
-            btnEfectivo.setSelected(true);
-        } else {
-            seleccionado = 1;
-            btnTarjeta.setSelected(true);
-            btnEfectivo.setSelected(false);
-        }
-    }
-    
-    
+   
     private void btnEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEfectivoActionPerformed
         // TODO add your handling code here:
         seleccionado = 2;
-        seleccionarFormaDePago();
     }//GEN-LAST:event_btnEfectivoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
