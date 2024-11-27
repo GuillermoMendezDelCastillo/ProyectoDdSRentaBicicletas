@@ -8,6 +8,12 @@ import control.ControlRenta;
 import dto.EmpleadoDTO;
 import dto.RentaDTO;
 import javax.swing.JFrame;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,11 +34,60 @@ public class RentaConfirmada extends javax.swing.JDialog {
         initComponents();
         this.rentaDto = rentaDto;
         this.controlRenta = new ControlRenta();
-        this.main=main;
+        this.main=(JFrame) parent;
         this.empleado=empleado;
         this.setLocationRelativeTo(null);
+        
+        rentalInfoLabel = new JLabel(getRentalInfoText());
+        rentalInfoLabel.setFont(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 16));
+        rentalInfoLabel.setForeground(new java.awt.Color(0, 0, 0)); 
+
+        a.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        a.add(rentalInfoLabel);
+
+        a.revalidate();
+        a.repaint();
+        
+         generarTicket();
     }
 
+    
+    
+    public void generarTicket(){
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+         String fechaFormateada = sdf.format(rentaDto.getFecha());
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream("RentaTicket "+rentaDto.getId()+" "+fechaFormateada+".pdf"));
+            document.open();
+
+            document.add(new Paragraph("Renta Confirmada", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 24)));
+        document.add(new Paragraph("\n"));
+
+        document.add(new Paragraph("Renta ID: " + rentaDto.getId()));
+        document.add(new Paragraph("Cliente: " + rentaDto.getCliente().getNombre()));
+        document.add(new Paragraph("Teléfono del Cliente: " + rentaDto.getCliente().getTelefono()));
+        document.add(new Paragraph("Empleado: " + empleado.getNombre()));
+        document.add(new Paragraph("Fecha de Renta: " + fechaFormateada));
+
+        document.add(new Paragraph("Tipo de Bicicleta: " + rentaDto.getBicicleta().getTipo()));
+        document.add(new Paragraph("Costo Total: " + rentaDto.getCosto() + "$"));
+
+        if (rentaDto.getTiempo() == 30) {
+            document.add(new Paragraph("Tiempo: 30 minutos"));
+        } else {
+            document.add(new Paragraph("Tiempo: " + rentaDto.getTiempo() + " horas"));
+        }
+
+        document.add(new Paragraph("\nGracias por su preferencia.", FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 12)));
+
+            document.close();
+            JOptionPane.showMessageDialog(this, "PDF generado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +99,8 @@ public class RentaConfirmada extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        panelRound1 = new Utileria.PanelRound();
+        a = new Utileria.PanelRound();
+        rentalInfoLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -57,24 +113,30 @@ public class RentaConfirmada extends javax.swing.JDialog {
         jLabel1.setText("Renta Confirmada");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
 
-        panelRound1.setBackground(new java.awt.Color(230, 230, 230));
-        panelRound1.setRoundBottomLeft(50);
-        panelRound1.setRoundBottomRight(50);
-        panelRound1.setRoundTopLeft(50);
-        panelRound1.setRoundTopRight(50);
+        a.setBackground(new java.awt.Color(230, 230, 230));
+        a.setRoundBottomLeft(50);
+        a.setRoundBottomRight(50);
+        a.setRoundTopLeft(50);
+        a.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+        javax.swing.GroupLayout aLayout = new javax.swing.GroupLayout(a);
+        a.setLayout(aLayout);
+        aLayout.setHorizontalGroup(
+            aLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(rentalInfoLabel)
+                .addContainerGap(614, Short.MAX_VALUE))
         );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
+        aLayout.setVerticalGroup(
+            aLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(rentalInfoLabel)
+                .addContainerGap(230, Short.MAX_VALUE))
         );
 
-        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 650, 270));
+        jPanel1.add(a, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 650, 270));
 
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -103,15 +165,39 @@ public class RentaConfirmada extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
+    private String getRentalInfoText() {
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaFormateada = sdf.format(rentaDto.getFecha());
+
+        StringBuilder rentalInfo = new StringBuilder();
+        rentalInfo.append("<html>");
+        rentalInfo.append("<b>Renta ID:</b> ").append(rentaDto.getId()).append("<br>");
+        rentalInfo.append("<b>Cliente:</b> ").append(rentaDto.getCliente().getNombre()).append("<br>");
+        rentalInfo.append("<b>Teléfono del Cliente:</b> ").append(rentaDto.getCliente().getTelefono()).append("<br>");
+        rentalInfo.append("<b>Empleado:</b> ").append(empleado.getNombre()).append("<br>");
+        rentalInfo.append("<b>Fecha de Renta:</b> ").append(fechaFormateada).append("<br>");
+        rentalInfo.append("<b>Tipo de bicicleta:</b> ").append(rentaDto.getBicicleta().getTipo()).append("<br>");
+        rentalInfo.append("<b>CostoTotal:</b> ").append(rentaDto.getCosto()+"$").append("<br>");
+        if(rentaDto.getTiempo()==30){
+            String tiempo="30 minutos";
+            rentalInfo.append("<b>Tiempo:</b> ").append(tiempo).append("<br>");
+        }else{
+            rentalInfo.append("<b>Tiempo:</b> ").append(rentaDto.getTiempo()+" horas").append("<br>");
+        }
+        rentalInfo.append("</html>");
+        return rentalInfo.toString();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Utileria.PanelRound a;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private Utileria.PanelRound panelRound1;
+    private javax.swing.JLabel rentalInfoLabel;
     // End of variables declaration//GEN-END:variables
 }

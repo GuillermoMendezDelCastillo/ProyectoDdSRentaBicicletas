@@ -70,5 +70,26 @@ public class BicicletaDTO {
     public Float getPrecio() {
         return precio;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setRodado(String rodado) {
+        this.rodado = rodado;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setPrecio(Float precio) {
+        this.precio = precio;
+    }
+    
     
 }

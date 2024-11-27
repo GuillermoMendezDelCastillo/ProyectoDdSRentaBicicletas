@@ -109,4 +109,14 @@ public class EmpleadoDAO implements IObjetoDAO<Empleado>{
         }
     }
     
+    public Empleado iniciar(String correo) {
+        try {
+            Query query = em.createQuery("SELECT u FROM Empleado u WHERE "
+                    + "u.correo = :correo", Empleado.class);
+            query.setParameter("correo", correo);
+            return (Empleado) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }

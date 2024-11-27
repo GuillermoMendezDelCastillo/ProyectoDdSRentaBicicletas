@@ -7,6 +7,7 @@ package Pantallas;
 import PantallasAdmin.PantallaMenu;
 import control.ControlEmpleado;
 import dto.EmpleadoDTO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -162,11 +163,17 @@ public class PantallaInicio extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
+        String empleado = txtEmpleado.getText().trim();
         char[] passwordCharArray = pswContrasena.getPassword();
         String password = new String(passwordCharArray);
+        
+         if (empleado.isEmpty() || password.isEmpty()) { 
+             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", 
+                                      "Error", JOptionPane.ERROR_MESSAGE); return; }
+         
         EmpleadoDTO empleadoDto = controlEmpleado.iniciarSesion(txtEmpleado.getText(), password);
         if (empleadoDto!=null)
-        {
+        { 
             PantallaMenu p = new PantallaMenu(empleadoDto);
             p.show();
             this.dispose();

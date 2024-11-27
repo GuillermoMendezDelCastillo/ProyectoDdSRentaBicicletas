@@ -4,7 +4,9 @@
  */
 package PantallasAdmin;
 
+import control.ControlBicicleta;
 import control.ControlRenta;
+import dto.BicicletaDTO;
 import dto.EmpleadoDTO;
 import dto.RentaDTO;
 import javax.swing.JFrame;
@@ -15,14 +17,15 @@ import javax.swing.JOptionPane;
  * @author PC Gamer
  */
 public class PagarConTarjeta extends javax.swing.JPanel {
-    JFrame main;
+    private JFrame main;
     
-    EmpleadoDTO empleado;
-    RentaDTO renta;
+    private EmpleadoDTO empleado;
+    private RentaDTO renta;
     
     private javax.swing.Timer tiempo;
     private int posicion = 0;
     
+    private ControlBicicleta cB;
     private ControlRenta controlR;
     
     /**
@@ -30,6 +33,9 @@ public class PagarConTarjeta extends javax.swing.JPanel {
      */
     public PagarConTarjeta(JFrame main, EmpleadoDTO empleado, RentaDTO renta) {
         initComponents();
+        
+        cB=new ControlBicicleta();
+
         this.main=main;
         this.empleado=empleado;
         this.renta=renta;
@@ -146,15 +152,16 @@ public class PagarConTarjeta extends javax.swing.JPanel {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        try{
-        controlR.agregarRenta(renta);
-           
+        BicicletaDTO b=cB.buscarBicicleta(renta.getBicicleta().getId());
+        System.out.println(b.toString());
+        b.setEstado("En Renta");
+        cB.actualizarBicicleta(b);
+        renta.setBicicleta(b);
+        renta=controlR.agregarRenta(renta);
+        
         RentaConfirmada rC=new RentaConfirmada(main,true,renta,empleado);
-        rC.show(); 
-        
+        rC.show();  
         JOptionPane.showMessageDialog(null, "Pago confirmado y renta exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        
-        }catch(Exception  e){JOptionPane.showMessageDialog(null, "Ocurrió un error al procesar la renta: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);}
     }//GEN-LAST:event_btnAceptarActionPerformed
 
 

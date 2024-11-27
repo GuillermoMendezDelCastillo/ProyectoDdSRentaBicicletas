@@ -101,6 +101,10 @@ public class ControlEmpleado {
         }
         return null;
     }
+    
+    public EmpleadoDTO iniciar(String correo){
+        return convertirEntidadADTO(empleadoDAO.iniciar(correo));
+    }
 
     /**
      * metodo para converitr dto en un empleado

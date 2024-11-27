@@ -27,7 +27,6 @@ public class PanelRenta extends javax.swing.JPanel {
     private Integer idBicicleta;
     private float tiempo;
     private SeleccionarBicicleta sb;
-    private ControlRenta controlRenta;
     private ControlBicicleta biciBO;
     private float costoTotal;
     private ControlCliente controlCliente;
@@ -41,7 +40,6 @@ public class PanelRenta extends javax.swing.JPanel {
         this.empleadoDto = empleadoDto;
         this.tiempo = (float) 0.5;
         this.idBicicleta = null;
-        this.controlRenta = new ControlRenta();
         this.biciBO=new ControlBicicleta();
         this.controlCliente=new ControlCliente();
         
@@ -49,6 +47,7 @@ public class PanelRenta extends javax.swing.JPanel {
         cbTiempo.addActionListener(e -> actualizarPrecio());
     }
 
+    
     private void actualizarPrecio() {
     if (idBicicleta != null) {
         float precioPorHora = biciBO.buscarBicicleta(idBicicleta.longValue()).getPrecio();
@@ -283,17 +282,14 @@ public class PanelRenta extends javax.swing.JPanel {
                 System.out.println("Tiempo no válido");
                 return;
         }
-
-        float costoTotal = precioPorHora * tiempoEnHoras;
+        tiempo=tiempoEnHoras;
+        costoTotal = precioPorHora * tiempoEnHoras;
 
         txtTotal.setText(String.format("%.2f$", costoTotal));
     } else {
         txtTotal.setText("0.00$");
         }  
-        
-        
-        
-        
+
     }//GEN-LAST:event_btnSeleccionar1ActionPerformed
 
     public JPanel getFondo() {

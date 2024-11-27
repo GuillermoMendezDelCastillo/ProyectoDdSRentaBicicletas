@@ -39,6 +39,8 @@ public class EditarBici extends javax.swing.JPanel {
         txtTipo.setSelectedItem(tipo);
         txtRodada.setText(String.valueOf(bici.getRodado()));
         txtPrecio.setText(String.valueOf(bici.getPrecio()));
+        String estado=bici.getEstado();
+        this.estado.setSelectedItem(estado);
     }
 
     public JPanel getFondo() {
@@ -64,6 +66,8 @@ public class EditarBici extends javax.swing.JPanel {
         txtRodada = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtTipo = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        estado = new javax.swing.JComboBox<>();
 
         jPanel1.setBackground(new java.awt.Color(243, 232, 255));
         jPanel1.setToolTipText("");
@@ -93,8 +97,8 @@ public class EditarBici extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Precio:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, -1, -1));
+        jLabel1.setText("Estado: ");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, -1));
 
         txtPrecio.setBackground(new java.awt.Color(250, 250, 250));
         txtPrecio.setSelectionColor(new java.awt.Color(0, 0, 0));
@@ -131,8 +135,19 @@ public class EditarBici extends javax.swing.JPanel {
 
         txtTipo.setBackground(new java.awt.Color(250, 250, 250));
         txtTipo.setForeground(new java.awt.Color(0, 0, 0));
-        txtTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Urbana", "", "De ruta", "Triatlon", "Montaña" }));
+        txtTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Urbana", "De ruta", "Triatlon", "Montaña" }));
         jPanel1.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 160, 30));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Precio:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, -1, -1));
+
+        estado.setBackground(new java.awt.Color(250, 250, 250));
+        estado.setForeground(new java.awt.Color(0, 0, 0));
+        estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "En Renta" }));
+        estado.setToolTipText("");
+        jPanel1.add(estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 160, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -169,7 +184,7 @@ public class EditarBici extends javax.swing.JPanel {
         if (confirm == JOptionPane.YES_OPTION) {
             try {
 
-                bici=new BicicletaDTO(txtRodada.getText(),String.valueOf(txtTipo.getSelectedItem()),"Disponible",Float.valueOf(txtPrecio.getText()));
+                bici=new BicicletaDTO(bici.getId(),txtRodada.getText(),String.valueOf(txtTipo.getSelectedItem()),String.valueOf(estado.getSelectedItem()),Float.valueOf(txtPrecio.getText()));
                 biciBO.actualizarBicicleta(bici);
 
                 JOptionPane.showMessageDialog(this,
@@ -201,10 +216,12 @@ public class EditarBici extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JComboBox<String> estado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtRodada;
