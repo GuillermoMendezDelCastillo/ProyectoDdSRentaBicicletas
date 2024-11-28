@@ -162,32 +162,54 @@ public class AgregarBici extends javax.swing.JPanel {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
+         if (txtPrecio.getText().isEmpty() || txtRodada.getText().isEmpty() || txtTipo.getSelectedItem().toString().isEmpty() || estado.getSelectedItem().toString().isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                "Por favor, complete todos los campos.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            Integer.parseInt(txtRodada.getText()); 
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, 
+                "El campo 'Rodada' debe ser un número entero válido.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         int confirm = JOptionPane.showConfirmDialog(this, 
-        "¿Deseas guardar esta bicicleta?", 
-        "Confirmar Guardado", 
-        JOptionPane.YES_NO_OPTION);
+            "¿Deseas guardar esta bicicleta?", 
+            "Confirmar Guardado", 
+            JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
             try {
-            System.out.println(String.valueOf(txtTipo.getSelectedItem()));
-            BicicletaDTO b=new BicicletaDTO(txtRodada.getText(),String.valueOf(txtTipo.getSelectedItem()),String.valueOf(estado.getSelectedItem()),Float.valueOf(txtPrecio.getText()));
-            biciBO.agregarBicicleta(b);
+                System.out.println(String.valueOf(txtTipo.getSelectedItem()));
+                BicicletaDTO b = new BicicletaDTO(txtRodada.getText(),
+                                                  String.valueOf(txtTipo.getSelectedItem()),
+                                                  String.valueOf(estado.getSelectedItem()),
+                                                  Float.valueOf(txtPrecio.getText()));
+                biciBO.agregarBicicleta(b);
 
-            JOptionPane.showMessageDialog(this, 
-                "La bicicleta se guardó exitosamente.", 
-                "Éxito", 
-                JOptionPane.INFORMATION_MESSAGE);
-           PantallaMenu p=(PantallaMenu) main;
-           AdminBicis aB=new AdminBicis(main,em);
-           p.showPanel(aB);
-           this.disable();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, 
-                "Ocurrió un error al guardar la bicicleta: " + e.getMessage(), 
-                "Error", 
-                JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, 
+                    "La bicicleta se guardó exitosamente.", 
+                    "Éxito", 
+                    JOptionPane.INFORMATION_MESSAGE);
+
+                PantallaMenu p = (PantallaMenu) main;
+                AdminBicis aB = new AdminBicis(main, em);
+                p.showPanel(aB);
+                this.disable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, 
+                    "Ocurrió un error al guardar la bicicleta: " + e.getMessage(), 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            }
         }
-    }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed

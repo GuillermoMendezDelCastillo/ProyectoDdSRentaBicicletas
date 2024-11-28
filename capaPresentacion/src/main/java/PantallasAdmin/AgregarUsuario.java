@@ -243,20 +243,53 @@ public class AgregarUsuario extends javax.swing.JPanel {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
         
-        try {
-            char[] passwordCharArray = txtContrasena.getPassword();
-            String password = new String(passwordCharArray);
-            java.sql.Date sqlDate = new java.sql.Date(date.getDatoFecha().getTime());
-            String direccion=txtColonia.getText()+" "+txtCalle.getText();
-            ClienteDTO cliente=new ClienteDTO(txtNombre.getText(),txtCorreo.getText(),password, sqlDate,txtTelefono.getText(),direccion);
-            clienteBo.agregarCliente(cliente);
-            JOptionPane.showMessageDialog(this, "Registro exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        String nombre = txtNombre.getText();
+        String correo = txtCorreo.getText();
+        char[] passwordCharArray = txtContrasena.getPassword();
+        String password = new String(passwordCharArray);
+        String telefono = txtTelefono.getText();
+        String colonia = txtColonia.getText();
+        String calle = txtCalle.getText();
+        java.sql.Date fechaNacimiento = new java.sql.Date(date.getDatoFecha().getTime());
+        
+        if (nombre.isEmpty() || correo.isEmpty() || password.isEmpty() || telefono.isEmpty() || colonia.isEmpty() || calle.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios");
+            return;
+        }
+
+        if (!correo.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
+            JOptionPane.showMessageDialog(this, "El correo electrónico no es válido");
+            return;
+        }
+
+        if (password.length() < 6) {
+            JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos 6 caracteres");
+            return;
+        }
+
+        if (!telefono.matches("[0-9]+") || telefono.length() < 10) {
+            JOptionPane.showMessageDialog(this, "El número de teléfono debe ser válido");
+            return;
+        }
+
+        if (fechaNacimiento.after(new java.sql.Date(System.currentTimeMillis()))) {
+            JOptionPane.showMessageDialog(this, "La fecha de nacimiento no puede ser en el futuro");
+            return;
+        }
+        
+        ClienteDTO nuevoUsuario = new ClienteDTO(nombre,correo,password,fechaNacimiento,telefono,(colonia+calle));
+        
+
+        ClienteDTO registrado = clienteBo.agregarCliente(nuevoUsuario);
+
+        if (registrado!=null) {
+            JOptionPane.showMessageDialog(this, "Usuario registrado con éxito");
             PantallaMenu p=(PantallaMenu) main;
-           AdminClientes aB=new AdminClientes(main,em);
-           p.showPanel(aB);
+            AdminClientes aB=new AdminClientes(main,em);
+            p.showPanel(aB);
            this.disable();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al registrar el empleado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al registrar el usuario");
         }
         
     }//GEN-LAST:event_btnRegistrarActionPerformed
