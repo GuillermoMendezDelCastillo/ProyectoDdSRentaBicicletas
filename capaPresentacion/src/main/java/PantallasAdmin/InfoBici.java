@@ -4,20 +4,68 @@
  */
 package PantallasAdmin;
 
+import control.ControlCliente;
+import dto.BicicletaDTO;
+import dto.ClienteDTO;
+import dto.EmpleadoDTO;
+import dto.RentaDTO;
+import java.text.SimpleDateFormat;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author PC Gamer
  */
 public class InfoBici extends javax.swing.JDialog {
 
+    JFrame main;
+    EmpleadoDTO empleado;
+    BicicletaDTO bici;
+    
     /**
      * Creates new form InfoBici
      */
-    public InfoBici(java.awt.Frame parent, boolean modal) {
+    public InfoBici(java.awt.Frame parent, boolean modal, EmpleadoDTO empleado, BicicletaDTO bici) {
         super(parent, modal);
         initComponents();
+        
+        main=(JFrame) parent;
+        this.empleado=empleado;
+        this.bici=bici;
+        
+        infoBici = new JLabel(generarInformacion());
+        infoBici.setFont(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 16));
+        infoBici.setForeground(new java.awt.Color(0, 0, 0)); 
+
+        dashBoard.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        dashBoard.add(infoBici);
+
+        dashBoard.revalidate();
+        dashBoard.repaint();
+        
+        this.setLocationRelativeTo(null);
+        
     }
 
+    public String generarInformacion(){
+        StringBuilder infoBici = new StringBuilder();
+        infoBici.append("<html>");
+        infoBici.append("<b> </b>").append("<br>");
+        infoBici.append("<b> </b>").append("<br>");
+        infoBici.append("<b>Bici ID:</b> ").append(bici.getId()).append("<br>");
+        infoBici.append("<b> </b>").append("<br>");
+        infoBici.append("<b>Rodada:</b> ").append(bici.getRodado()).append("<br>");
+        infoBici.append("<b> </b>").append("<br>");
+        infoBici.append("<b>Tipo:</b> ").append(bici.getTipo()).append("<br>");
+        infoBici.append("<b> </b>").append("<br>");
+        infoBici.append("<b>Precio:</b> ").append(bici.getPrecio()+"$").append("<br>");
+        infoBici.append("</html>");
+        return infoBici.toString();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,59 +76,116 @@ public class InfoBici extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        dashBoard = new javax.swing.JPanel();
+        infoBici = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JTextField();
+        pswContrasena = new javax.swing.JPasswordField();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        cancelar = new javax.swing.JButton();
+        seleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(230, 230, 230));
+        dashBoard.setBackground(new java.awt.Color(230, 230, 230));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
+        javax.swing.GroupLayout dashBoardLayout = new javax.swing.GroupLayout(dashBoard);
+        dashBoard.setLayout(dashBoardLayout);
+        dashBoardLayout.setHorizontalGroup(
+            dashBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dashBoardLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(infoBici)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
+        dashBoardLayout.setVerticalGroup(
+            dashBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dashBoardLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(infoBici)
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 360, 270));
+        jPanel1.add(dashBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 360, 230));
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 240, -1));
+        jPanel1.add(pswContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 210, -1));
 
-        jButton1.setText("Seleccionar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel19.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel19.setText("Correo");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel20.setText("Contraseña");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+
+        cancelar.setText("Cancelar");
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, -1, -1));
+        jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
+
+        seleccionar.setText("Seleccionar");
+        seleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seleccionarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarActionPerformed
         // TODO add your handling code here:
-        return;
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (txtCorreo.getText().isEmpty() || pswContrasena.getPassword().length == 0) { JOptionPane.showMessageDialog(null, "No se han llenado los campos correctamente", "Error", JOptionPane.ERROR_MESSAGE);return; }
+        char[] passwordCharArray = pswContrasena.getPassword();
+        String password = new String(passwordCharArray);
+        ControlCliente c=new ControlCliente();
+        
+        ClienteDTO clienteDto = c.buscar(txtCorreo.getText(), password);
+        if (clienteDto == null) {
+            JOptionPane.showMessageDialog(null, "Cliente no encontrado o credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        bici.setCliente(clienteDto);
+        RentaDTO renta=new RentaDTO(bici,clienteDto,0,0,empleado);
+        PagarRenta pR=new PagarRenta(main,true,renta,bici.getPrecio(),bici);
+        pR.show();
+        this.dispose();
+    }//GEN-LAST:event_seleccionarActionPerformed
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        // TODO add your handling code here:
+       this.dispose();
+    }//GEN-LAST:event_cancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton cancelar;
+    private javax.swing.JPanel dashBoard;
+    private javax.swing.JLabel infoBici;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPasswordField pswContrasena;
+    private javax.swing.JButton seleccionar;
+    private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }

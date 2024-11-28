@@ -23,7 +23,7 @@ public class SeleccionarBicicleta extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        c = new CompraRentaBicis(p,2);
+        c = new CompraRentaBicis(p,2,null);
         showPanel(c);
     }
 

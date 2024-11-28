@@ -20,6 +20,7 @@ PantallasAdmin\AdminBicis$2.class
 PantallasAdmin\PanelRenta$3.class
 Pantallas\PantallaRegistro$1.class
 PantallasAdmin\EditarBici$2.class
+PantallasAdmin\InfoBici$2.class
 PantallasAdmin\PagarRenta$4.class
 PantallasAdmin\PantallaMenu.class
 Pantallas\PantallaInicio$1.class
@@ -66,6 +67,7 @@ PantallasAdmin\PagarRenta$6.class
 PantallasAdmin\AdminBicis$3.class
 PantallasAdmin\EditarUsuario$3.class
 PantallasAdmin\PanelRenta$2.class
+PantallasAdmin\PagarConTarjeta$4.class
 PantallasAdmin\PanelRenta.class
 PantallasAdmin\AgregarUsuario.class
 PantallasAdmin\EditarBici$4.class

@@ -244,7 +244,7 @@ public class PanelRenta extends javax.swing.JPanel {
             if (Math.abs(tiempo - 0.5) < 0.001) {
                 RentaDTO rentaDto = new RentaDTO(bici, clienteDto, 30, costoTotal, empleadoDto);
 
-                PagarRenta c = new PagarRenta(main, true, rentaDto, costoTotal, main);
+                PagarRenta c = new PagarRenta(main, true, rentaDto, costoTotal,null);
                 c.show();
             } else {
                 JOptionPane.showMessageDialog(null, "Tiempo inválido para la renta", "Error", JOptionPane.ERROR_MESSAGE);

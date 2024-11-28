@@ -10,6 +10,7 @@ import dto.RentaDTO;
 import javax.swing.JFrame;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
+import dto.BicicletaDTO;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import javax.swing.JLabel;
@@ -26,6 +27,9 @@ public class RentaConfirmada extends javax.swing.JDialog {
     private ControlRenta controlRenta;
     private JFrame main;
     
+    private BicicletaDTO bici;
+    private boolean compra;
+    
     /**
      * Creates new form RentaConfirmadaJFrame
      */
@@ -33,55 +37,83 @@ public class RentaConfirmada extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.rentaDto = rentaDto;
-        this.controlRenta = new ControlRenta();
-        this.main=(JFrame) parent;
-        this.empleado=empleado;
+        this.empleado = empleado;
+        this.main = (JFrame) parent;
+        this.compra = false;
         this.setLocationRelativeTo(null);
-        
-        rentalInfoLabel = new JLabel(getRentalInfoText());
+
+        initInfoLabel();
+        generarTicket();
+    }
+    
+    public RentaConfirmada(java.awt.Frame parent, boolean modal, BicicletaDTO bici, EmpleadoDTO empleado) {
+        super(parent, modal);
+        initComponents();
+        this.bici = bici;
+        this.empleado = empleado;
+        this.main = (JFrame) parent;
+        this.compra = true; 
+        this.setLocationRelativeTo(null);
+
+        initInfoLabel();
+        generarTicket();
+    }
+
+    private void initInfoLabel() {
+        rentalInfoLabel = new JLabel(getInfoText());
         rentalInfoLabel.setFont(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 16));
         rentalInfoLabel.setForeground(new java.awt.Color(0, 0, 0)); 
 
         a.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
         a.add(rentalInfoLabel);
-
         a.revalidate();
         a.repaint();
-        
-         generarTicket();
     }
-
     
-    
-    public void generarTicket(){
+    public void generarTicket() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-         String fechaFormateada = sdf.format(rentaDto.getFecha());
+            String fechaFormateada = sdf.format(new java.util.Date());
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("RentaTicket "+rentaDto.getId()+" "+fechaFormateada+".pdf"));
+
+            String fileName = compra
+                ? "CompraTicket " + bici.getId() + " " + fechaFormateada + ".pdf"
+                : "RentaTicket " + rentaDto.getId() + " " + fechaFormateada + ".pdf";
+
+            PdfWriter.getInstance(document, new FileOutputStream(fileName));
             document.open();
 
-            document.add(new Paragraph("Renta Confirmada", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 24)));
-        document.add(new Paragraph("\n"));
+            document.add(new Paragraph(compra ? "Compra Confirmada" : "Renta Confirmada", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 24)));
+            document.add(new Paragraph("\n"));
 
-        document.add(new Paragraph("Renta ID: " + rentaDto.getId()));
-        document.add(new Paragraph("Cliente: " + rentaDto.getCliente().getNombre()));
-        document.add(new Paragraph("Teléfono del Cliente: " + rentaDto.getCliente().getTelefono()));
-        document.add(new Paragraph("Empleado: " + empleado.getNombre()));
-        document.add(new Paragraph("Fecha de Renta: " + fechaFormateada));
+            if (compra) {
+                document.add(new Paragraph("Bicicleta ID: " + bici.getId()));
+                document.add(new Paragraph("Tipo de Bicicleta: " + bici.getTipo()));
+                document.add(new Paragraph("Costo: " + bici.getPrecio()));
+                document.add(new Paragraph("Cliente: " + bici.getCliente().getNombre()));
+                document.add(new Paragraph("Correo del Cliente: " + bici.getCliente().getCorreo()));
+                document.add(new Paragraph("Telefono del Cliente: " + bici.getCliente().getTelefono()));
+                document.add(new Paragraph("Empleado: " + empleado.getNombre()));
+                document.add(new Paragraph("Fecha de Compra: " + fechaFormateada));
+                document.add(new Paragraph("\nGracias por su compra.", FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 12)));
+            } else {
+                document.add(new Paragraph("Renta ID: " + rentaDto.getId()));
+                document.add(new Paragraph("Cliente: " + rentaDto.getCliente().getNombre()));
+                document.add(new Paragraph("Teléfono del Cliente: " + rentaDto.getCliente().getTelefono()));
+                document.add(new Paragraph("Empleado: " + empleado.getNombre()));
+                document.add(new Paragraph("Fecha de Renta: " + fechaFormateada));
+                document.add(new Paragraph("Tipo de Bicicleta: " + rentaDto.getBicicleta().getTipo()));
+                document.add(new Paragraph("Tipo de Pago: " + rentaDto.getMetodoPago()));
+                document.add(new Paragraph("Costo Total: " + rentaDto.getCosto() + "$"));
 
-        document.add(new Paragraph("Tipo de Bicicleta: " + rentaDto.getBicicleta().getTipo()));
-        document.add(new Paragraph("Tipo de Pago: " + rentaDto.getMetodoPago()));
-        document.add(new Paragraph("Costo Total: " + rentaDto.getCosto() + "$"));
+                if (rentaDto.getTiempo() == 30) {
+                    document.add(new Paragraph("Tiempo: 30 minutos"));
+                } else {
+                    document.add(new Paragraph("Tiempo: " + rentaDto.getTiempo() + " horas"));
+                }
 
-        if (rentaDto.getTiempo() == 30) {
-            document.add(new Paragraph("Tiempo: 30 minutos"));
-        } else {
-            document.add(new Paragraph("Tiempo: " + rentaDto.getTiempo() + " horas"));
-        }
-
-        document.add(new Paragraph("\nGracias por su preferencia.", FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 12)));
+                document.add(new Paragraph("\nGracias por su preferencia.", FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 12)));
+            }
 
             document.close();
             JOptionPane.showMessageDialog(this, "PDF generado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -89,6 +121,44 @@ public class RentaConfirmada extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    private String getInfoText() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaFormateada = sdf.format(new java.util.Date());
+
+        StringBuilder infoText = new StringBuilder();
+        infoText.append("<html>");
+
+        if (compra) {
+            infoText.append("<b>Bicicleta ID:</b> ").append(bici.getId()).append("<br>");
+            infoText.append("<b>Tipo de Bicicleta:</b> ").append(bici.getTipo()).append("<br>");
+            infoText.append("<b>Costo:</b> ").append(bici.getPrecio()).append("<br>");
+            infoText.append("<b>Cliente:</b> ").append(bici.getCliente().getNombre()).append("<br>");
+            infoText.append("<b>Correo del Cliente:</b> ").append(bici.getCliente().getCorreo()).append("<br>");
+            infoText.append("<b>Telefono del Cliente:</b> ").append(bici.getCliente().getTelefono()).append("<br>");
+            infoText.append("<b>Empleado:</b> ").append(empleado.getNombre()).append("<br>");
+            infoText.append("<b>Fecha de Compra:</b> ").append(fechaFormateada).append("<br>");
+        } else {
+            infoText.append("<b>Renta ID:</b> ").append(rentaDto.getId()).append("<br>");
+            infoText.append("<b>Cliente:</b> ").append(rentaDto.getCliente().getNombre()).append("<br>");
+            infoText.append("<b>Teléfono del Cliente:</b> ").append(rentaDto.getCliente().getTelefono()).append("<br>");
+            infoText.append("<b>Empleado:</b> ").append(empleado.getNombre()).append("<br>");
+            infoText.append("<b>Fecha de Renta:</b> ").append(fechaFormateada).append("<br>");
+            infoText.append("<b>Tipo de Bicicleta:</b> ").append(rentaDto.getBicicleta().getTipo()).append("<br>");
+            infoText.append("<b>Tipo de Pago:</b> ").append(rentaDto.getMetodoPago()).append("<br>");
+            infoText.append("<b>Costo Total:</b> ").append(rentaDto.getCosto()).append("<br>");
+
+            if (rentaDto.getTiempo() == 30) {
+                infoText.append("<b>Tiempo:</b> 30 minutos<br>");
+            } else {
+                infoText.append("<b>Tiempo:</b> ").append(rentaDto.getTiempo()).append(" horas<br>");
+            }
+        }
+
+        infoText.append("</html>");
+        return infoText.toString();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -169,6 +239,7 @@ public class RentaConfirmada extends javax.swing.JDialog {
         PantallaMenu pM=(PantallaMenu) main;
         PanelRenta p=new PanelRenta(main,empleado);
         pM.showPanel(p);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -176,26 +247,39 @@ public class RentaConfirmada extends javax.swing.JDialog {
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String fechaFormateada = sdf.format(rentaDto.getFecha());
+        StringBuilder infoText = new StringBuilder();
+        
+        infoText.append("<html>");
+        if (compra) {
+            infoText.append("<b>Bicicleta ID:</b> ").append(bici.getId()).append("<br>");
+            infoText.append("<b>Tipo de Bicicleta:</b> ").append(bici.getTipo()).append("<br>");
+            infoText.append("<b>Costo:</b> ").append(bici.getPrecio()).append("<br>");
+            infoText.append("<b>Cliente:</b> ").append(bici.getCliente().getNombre()).append("<br>");
+            infoText.append("<b>Correo del Cliente:</b> ").append(bici.getCliente().getCorreo()).append("<br>");
+            infoText.append("<b>Telefono del Cliente:</b> ").append(bici.getCliente().getTelefono()).append("<br>");
+            infoText.append("<b>Empleado:</b> ").append(empleado.getNombre()).append("<br>");
+            infoText.append("<b>Fecha de Compra:</b> ").append(fechaFormateada).append("<br>");
+        } else {
+            // Info for "Renta"
+            infoText.append("<b>Renta ID:</b> ").append(rentaDto.getId()).append("<br>");
+            infoText.append("<b>Cliente:</b> ").append(rentaDto.getCliente().getNombre()).append("<br>");
+            infoText.append("<b>Teléfono del Cliente:</b> ").append(rentaDto.getCliente().getTelefono()).append("<br>");
+            infoText.append("<b>Empleado:</b> ").append(empleado.getNombre()).append("<br>");
+            infoText.append("<b>Fecha de Renta:</b> ").append(fechaFormateada).append("<br>");
+            infoText.append("<b>Tipo de Bicicleta:</b> ").append(rentaDto.getBicicleta().getTipo()).append("<br>");
+            infoText.append("<b>Tipo de Pago:</b> ").append(rentaDto.getMetodoPago()).append("<br>");
+            infoText.append("<b>Costo Total:</b> ").append(rentaDto.getCosto()).append("<br>");
 
-        StringBuilder rentalInfo = new StringBuilder();
-        rentalInfo.append("<html>");
-        rentalInfo.append("<b>Renta ID:</b> ").append(rentaDto.getId()).append("<br>");
-        rentalInfo.append("<b>Cliente:</b> ").append(rentaDto.getCliente().getNombre()).append("<br>");
-        rentalInfo.append("<b>Teléfono del Cliente:</b> ").append(rentaDto.getCliente().getTelefono()).append("<br>");
-        rentalInfo.append("<b>Empleado:</b> ").append(empleado.getNombre()).append("<br>");
-        rentalInfo.append("<b>Fecha de Renta:</b> ").append(fechaFormateada).append("<br>");
-        rentalInfo.append("<b>Tipo de bicicleta:</b> ").append(rentaDto.getBicicleta().getTipo()).append("<br>");
-        rentalInfo.append("<b>Tipo de pago:</b> ").append(rentaDto.getMetodoPago()).append("<br>");
-        rentalInfo.append("<b>CostoTotal:</b> ").append(rentaDto.getCosto()+"$").append("<br>");
-        if(rentaDto.getTiempo()==30){
-            String tiempo="30 minutos";
-            rentalInfo.append("<b>Tiempo:</b> ").append(tiempo).append("<br>");
-        }else{
-            rentalInfo.append("<b>Tiempo:</b> ").append(rentaDto.getTiempo()+" horas").append("<br>");
+            if (rentaDto.getTiempo() == 30) {
+                infoText.append("<b>Tiempo:</b> 30 minutos<br>");
+            } else {
+                infoText.append("<b>Tiempo:</b> ").append(rentaDto.getTiempo()).append(" horas<br>");
+            }
         }
-        rentalInfo.append("</html>");
-        return rentalInfo.toString();
+        infoText.append("</html>");
+        return infoText.toString();
     }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Utileria.PanelRound a;

@@ -164,13 +164,12 @@ public class PantallaInicio extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
+        
         String empleado = txtEmpleado.getText().trim();
         char[] passwordCharArray = pswContrasena.getPassword();
         String password = new String(passwordCharArray);
         
-         if (empleado.isEmpty() || password.isEmpty()) { 
-             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", 
-                                      "Error", JOptionPane.ERROR_MESSAGE); return; }
+         if (empleado.isEmpty() || password.isEmpty()) { JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE); return; }
          
         EmpleadoDTO empleadoDto = controlEmpleado.iniciarSesion(txtEmpleado.getText(), password);
         if (empleadoDto!=null)
@@ -178,10 +177,8 @@ public class PantallaInicio extends javax.swing.JFrame {
             PantallaMenu p = new PantallaMenu(empleadoDto);
             p.show();
             this.dispose();
-        } else{
-            System.out.println("Mensaje: Contraseña o usuario incorrecto");
-        }
-        
+        } else{  JOptionPane.showMessageDialog(this, "Mensaje: Contraseña o usuario incorrecto",  "Error", JOptionPane.ERROR_MESSAGE); return; 
+        } 
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed

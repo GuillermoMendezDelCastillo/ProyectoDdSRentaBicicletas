@@ -21,10 +21,12 @@ public class PagarConEfectivo extends javax.swing.JPanel {
     
     private EmpleadoDTO empleado;
     private RentaDTO renta;
+    private BicicletaDTO bici;
   
     private ControlBicicleta cB;
     private ControlRenta controlR;
     
+    private boolean compra;
     
     /**
      * Creates new form PagarConEfectivo
@@ -47,8 +49,28 @@ public class PagarConEfectivo extends javax.swing.JPanel {
         
         btnAceptar.setVisible(false);
         btnAceptar.setEnabled(false);
+        this.compra=false;
     }
+    
+    public PagarConEfectivo(JFrame main, EmpleadoDTO empleado, BicicletaDTO bici) {
+        initComponents();
+        
+        cB=new ControlBicicleta();
 
+        this.main=main;
+        this.empleado=empleado;
+        this.bici=bici;
+        
+        this.compra=true;
+       
+        total.setText(bici.getPrecio()+"$");
+        
+        listo.setVisible(false);
+        listo.setEnabled(false);
+        
+        btnAceptar.setVisible(false);
+        btnAceptar.setEnabled(false);
+    }
     
     
     
@@ -169,16 +191,26 @@ public class PagarConEfectivo extends javax.swing.JPanel {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        BicicletaDTO b=cB.buscarBicicleta(renta.getBicicleta().getId());
-        System.out.println(b.toString());
-        b.setEstado("En Renta");
-        cB.actualizarBicicleta(b);
-        renta.setBicicleta(b);
-        renta=controlR.agregarRenta(renta);
-        JOptionPane.showMessageDialog(this, "Pago realizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        if(compra==false){
+            BicicletaDTO b=cB.buscarBicicleta(renta.getBicicleta().getId());
+            System.out.println(b.toString());
+            b.setEstado("En Renta");
+            cB.actualizarBicicleta(b);
+            renta.setBicicleta(b);
+            renta=controlR.agregarRenta(renta);
+            JOptionPane.showMessageDialog(this, "Pago realizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            RentaConfirmada rC=new RentaConfirmada(main,true,renta,empleado);
+            rC.show(); 
+        }else{
+            bici.setEstado("Comprada");
+            cB.actualizarBicicleta(bici);
+            JOptionPane.showMessageDialog(this, "Pago realizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            RentaConfirmada rC=new RentaConfirmada(main,true,bici,empleado);
+            rC.show(); 
+        }
+         
         
-        RentaConfirmada rC=new RentaConfirmada(main,true,renta,empleado);
-        rC.show();  
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed

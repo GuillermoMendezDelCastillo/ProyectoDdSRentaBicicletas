@@ -28,12 +28,16 @@ public class PagarConTarjeta extends javax.swing.JPanel {
     private ControlBicicleta cB;
     private ControlRenta controlR;
     
+    private BicicletaDTO biciCompra;
+    
+    private int tipo;
+    
     /**
      * Creates new form PagarConTarjeta
      */
     public PagarConTarjeta(JFrame main, EmpleadoDTO empleado, RentaDTO renta) {
         initComponents();
-        
+        tipo=2;
         cB=new ControlBicicleta();
 
         this.main=main;
@@ -68,7 +72,44 @@ public class PagarConTarjeta extends javax.swing.JPanel {
         }
     });
     this.requestFocusInWindow();
-    }   
+    }  
+    
+    public PagarConTarjeta(JFrame main, EmpleadoDTO empleado, BicicletaDTO bici) {
+        initComponents();
+        tipo=1;
+        cB=new ControlBicicleta();
+
+        this.main=main;
+        this.empleado=empleado;
+        this.biciCompra=bici;
+        
+        btnAceptar.setVisible(false);
+        btnAceptar.setEnabled(false);
+        
+        pagoR.setVisible(false);
+        
+        tiempo();
+        
+        main.setFocusable(true);
+        this.setFocusable(true);
+
+        main.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_P) {
+                    System.out.println("p");  
+                    jPanel2.setVisible(false);
+                    btnAceptar.setVisible(true);
+                    btnAceptar.setEnabled(true);
+                    lab.setVisible(false);
+                    pagoR.setVisible(true);
+                    btnCancelar.setVisible(false);
+                    btnCancelar.setEnabled(false);
+                }
+            }
+        });
+        this.requestFocusInWindow();
+    } 
     
     
     private void tiempo() {
@@ -174,23 +215,39 @@ public class PagarConTarjeta extends javax.swing.JPanel {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        BicicletaDTO b=cB.buscarBicicleta(renta.getBicicleta().getId());
-        System.out.println(b.toString());
-        b.setEstado("En Renta");
-        cB.actualizarBicicleta(b);
-        renta.setBicicleta(b);
-        renta=controlR.agregarRenta(renta);
+        if(tipo==1){
+            biciCompra.setEstado("Comprada");
+            cB.actualizarBicicleta(biciCompra);
+            RentaConfirmada rC=new RentaConfirmada(main,true,biciCompra,empleado);
+            rC.show();  
+            JOptionPane.showMessageDialog(null, "Pago confirmado y renta exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            BicicletaDTO b=cB.buscarBicicleta(renta.getBicicleta().getId());
+            System.out.println(b.toString());
+            b.setEstado("En Renta");
+            cB.actualizarBicicleta(b);
+            renta.setBicicleta(b);
+            renta=controlR.agregarRenta(renta);
+
+            RentaConfirmada rC=new RentaConfirmada(main,true,renta,empleado);
+            rC.show();  
+            JOptionPane.showMessageDialog(null, "Pago confirmado y renta exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }
+            
         
-        RentaConfirmada rC=new RentaConfirmada(main,true,renta,empleado);
-        rC.show();  
-        JOptionPane.showMessageDialog(null, "Pago confirmado y renta exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        PantallaMenu p=(PantallaMenu) main;
-        PanelRenta panel=new PanelRenta(main,empleado);
-        p.showPanel(panel);
+        if(tipo==1){
+            PantallaMenu p=(PantallaMenu) main;
+            CompraRentaBicis panel=new CompraRentaBicis(main,1,empleado);
+            p.showPanel(panel);
+        }else{
+            PantallaMenu p=(PantallaMenu) main;
+            PanelRenta panel=new PanelRenta(main,empleado);
+            p.showPanel(panel);
+        }  
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 

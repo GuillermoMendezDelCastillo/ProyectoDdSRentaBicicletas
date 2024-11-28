@@ -168,7 +168,7 @@ public class PantallaMenu extends javax.swing.JFrame {
     private void btnComprarBicicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarBicicletaActionPerformed
         // TODO add your handling code here:
         
-        CompraRentaBicis c = new CompraRentaBicis(this,1);
+        CompraRentaBicis c = new CompraRentaBicis(this,1,empleadoDto);
         showPanel(c);
     }//GEN-LAST:event_btnComprarBicicletaActionPerformed
 

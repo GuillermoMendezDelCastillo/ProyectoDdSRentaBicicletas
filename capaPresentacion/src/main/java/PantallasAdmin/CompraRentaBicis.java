@@ -6,6 +6,7 @@ package PantallasAdmin;
 
 import control.ControlBicicleta;
 import dto.BicicletaDTO;
+import dto.EmpleadoDTO;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -27,12 +28,14 @@ public class CompraRentaBicis extends javax.swing.JPanel {
     private List<BicicletaDTO> listaBicisDto;
     private ControlBicicleta controlBicicleta;
     private int idBicicleta;
+    private EmpleadoDTO empleado;
     
     /**
      * Creates new form CompraBicis
      */
-    public CompraRentaBicis(JFrame main, int tipoPantalla) {
+    public CompraRentaBicis(JFrame main, int tipoPantalla,EmpleadoDTO empleado) {
         initComponents();
+        this.empleado=empleado;
         
         this.controlBicicleta = new ControlBicicleta();
         botones = new ArrayList<>();
@@ -69,8 +72,12 @@ public class CompraRentaBicis extends javax.swing.JPanel {
             boton.setBackground(new Color(243,232,255)); 
 
             boton.addActionListener(e -> {
+                
                 int num=Integer.parseInt(boton.getName());
                 this.idBicicleta = listaBicisDto.get(num).getId().intValue();
+                if ("Compra Bicicleta".equals(lblCompraRenta.getText())) {
+                    realizarCompra(listaBicisDto.get(num));
+                }
             });
 
             panelBotones.add(boton); 
@@ -83,6 +90,11 @@ public class CompraRentaBicis extends javax.swing.JPanel {
         jPanel1.add(scrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 810, 460));
     }
 
+    public void realizarCompra(BicicletaDTO bicicleta){
+        InfoBici iB=new InfoBici(main,true,empleado,bicicleta);
+        iB.show();
+    }
+    
     public JPanel getFondo() {
             return this;
     }

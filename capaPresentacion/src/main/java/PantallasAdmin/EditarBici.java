@@ -145,7 +145,7 @@ public class EditarBici extends javax.swing.JPanel {
 
         estado.setBackground(new java.awt.Color(250, 250, 250));
         estado.setForeground(new java.awt.Color(0, 0, 0));
-        estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "En Renta" }));
+        estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "En Renta", "En venta" }));
         estado.setToolTipText("");
         jPanel1.add(estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 160, 30));
 
