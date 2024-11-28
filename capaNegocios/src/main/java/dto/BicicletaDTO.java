@@ -15,6 +15,7 @@ public class BicicletaDTO {
     private String tipo;
     private String estado;
     private Float precio;
+    private ClienteDTO cliente;
 
     public BicicletaDTO() {
     }
@@ -49,6 +50,15 @@ public class BicicletaDTO {
         this.tipo = tipo;
         this.estado = estado;
         this.precio = precio;
+    }
+    
+    public BicicletaDTO(Long id,String rodado, String tipo, String estado, Float precio, ClienteDTO cliente) {
+        this.id = id;
+        this.rodado = rodado;
+        this.tipo = tipo;
+        this.estado = estado;
+        this.precio = precio;
+        this.cliente=cliente;
     }
 
     public Long getId() {
@@ -90,6 +100,12 @@ public class BicicletaDTO {
     public void setPrecio(Float precio) {
         this.precio = precio;
     }
-    
-    
+
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
+    } 
 }

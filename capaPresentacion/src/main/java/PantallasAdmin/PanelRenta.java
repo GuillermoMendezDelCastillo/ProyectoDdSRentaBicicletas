@@ -6,7 +6,6 @@ package PantallasAdmin;
 
 import control.ControlBicicleta;
 import control.ControlCliente;
-import control.ControlRenta;
 import dto.BicicletaDTO;
 import dto.ClienteDTO;
 import dto.EmpleadoDTO;
@@ -229,19 +228,33 @@ public class PanelRenta extends javax.swing.JPanel {
         if (txtCorreo.getText().isEmpty() || pswContrasena.getPassword().length == 0 || idBicicleta == null) { JOptionPane.showMessageDialog(null, "No se han llenado los campos correctamente", "Error", JOptionPane.ERROR_MESSAGE);return; }
           char[] passwordCharArray = pswContrasena.getPassword();
         String password = new String(passwordCharArray);
+        
+        try {
+            this.clienteDto = controlCliente.buscar(txtCorreo.getText(), password);
+            if (clienteDto == null) {
+                JOptionPane.showMessageDialog(null, "Cliente no encontrado o credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        this.clienteDto = controlCliente.buscar(txtCorreo.getText(), password);
+            BicicletaDTO bici=biciBO.buscarBicicleta(idBicicleta.longValue());
+            if (bici == null) {
+                JOptionPane.showMessageDialog(null, "Bicicleta no disponible o no encontrada", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (Math.abs(tiempo - 0.5) < 0.001) {
+                RentaDTO rentaDto = new RentaDTO(bici, clienteDto, 30, costoTotal, empleadoDto);
 
-        BicicletaDTO bici=biciBO.buscarBicicleta(idBicicleta.longValue());
-      
-            if(tiempo==.5){
-            
-            RentaDTO rentaDto=new RentaDTO(bici,clienteDto, 30,costoTotal,empleadoDto);
-            
-            PagarRenta c = new PagarRenta(main, true, rentaDto, costoTotal, main);
-            c.show();
-        }
-                 
+                PagarRenta c = new PagarRenta(main, true, rentaDto, costoTotal, main);
+                c.show();
+            } else {
+                JOptionPane.showMessageDialog(null, "Tiempo inválido para la renta", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrió un error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            java.util.Arrays.fill(passwordCharArray, '\0');
+        }       
     }//GEN-LAST:event_btnRentar1ActionPerformed
 
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed

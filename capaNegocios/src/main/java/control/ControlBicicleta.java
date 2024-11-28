@@ -6,7 +6,9 @@ package control;
 
 import dao.BicicletaDAO;
 import dto.BicicletaDTO;
+import dto.ClienteDTO;
 import entidades.Bicicleta;
+import entidades.Cliente;
 import java.util.List;
 
 /**
@@ -78,6 +80,17 @@ public class ControlBicicleta {
                 .toList();
         return bicicletas.stream().map(this::convertirEntidadADTO).toList();
     }
+    
+    /**
+     * metodo para obtener todas las bicicletas en venta
+     * @return una lista con todos los dto de todas las bicicletas disponibles
+     */
+    public List<BicicletaDTO> obtenerBicicletasEnVenta() {
+        List<Bicicleta> bicicletas = bicicletaDAO.lista().stream()
+                .filter(b -> b.getEstado().equalsIgnoreCase("En venta"))
+                .toList();
+        return bicicletas.stream().map(this::convertirEntidadADTO).toList();
+    }
 
     /**
      * metodo para buscar una bicicleta
@@ -95,13 +108,24 @@ public class ControlBicicleta {
      * @return dto de la bicicleta convertida
      */
     public BicicletaDTO convertirEntidadADTO(Bicicleta bicicleta) {
-        return new BicicletaDTO(
+        ControlCliente c=new ControlCliente();
+        if(bicicleta.getIdCliente()==null){
+            return new BicicletaDTO(
                 bicicleta.getId(),
                 bicicleta.getRodado(),
                 bicicleta.getTipo(),
                 bicicleta.getEstado(),
-                bicicleta.getPrecio()
-        );
+                bicicleta.getPrecio());
+        }else{
+            ClienteDTO cliente=c.convertirEntidadADTO(bicicleta.getIdCliente());
+            return new BicicletaDTO(
+                bicicleta.getId(),
+                bicicleta.getRodado(),
+                bicicleta.getTipo(),
+                bicicleta.getEstado(),
+                bicicleta.getPrecio(),
+                cliente);
+        }
     }
 
     /**
@@ -110,12 +134,26 @@ public class ControlBicicleta {
      * @return la bicicleta convertida a partir del dto
      */
     public Bicicleta convertirDTOAEntidad(BicicletaDTO bicicletaDTO) {
-        return new Bicicleta(
+        ControlCliente c=new ControlCliente();
+        if(bicicletaDTO.getCliente()==null){
+            return new Bicicleta(
                 bicicletaDTO.getId(), 
                 bicicletaDTO.getRodado(), 
                 bicicletaDTO.getTipo(), 
                 bicicletaDTO.getEstado(), 
-                bicicletaDTO.getPrecio());
+                bicicletaDTO.getPrecio()
+                );
+        }else{
+            Cliente cliente=c.convertirDTOAEntidad(bicicletaDTO.getCliente());
+            return new Bicicleta(
+                bicicletaDTO.getId(), 
+                bicicletaDTO.getRodado(), 
+                bicicletaDTO.getTipo(), 
+                bicicletaDTO.getEstado(), 
+                bicicletaDTO.getPrecio(),
+                cliente);
+        }
+        
     }
     
     

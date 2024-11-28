@@ -24,7 +24,6 @@ public class CompraRentaBicis extends javax.swing.JPanel {
 
     private JFrame main;
     private ArrayList<JButton> botones;
-    //private ArrayList<BicicletaDTO> seleccionados;
     private List<BicicletaDTO> listaBicisDto;
     private ControlBicicleta controlBicicleta;
     private int idBicicleta;
@@ -34,11 +33,19 @@ public class CompraRentaBicis extends javax.swing.JPanel {
      */
     public CompraRentaBicis(JFrame main, int tipoPantalla) {
         initComponents();
+        
+        this.controlBicicleta = new ControlBicicleta();
+        botones = new ArrayList<>();
         switch(tipoPantalla) {
             case 1:
                 lblCompraRenta.setText("Compra Bicicleta");
+                listaBicisDto=controlBicicleta.obtenerBicicletasEnVenta();
+                crearBotones(listaBicisDto);
                 break;
             case 2:
+                
+                listaBicisDto=controlBicicleta.obtenerBicicletasDisponibles();
+                crearBotones(listaBicisDto);
                 lblCompraRenta.setText("Renta Bicicleta");
                 break;
             default:
@@ -46,16 +53,9 @@ public class CompraRentaBicis extends javax.swing.JPanel {
                 break;
         }
         this.main=main;
-        this.controlBicicleta = new ControlBicicleta();
-        this.listaBicisDto = controlBicicleta.obtenerBicicletasDisponibles();
-        botones = new ArrayList<>();
-        //seleccionados = new ArrayList<>();
-        crearBotones();
     }
     
-    private void crearBotones() {
-        
-        //int numeroOpciones = 30;
+    private void crearBotones(List<BicicletaDTO >listaBicisDto) {
         
         int numeroOpciones = listaBicisDto.size(); 
         
@@ -71,13 +71,6 @@ public class CompraRentaBicis extends javax.swing.JPanel {
             boton.addActionListener(e -> {
                 int num=Integer.parseInt(boton.getName());
                 this.idBicicleta = listaBicisDto.get(num).getId().intValue();
-//                if (seleccionados.contains(boton)) {
-//                    boton.setBackground(Color.LIGHT_GRAY); 
-//                    //seleccionados.remove(listaBicisDto.get(Integer.parseInt(boton.getText())));
-//                } else {
-//                    boton.setBackground(Color.GREEN);
-//                    //seleccionados.add(listaBicisDto.get(Integer.parseInt(boton.getText()))); 
-//                }
             });
 
             panelBotones.add(boton); 

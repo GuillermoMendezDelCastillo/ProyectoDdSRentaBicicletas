@@ -103,7 +103,11 @@ public class ControlEmpleado {
     }
     
     public EmpleadoDTO iniciar(String correo){
-        return convertirEntidadADTO(empleadoDAO.iniciar(correo));
+        Empleado empleado = empleadoDAO.iniciar(correo);
+        if (empleado == null) { 
+            return null;
+        }
+        return convertirEntidadADTO(empleado);
     }
 
     /**

@@ -11,7 +11,6 @@ PantallasAdmin\EditarUsuario$2.class
 Pantallas\PantallaInicio$3.class
 PantallasAdmin\InfoBici.class
 PantallasAdmin\SeleccionarBicicleta.class
-PantallasAdmin\ServiciosBici.class
 PantallasAdmin\EditarBici.class
 PantallasAdmin\PagarRenta$2.class
 PantallasAdmin\AgregarUsuario$3.class
@@ -28,7 +27,6 @@ PantallasAdmin\SeleccionarBicicleta$1.class
 Pantallas\PantallaRegistro.class
 PantallasAdmin\EditarUsuario$1.class
 PantallasAdmin\PagarConEfectivo$2.class
-PantallasAdmin\ServiciosBici$1.class
 PantallasAdmin\AdminClientes$1.class
 PantallasAdmin\PagarConTarjeta$2.class
 PantallasAdmin\AgregarUsuario$2.class

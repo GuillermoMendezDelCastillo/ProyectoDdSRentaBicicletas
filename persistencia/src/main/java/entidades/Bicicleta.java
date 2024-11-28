@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -36,6 +38,10 @@ public class Bicicleta implements Serializable {
 
     @Column(name = "precio", nullable = false, length = 50)
     private Float precio;
+    
+    @ManyToOne
+    @JoinColumn(name = "idCliente", nullable = true)
+    private Cliente idCliente;
     
     public Bicicleta() {
     }
@@ -66,6 +72,14 @@ public class Bicicleta implements Serializable {
         this.tipo = tipo;
         this.estado = estado;
         this.precio = precio;
+    }
+    
+    public Bicicleta(Long id,String rodado, String tipo, String estado, Float precio, Cliente idCliente) {
+        this.rodado = rodado;
+        this.tipo = tipo;
+        this.estado = estado;
+        this.precio = precio;
+        this.idCliente = idCliente;
     }
     
     public Long getId() {
@@ -113,6 +127,14 @@ public class Bicicleta implements Serializable {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
+    }
+
+    public Cliente getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Cliente idCliente) {
+        this.idCliente = idCliente;
     }
     
     @Override

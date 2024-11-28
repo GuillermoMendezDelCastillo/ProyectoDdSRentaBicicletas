@@ -195,34 +195,35 @@ public class PantallaRegistro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:}
-         try {
-        char[] contra = txtContrasena.getPassword();
-        String contrasena = new String(contra);
-        String email = txtCorreo.getText().trim();
-        String username = txtEmpleado.getText().trim();
-        java.sql.Date sqlDate = new java.sql.Date(date.getDatoFecha().getTime());
-        
-        if (!contrasenaSegura(contrasena)) {
-            JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos 8 caracteres, " +
-                    "una letra mayúscula, un número o un carácter especial.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        try {
+            char[] contra = txtContrasena.getPassword();
+            String contrasena = new String(contra);
+            String email = txtCorreo.getText().trim();
+            String username = txtEmpleado.getText().trim();
+            java.sql.Date sqlDate = new java.sql.Date(date.getDatoFecha().getTime());
+
+            if (!contrasenaSegura(contrasena)) {
+                JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos 8 caracteres, " +
+                        "una letra mayúscula, un número o un carácter especial.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (empleadoBO.iniciar(email) != null) { 
+                JOptionPane.showMessageDialog(this, "El correo electrónico ya está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            EmpleadoDTO empleado = new EmpleadoDTO(username, email, contrasena, sqlDate);
+            empleadoBO.agregarEmpleado(empleado);
+
+            JOptionPane.showMessageDialog(this, "Registro exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            PantallaInicio pI = new PantallaInicio();
+            pI.show();
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al registrar el empleado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        if (empleadoBO.iniciar(email)!=null) {
-            JOptionPane.showMessageDialog(this, "El correo electrónico ya está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        EmpleadoDTO empleado = new EmpleadoDTO(username, email, contrasena, sqlDate);
-        empleadoBO.agregarEmpleado(empleado);
-        
-        JOptionPane.showMessageDialog(this, "Registro exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        PantallaInicio pI = new PantallaInicio();
-        pI.show();
-        this.dispose();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al registrar el empleado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }  
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private boolean contrasenaSegura(String password) {
